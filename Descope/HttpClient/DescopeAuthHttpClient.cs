@@ -16,7 +16,7 @@ namespace Descope.HttpClient
     {
         private readonly RestClient _client;
 
-        internal DescopeAuthHttpClient(IDescopeConfiguration config)
+        public DescopeAuthHttpClient(IDescopeConfiguration config)
         {
             var options = new RestClientOptions(config.BaseUrl)
             {
@@ -26,6 +26,7 @@ namespace Descope.HttpClient
             _client = new RestClient(options, configureSerialization: x => x.UseSystemTextJson(new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             }));
         }
 

@@ -18,7 +18,7 @@ namespace Descope.Management.Users
     {
         private readonly IDescopeManagementHttpClient _httpClient;
 
-        internal UsersApiClient(IDescopeManagementHttpClient httpClient)
+        public UsersApiClient(IDescopeManagementHttpClient httpClient)
         {
             _httpClient = httpClient;
         }

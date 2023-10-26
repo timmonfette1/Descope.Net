@@ -13,7 +13,7 @@ namespace Descope
     {
         private readonly IManagementApiClient _managementApiClient;
 
-        internal DescopeApiClient(IManagementApiClient managementApiClient)
+        public DescopeApiClient(IManagementApiClient managementApiClient)
         {
             _managementApiClient = managementApiClient;
         }

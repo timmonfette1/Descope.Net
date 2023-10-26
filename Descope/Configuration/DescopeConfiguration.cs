@@ -16,7 +16,7 @@ namespace Descope.Configuration
         private readonly OAuth2AuthorizationRequestHeaderAuthenticator _mgmtAuthenticator;
         private readonly OAuth2AuthorizationRequestHeaderAuthenticator _authAuthenticator;
 
-        internal DescopeConfiguration(string projectId, string managementKey)
+        public DescopeConfiguration(string projectId, string managementKey)
         {
             var mgmtToken = $"{projectId}:{managementKey}";
 
