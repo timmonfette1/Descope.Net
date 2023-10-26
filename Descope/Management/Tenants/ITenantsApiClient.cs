@@ -12,10 +12,10 @@ namespace Descope.Management.Tenants
     public interface ITenantsApiClient
     {
         Task<DescopeTenantListResponse> GetAll();
-        Task<DescopeTenantResponse> Get(string id);
+        Task<DescopeTenant> Get(string id);
         Task<DescopeTenantListResponse> Search(DescopeTenantSearchRequest search);
-        Task<DescopeTenantResponse> Create(DescopeTenant tenant);
-        Task<DescopeTenantResponse> Update(DescopeTenant tenant);
+        Task<DescopeTenant> Create(DescopeTenant tenant);
+        Task<DescopeTenant> Update(DescopeTenant tenant);
         Task Delete(DescopeTenantDeleteRequest tenant);
     }
 }

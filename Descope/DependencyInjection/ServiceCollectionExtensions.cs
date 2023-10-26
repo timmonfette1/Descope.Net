@@ -23,12 +23,12 @@ namespace Descope.DependencyInjection
                 .AddSingleton<IDescopeConfiguration, DescopeConfiguration>(x => new DescopeConfiguration(projectId, managementKey))
                 .AddSingleton<IDescopeAuthHttpClient, DescopeAuthHttpClient>()
                 .AddSingleton<IDescopeManagementHttpClient, DescopeManagementHttpClient>()
-                .AddSingleton<IUsersApiClient, UsersApiClient>()
-                .AddSingleton<ITenantsApiClient, TenantsApiClient>()
-                .AddSingleton<IManagementApiClient, ManagementApiClient>();
+                .AddTransient<IUsersApiClient, UsersApiClient>()
+                .AddTransient<ITenantsApiClient, TenantsApiClient>()
+                .AddTransient<IManagementApiClient, ManagementApiClient>();
 
             // Publics
-            services.AddSingleton<IDescopeApiClient, DescopeApiClient>();
+            services.AddTransient<IDescopeApiClient, DescopeApiClient>();
 
             return services;
         }

@@ -15,7 +15,7 @@ namespace Descope.Management
         private readonly IUsersApiClient _usersApiClient;
         private readonly ITenantsApiClient _tenantsApiClient;
 
-        internal ManagementApiClient(IUsersApiClient usersApiClient, ITenantsApiClient tenants)
+        public ManagementApiClient(IUsersApiClient usersApiClient, ITenantsApiClient tenants)
         {
             _usersApiClient = usersApiClient;
             _tenantsApiClient = tenants;
