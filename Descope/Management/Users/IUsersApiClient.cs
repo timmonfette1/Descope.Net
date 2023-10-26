@@ -11,6 +11,6 @@ namespace Descope.Management.Users
 {
     public interface IUsersApiClient
     {
-        Task<IEnumerable<DescopeUser>> Get();
+        Task<DescopeUser> Get(string id);
     }
 }

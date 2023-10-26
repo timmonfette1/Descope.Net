@@ -6,8 +6,10 @@
  */
 
 using Descope.Configuration;
+using Descope.Extensions;
 using Descope.HttpClient;
 using Descope.Models;
+using Descope.Utilities;
 using RestSharp;
 
 namespace Descope.Management.Users
@@ -21,9 +23,13 @@ namespace Descope.Management.Users
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<DescopeUser>> Get()
+        public async Task<DescopeUser> Get(string id)
         {
-            return await _httpClient.Client.GetJsonAsync<IEnumerable<DescopeUser>>(Endpoints.LoadUser);
+            var request = Requests.GetRequest(Endpoints.Management.LoadUser);
+            request.AddQueryParameter("userId", id);
+
+            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
+            return _httpClient.Client.Serializers.DeserializeResponse<DescopeUser>(restResponse);
         }
     }
 }

@@ -8,6 +8,8 @@
 using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Management;
+using Descope.Management.Tenants;
+using Descope.Management.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Descope.DependencyInjection
@@ -21,6 +23,8 @@ namespace Descope.DependencyInjection
                 .AddSingleton<IDescopeConfiguration, DescopeConfiguration>(x => new DescopeConfiguration(projectId, managementKey))
                 .AddSingleton<IDescopeAuthHttpClient, DescopeAuthHttpClient>()
                 .AddSingleton<IDescopeManagementHttpClient, DescopeManagementHttpClient>()
+                .AddSingleton<IUsersApiClient, UsersApiClient>()
+                .AddSingleton<ITenantsApiClient, TenantsApiClient>()
                 .AddSingleton<IManagementApiClient, ManagementApiClient>();
 
             // Publics

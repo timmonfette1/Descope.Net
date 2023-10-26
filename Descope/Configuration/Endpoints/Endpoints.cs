@@ -11,12 +11,28 @@ namespace Descope.Configuration
     {
         private const string VERSION = "v1";
 
-        internal static string LoadUser => Url(ManagementEndpoints.LoadUser);
+        internal static class Management
+        {
+            internal static string LoadUser => Url(ManagementEndpoints.LoadUser);
+            internal static string CreateTenant => Url(ManagementEndpoints.CreateTenant);
+            internal static string UpdateTenant => Url(ManagementEndpoints.UpdateTenant);
+        }
 
         #region Private Methods
 
         private static string Url(string route) => $"{VERSION}/{route}";
 
         #endregion Private Methods
+
+        #region Management Endpoint Config
+
+        private static class ManagementEndpoints
+        {
+            internal const string LoadUser = "mgmt/user";
+            internal const string CreateTenant = "mgmt/tenant/create";
+            internal const string UpdateTenant = "mgmt/tenant/update";
+        }
+
+        #endregion Management Endpoint Config
     }
 }
