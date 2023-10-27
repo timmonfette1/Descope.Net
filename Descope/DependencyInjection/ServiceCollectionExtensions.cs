@@ -18,7 +18,6 @@ namespace Descope.DependencyInjection
     {
         public static IServiceCollection AddDescope(this IServiceCollection services, string projectId, string managementKey)
         {
-            // Internals
             services
                 .AddSingleton<IDescopeConfiguration, DescopeConfiguration>(x => new DescopeConfiguration(projectId, managementKey))
                 .AddSingleton<IDescopeAuthHttpClient, DescopeAuthHttpClient>()
@@ -27,7 +26,6 @@ namespace Descope.DependencyInjection
                 .AddTransient<ITenantsApiClient, TenantsApiClient>()
                 .AddTransient<IManagementApiClient, ManagementApiClient>();
 
-            // Publics
             services.AddTransient<IDescopeApiClient, DescopeApiClient>();
 
             return services;
