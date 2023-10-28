@@ -5,24 +5,23 @@
  * <date>10/26/2023 21:23:06</date>
  */
 
-using Descope.Configuration;
 using RestSharp.Authenticators.OAuth2;
 
 namespace Descope.Test.Configuration
 {
-    public class DescopeConfigurationTests
+    public class DescopeConfigurationTests : IClassFixture<DescopeConfigurationFixture>
     {
-        private readonly DescopeConfiguration _config;
+        private readonly DescopeConfigurationFixture _fixture;
 
-        public DescopeConfigurationTests()
+        public DescopeConfigurationTests(DescopeConfigurationFixture fixture)
         {
-            _config = new DescopeConfiguration("myProjectId", "myManagementKey");
+            _fixture = fixture;
         }
 
         [Fact]
         public void ShouldGetBaseUrl()
         {
-            var baseUrl = _config.BaseUrl;
+            var baseUrl = _fixture.Config.BaseUrl;
 
             Assert.Equal("https://api.descope.com", baseUrl);
         }
@@ -30,7 +29,7 @@ namespace Descope.Test.Configuration
         [Fact]
         public void ShouldGetAuthAuthenticator()
         {
-            var authenticator = _config.AuthApiAuthenticator;
+            var authenticator = _fixture.Config.AuthApiAuthenticator;
 
             Assert.IsType<OAuth2AuthorizationRequestHeaderAuthenticator>(authenticator);
         }
@@ -38,7 +37,7 @@ namespace Descope.Test.Configuration
         [Fact]
         public void ShouldGetManagementAuthenticator()
         {
-            var authenticator = _config.ManagementApiAuthenticator;
+            var authenticator = _fixture.Config.ManagementApiAuthenticator;
 
             Assert.IsType<OAuth2AuthorizationRequestHeaderAuthenticator>(authenticator);
         }
