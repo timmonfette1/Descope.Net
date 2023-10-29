@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace Descope.HttpClient
 {
-    internal interface IDescopeManagementHttpClient
+    internal interface IDescopeManagementHttpClient : IDisposable
     {
         RestClient Client { get; }
     }
