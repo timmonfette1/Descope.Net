@@ -20,7 +20,7 @@ namespace Descope.Utilities
         internal static RestRequest JsonPostRequest<T>(string resource, T body) where T : class, new()
         {
             var request = new RestRequest(resource, Method.Post);
-            request.AddJsonBody<T>(body);
+            request.AddJsonBody(body);
 
             return request;
         }
