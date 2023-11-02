@@ -13,14 +13,14 @@ namespace Descope.Utilities
     {
         internal static RestRequest GetRequest(string resource)
         {
-            var request = new RestRequest(resource);
+            var request = new RestRequest(resource, Method.Get);
             return request;
         }
 
         internal static RestRequest JsonPostRequest<T>(string resource, T body) where T : class, new()
         {
-            var request = new RestRequest(resource);
-            request.AddJsonBody<T>(body);
+            var request = new RestRequest(resource, Method.Post);
+            request.AddJsonBody(body);
 
             return request;
         }

@@ -31,5 +31,11 @@ namespace Descope.HttpClient
         }
 
         public RestClient Client => _client;
+
+        public void Dispose()
+        {
+            _client.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }
