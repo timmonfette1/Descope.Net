@@ -17,6 +17,10 @@ namespace Descope.Configuration
             internal static string CreatePermission => Url(ManagementEndpoints.CreatePermission);
             internal static string UpdatePermission => Url(ManagementEndpoints.UpdatePermission);
             internal static string DeletePermission => Url(ManagementEndpoints.DeletePermission);
+            internal static string LoadAllRoles => Url(ManagementEndpoints.LoadAllRoles);
+            internal static string CreateRole => Url(ManagementEndpoints.CreateRole);
+            internal static string UpdateRole => Url(ManagementEndpoints.UpdateRole);
+            internal static string DeleteRole => Url(ManagementEndpoints.DeleteRole);
             internal static string LoadAllTenants => Url(ManagementEndpoints.LoadAllTenants);
             internal static string LoadTenant => Url(ManagementEndpoints.LoadTenant);
             internal static string SearchTenants => Url(ManagementEndpoints.SearchTenants);
@@ -40,6 +44,10 @@ namespace Descope.Configuration
             internal const string CreatePermission = "mgmt/permission/create";
             internal const string UpdatePermission = "mgmt/permission/update";
             internal const string DeletePermission = "mgmt/permission/delete";
+            internal const string LoadAllRoles = "mgmt/role/all";
+            internal const string CreateRole = "mgmt/role/create";
+            internal const string UpdateRole = "mgmt/role/update";
+            internal const string DeleteRole = "mgmt/role/delete";
             internal const string LoadTenant = "mgmt/tenant";
             internal const string LoadAllTenants = "mgmt/tenant/all";
             internal const string SearchTenants = "mgmt/tenant/search";
