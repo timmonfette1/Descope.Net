@@ -9,6 +9,7 @@ using Descope.Configuration;
 using Descope.DependencyInjection;
 using Descope.HttpClient;
 using Descope.Management;
+using Descope.Management.Permissions;
 using Descope.Management.Tenants;
 using Descope.Management.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,11 +34,14 @@ namespace Descope.Test.DependencyInjection
             var mgmtClient = Record.Exception(serviceProvider.GetRequiredService<IDescopeManagementHttpClient>);
             Assert.Null(mgmtClient);
 
-            var user = Record.Exception(serviceProvider.GetRequiredService<IUsersApiClient>);
-            Assert.Null(user);
+            var permission = Record.Exception(serviceProvider.GetRequiredService<IPermissionsApiClient>);
+            Assert.Null(permission);
 
             var tenant = Record.Exception(serviceProvider.GetRequiredService<ITenantsApiClient>);
             Assert.Null(tenant);
+
+            var user = Record.Exception(serviceProvider.GetRequiredService<IUsersApiClient>);
+            Assert.Null(user);
 
             var mgmt = Record.Exception(serviceProvider.GetRequiredService<IManagementApiClient>);
             Assert.Null(mgmt);

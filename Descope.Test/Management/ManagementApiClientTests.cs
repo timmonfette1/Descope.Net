@@ -6,6 +6,7 @@
  */
 
 using Descope.Management;
+using Descope.Management.Permissions;
 using Descope.Management.Tenants;
 using Descope.Management.Users;
 using NSubstitute;
@@ -17,12 +18,14 @@ namespace Descope.Test.Management
         [Fact]
         public void ShouldGetSubClients()
         {
-            var userMock = Substitute.For<IUsersApiClient>();
+            var permissionMock = Substitute.For<IPermissionsApiClient>();
             var tenantMock = Substitute.For<ITenantsApiClient>();
-            var client = new ManagementApiClient(userMock, tenantMock);
+            var userMock = Substitute.For<IUsersApiClient>();
+            var client = new ManagementApiClient(permissionMock, tenantMock, userMock);
 
-            Assert.IsAssignableFrom<IUsersApiClient>(client.Users);
+            Assert.IsAssignableFrom<IPermissionsApiClient>(client.Permissions);
             Assert.IsAssignableFrom<ITenantsApiClient>(client.Tenants);
+            Assert.IsAssignableFrom<IUsersApiClient>(client.Users);
         }
     }
 }

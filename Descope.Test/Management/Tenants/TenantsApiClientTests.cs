@@ -5,9 +5,7 @@
  * <date>10/28/2023 22:34:18</date>
  */
 
-using Descope.Management.Users;
 using Descope.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Descope.Test.Management.Tenants
 {

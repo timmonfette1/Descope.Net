@@ -25,6 +25,7 @@ namespace Descope.HttpClient
 
             _client = new RestClient(options, configureSerialization: x => x.UseSystemTextJson(new JsonSerializerOptions
             {
+                IncludeFields = true,
                 PropertyNameCaseInsensitive = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             }));
