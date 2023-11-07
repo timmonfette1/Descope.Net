@@ -18,6 +18,10 @@ namespace Descope.Test.Configuration
             Assert.Equal("v1/mgmt/permission/create", Endpoints.Management.CreatePermission);
             Assert.Equal("v1/mgmt/permission/update", Endpoints.Management.UpdatePermission);
             Assert.Equal("v1/mgmt/permission/delete", Endpoints.Management.DeletePermission);
+            Assert.Equal("v1/mgmt/role/all", Endpoints.Management.LoadAllRoles);
+            Assert.Equal("v1/mgmt/role/create", Endpoints.Management.CreateRole);
+            Assert.Equal("v1/mgmt/role/update", Endpoints.Management.UpdateRole);
+            Assert.Equal("v1/mgmt/role/delete", Endpoints.Management.DeleteRole);
             Assert.Equal("v1/mgmt/tenant", Endpoints.Management.LoadTenant);
             Assert.Equal("v1/mgmt/tenant/all", Endpoints.Management.LoadAllTenants);
             Assert.Equal("v1/mgmt/tenant/search", Endpoints.Management.SearchTenants);
