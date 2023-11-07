@@ -72,7 +72,7 @@ namespace Descope.Test.Management
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new { Id = "TEST" })
+                        .WithBodyAsJson(new { })
                 );
 
             _server

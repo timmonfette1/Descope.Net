@@ -9,6 +9,7 @@ using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Management;
 using Descope.Management.Permissions;
+using Descope.Management.Roles;
 using Descope.Management.Tenants;
 using Descope.Management.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ namespace Descope.DependencyInjection
                 .AddSingleton<IDescopeAuthHttpClient, DescopeAuthHttpClient>()
                 .AddSingleton<IDescopeManagementHttpClient, DescopeManagementHttpClient>()
                 .AddTransient<IPermissionsApiClient, PermissionsApiClient>()
+                .AddTransient<IRolesApiClient, RolesApiClient>()
                 .AddTransient<ITenantsApiClient, TenantsApiClient>()
                 .AddTransient<IUsersApiClient, UsersApiClient>()
                 .AddTransient<IManagementApiClient, ManagementApiClient>();
