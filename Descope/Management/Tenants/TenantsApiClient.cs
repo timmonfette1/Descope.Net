@@ -14,20 +14,18 @@ using RestSharp;
 
 namespace Descope.Management.Tenants
 {
-    internal class TenantsApiClient : ITenantsApiClient
+    internal class TenantsApiClient : BaseManagementApiClient, ITenantsApiClient
     {
         private readonly IDescopeManagementHttpClient _httpClient;
 
-        public TenantsApiClient(IDescopeManagementHttpClient httpClient)
+        public TenantsApiClient(IDescopeManagementHttpClient httpClient) : base(httpClient)
         {
             _httpClient = httpClient;
         }
 
         public async Task<DescopeTenantListResponse> GetAll()
         {
-            var request = Requests.GetRequest(Endpoints.Management.LoadAllTenants);
-            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopeTenantListResponse>(restResponse);
+            return await GetAll<DescopeTenantListResponse>(Endpoints.Management.LoadAllTenants);
         }
 
         public async Task<DescopeTenant> Get(string id)

@@ -14,20 +14,18 @@ using RestSharp;
 
 namespace Descope.Management.Roles
 {
-    internal class RolesApiClient : IRolesApiClient
+    internal class RolesApiClient : BaseManagementApiClient, IRolesApiClient
     {
         private readonly IDescopeManagementHttpClient _httpClient;
 
-        public RolesApiClient(IDescopeManagementHttpClient httpClient)
+        public RolesApiClient(IDescopeManagementHttpClient httpClient) : base(httpClient)
         {
             _httpClient = httpClient;
         }
 
         public async Task<DescopeRoleListResponse> GetAll()
         {
-            var request = Requests.GetRequest(Endpoints.Management.LoadAllRoles);
-            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopeRoleListResponse>(restResponse);
+            return await GetAll<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
         }
 
         public async Task<DescopeRole> Create(DescopeRole role)

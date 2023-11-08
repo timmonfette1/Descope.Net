@@ -14,20 +14,18 @@ using RestSharp;
 
 namespace Descope.Management.Permissions
 {
-    internal class PermissionsApiClient : IPermissionsApiClient
+    internal class PermissionsApiClient : BaseManagementApiClient, IPermissionsApiClient
     {
         private readonly IDescopeManagementHttpClient _httpClient;
 
-        public PermissionsApiClient(IDescopeManagementHttpClient httpClient)
+        public PermissionsApiClient(IDescopeManagementHttpClient httpClient) : base(httpClient)
         {
             _httpClient = httpClient;
         }
 
         public async Task<DescopePermissionListResponse> GetAll()
         {
-            var request = Requests.GetRequest(Endpoints.Management.LoadAllPermissions);
-            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopePermissionListResponse>(restResponse);
+            return await GetAll<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
         }
 
         public async Task<DescopePermission> Create(DescopePermission permission)
