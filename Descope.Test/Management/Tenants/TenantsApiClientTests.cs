@@ -9,6 +9,7 @@ using Descope.Models;
 
 namespace Descope.Test.Management.Tenants
 {
+    [Collection("ClientServer")]
     public class TenantsApiClientTests : IClassFixture<TenantsApiClientFixture>
     {
         private readonly TenantsApiClientFixture _fixture;

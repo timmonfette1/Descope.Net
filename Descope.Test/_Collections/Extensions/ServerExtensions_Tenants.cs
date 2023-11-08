@@ -1,51 +1,37 @@
-﻿/* <copyright file="TenantsApiClientFixture" company="Solidus">
+﻿/* <copyright file="ServerExtensions_Tenants" company="Solidus">
  * Copyright (c) 2023 All Rights Reserved
  * </copyright>
  * <author>Solidus</author>
- * <date>10/31/2023 20:53:26</date>
+ * <date>11/7/2023 21:27:04</date>
  */
 
-using Descope.HttpClient;
-using Descope.Management.Tenants;
 using Descope.Models;
-using Descope.Test.Mocks;
 using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
-namespace Descope.Test.Management
+namespace Descope.Test
 {
-    public class TenantsApiClientFixture : IDisposable
+    public static class ServerExtensions_Tenants
     {
-        private readonly WireMockServer _server;
-        private readonly IDescopeManagementHttpClient _httpClient;
-        private readonly TenantsApiClient _tenantsApiClient;
-
-        private readonly DescopeTenant _tenantMock;
-        private readonly DescopeTenantListResponse _tenantListMock;
-
-        public TenantsApiClientFixture()
+        private static readonly DescopeTenant _tenantMock = new()
         {
-            _tenantMock = new()
+            Id = "TEST",
+            Name = "Test Client",
+        };
+
+        private static readonly DescopeTenantListResponse _tenantListMock = new()
+        {
+            Tenants = new DescopeTenant[1]
             {
-                Id = "TEST",
-                Name = "Test Client",
-            };
+                _tenantMock
+            }
+        };
 
-            _tenantListMock = new()
-            {
-                Tenants = new DescopeTenant[1]
-                {
-                    _tenantMock
-                }
-            };
-
-            _server = WireMockServer.Start();
-
-            #region Get All Tenants Mock
-
-            _server
+        public static WireMockServer GetAllTenants(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -59,11 +45,12 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(_tenantListMock)
                 );
 
-            #endregion Get All Tenants Mock
+            return server;
+        }
 
-            #region Get Single Tenant Mock
-
-            _server
+        public static WireMockServer GetTenants(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -78,7 +65,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(_tenantMock)
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -99,11 +86,12 @@ namespace Descope.Test.Management
                         })
                 );
 
-            #endregion Get Single Tenant Mock
+            return server;
+        }
 
-            #region Search Tenants Mock
-
-            _server
+        public static WireMockServer SearchTenants(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -121,7 +109,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(_tenantListMock)
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -139,7 +127,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(_tenantListMock)
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -157,11 +145,12 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new DescopeTenantListResponse { Tenants = Array.Empty<DescopeTenant>() })
                 );
 
-            #endregion Search Tenants Mock
+            return server;
+        }
 
-            #region Create Tenant Mock
-
-            _server
+        public static WireMockServer CreateTenants(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -180,7 +169,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new { Id = "TEST" })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -205,11 +194,12 @@ namespace Descope.Test.Management
                         })
                 );
 
-            #endregion Create Tenant Mock
+            return server;
+        }
 
-            #region Update Tenant Mock
-
-            _server
+        public static WireMockServer UpdateTenants(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -228,7 +218,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new { })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -253,11 +243,12 @@ namespace Descope.Test.Management
                         })
                 );
 
-            #endregion Update Tenant Mock
+            return server;
+        }
 
-            #region Delete Tenant Mock
-
-            _server
+        public static WireMockServer DeleteTenants(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -275,21 +266,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new { })
                 );
 
-            #endregion Delete Tenant Mock
-
-            var config = new IDescopeConfigurationMock(_server.Url);
-            _httpClient = new DescopeManagementHttpClient(config.DescopeConfiguration);
-            _tenantsApiClient = new TenantsApiClient(_httpClient);
-        }
-
-        internal TenantsApiClient TenantsApiClient => _tenantsApiClient;
-
-        public void Dispose()
-        {
-            _server?.Stop();
-            _server?.Dispose();
-            _httpClient?.Dispose();
-            GC.SuppressFinalize(this);
+            return server;
         }
     }
 }

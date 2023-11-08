@@ -8,7 +8,7 @@
 using Descope.HttpClient;
 using Descope.Test.Mocks;
 
-namespace Descope.Test.HttpClient
+namespace Descope.Test.HttpClient.Management
 {
     public class DescopeManagementHttpClientFixture : IDisposable
     {

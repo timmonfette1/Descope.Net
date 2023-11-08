@@ -1,34 +1,23 @@
-﻿/* <copyright file="RolesApiClientFixture" company="Solidus">
+﻿/* <copyright file="ServerExtensions_Roles" company="Solidus">
  * Copyright (c) 2023 All Rights Reserved
  * </copyright>
  * <author>Solidus</author>
- * <date>11/6/2023 20:55:11</date>
+ * <date>11/7/2023 21:23:19</date>
  */
 
-using Descope.HttpClient;
-using Descope.Management.Roles;
 using Descope.Models;
-using Descope.Test.Mocks;
 using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
-namespace Descope.Test.Management._Fixtures
+namespace Descope.Test
 {
-    public class RolesApiClientFixture : IDisposable
+    public static class ServerExtensions_Roles
     {
-        private readonly WireMockServer _server;
-        private readonly IDescopeManagementHttpClient _httpClient;
-        private readonly RolesApiClient _rolesApiClient;
-
-        public RolesApiClientFixture()
+        public static WireMockServer GetAllRoles(this WireMockServer server)
         {
-            _server = WireMockServer.Start();
-
-            #region Get All Roles Mocks
-
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -56,11 +45,12 @@ namespace Descope.Test.Management._Fixtures
                         })
                 );
 
-            #endregion Get All Roles Mocks
+            return server;
+        }
 
-            #region Create Roles Mocks
-
-            _server
+        public static WireMockServer CreateRoles(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -83,7 +73,7 @@ namespace Descope.Test.Management._Fixtures
                         .WithBodyAsJson(new { })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -112,7 +102,7 @@ namespace Descope.Test.Management._Fixtures
                         })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -141,11 +131,12 @@ namespace Descope.Test.Management._Fixtures
                         })
                 );
 
-            #endregion Create Roles Mocks
+            return server;
+        }
 
-            #region Update Roles Mocks
-
-            _server
+        public static WireMockServer UpdateRoles(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -169,7 +160,7 @@ namespace Descope.Test.Management._Fixtures
                         .WithBodyAsJson(new { })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -199,7 +190,7 @@ namespace Descope.Test.Management._Fixtures
                         })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -229,7 +220,7 @@ namespace Descope.Test.Management._Fixtures
                         })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -259,11 +250,12 @@ namespace Descope.Test.Management._Fixtures
                         })
                 );
 
-            #endregion Update Roles Mocks
+            return server;
+        }
 
-            #region Delete Role Mocks
-
-            _server
+        public static WireMockServer DeleteRoles(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -281,21 +273,7 @@ namespace Descope.Test.Management._Fixtures
                         .WithBodyAsJson(new { })
                 );
 
-            #endregion Delete Role Mocks
-
-            var config = new IDescopeConfigurationMock(_server.Url);
-            _httpClient = new DescopeManagementHttpClient(config.DescopeConfiguration);
-            _rolesApiClient = new RolesApiClient(_httpClient);
-        }
-
-        internal RolesApiClient RolesApiClient => _rolesApiClient;
-
-        public void Dispose()
-        {
-            _server?.Stop();
-            _server?.Dispose();
-            _httpClient?.Dispose();
-            GC.SuppressFinalize(this);
+            return server;
         }
     }
 }
