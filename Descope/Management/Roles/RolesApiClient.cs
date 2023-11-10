@@ -6,11 +6,8 @@
  */
 
 using Descope.Configuration;
-using Descope.Extensions;
 using Descope.HttpClient;
 using Descope.Models;
-using Descope.Utilities;
-using RestSharp;
 
 namespace Descope.Management.Roles
 {
@@ -25,22 +22,18 @@ namespace Descope.Management.Roles
 
         public async Task<DescopeRoleListResponse> GetAll()
         {
-            return await GetAll<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
+            return await GetAsync<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
         }
 
         public async Task<DescopeRole> Create(DescopeRole role)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.CreateRole, role);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await PostAsync(Endpoints.Management.CreateRole, role);
             return role;
         }
 
         public async Task<DescopeRole> Update(DescopeRoleUpdateRequest role)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.UpdateRole, role);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await PostAsync(Endpoints.Management.UpdateRole, role);
             return new DescopeRole
             {
                 Name = role.NewName,
@@ -51,9 +44,7 @@ namespace Descope.Management.Roles
 
         public async Task Delete(DescopeRoleDeleteRequest role)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.DeleteRole, role);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await PostAsync(Endpoints.Management.DeleteRole, role);
         }
     }
 }
