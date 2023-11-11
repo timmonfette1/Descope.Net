@@ -14,9 +14,9 @@ namespace Descope.Test.HttpClient.Management
     {
         private readonly DescopeManagementHttpClient _client;
 
-        public DescopeManagementHttpClientFixture()
+        public DescopeManagementHttpClientFixture(ClientServerFixture fixture)
         {
-            var config = new IDescopeConfigurationMock();
+            var config = new IDescopeConfigurationMock(fixture.ServerUrl);
             _client = new DescopeManagementHttpClient(config.DescopeConfiguration);
         }
 

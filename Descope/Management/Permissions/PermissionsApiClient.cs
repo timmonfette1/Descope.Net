@@ -11,29 +11,29 @@ using Descope.Models;
 
 namespace Descope.Management.Permissions
 {
-    internal class PermissionsApiClient : BaseManagementApiClient, IPermissionsApiClient
+    internal class PermissionsApiClient : IPermissionsApiClient
     {
         private readonly IDescopeManagementHttpClient _httpClient;
 
-        public PermissionsApiClient(IDescopeManagementHttpClient httpClient) : base(httpClient)
+        public PermissionsApiClient(IDescopeManagementHttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
         public async Task<DescopePermissionListResponse> GetAll()
         {
-            return await GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
+            return await _httpClient.GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
         }
 
         public async Task<DescopePermission> Create(DescopePermission permission)
         {
-            await PostAsync(Endpoints.Management.CreatePermission, permission);
+            await _httpClient.PostAsync(Endpoints.Management.CreatePermission, permission);
             return permission;
         }
 
         public async Task<DescopePermission> Update(DescopePermissionUpdateRequest permission)
         {
-            await PostAsync(Endpoints.Management.UpdatePermission, permission);
+            await _httpClient.PostAsync(Endpoints.Management.UpdatePermission, permission);
             return new DescopePermission
             {
                 Name = permission.NewName,
@@ -43,7 +43,7 @@ namespace Descope.Management.Permissions
 
         public async Task Delete(DescopePermissionDeleteRequest permission)
         {
-            await PostAsync(Endpoints.Management.DeletePermission, permission);
+            await _httpClient.PostAsync(Endpoints.Management.DeletePermission, permission);
         }
     }
 }

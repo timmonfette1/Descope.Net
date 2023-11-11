@@ -11,6 +11,15 @@ namespace Descope.Test
 {
     public static class ServerExtensions
     {
+        public static WireMockServer ConfigureDummy(this WireMockServer server)
+        {
+            server
+                .ConfigureDummyGets()
+                .ConfigureDummyPosts();
+
+            return server;
+        }
+
         public static WireMockServer ConifgurePermissions(this WireMockServer server)
         {
             server

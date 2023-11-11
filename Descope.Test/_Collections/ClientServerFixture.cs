@@ -16,20 +16,26 @@ namespace Descope.Test
         private readonly WireMockServer _server;
         private readonly IDescopeManagementHttpClient _httpClient;
 
+        private string _serverUrl;
+
         public ClientServerFixture()
         {
             _server = WireMockServer.Start();
 
             _server
+                .ConfigureDummy()
                 .ConifgurePermissions()
                 .ConifgureRoles()
                 .ConifgureTenants();
 
-            var config = new IDescopeConfigurationMock(_server.Url);
+            _serverUrl = _server.Url;
+            var config = new IDescopeConfigurationMock(_serverUrl);
             _httpClient = new DescopeManagementHttpClient(config.DescopeConfiguration);
         }
 
         internal IDescopeManagementHttpClient HttpClient => _httpClient;
+
+        internal string ServerUrl => _serverUrl;
 
         public void Dispose()
         {
