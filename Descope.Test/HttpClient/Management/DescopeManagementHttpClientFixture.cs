@@ -8,15 +8,15 @@
 using Descope.HttpClient;
 using Descope.Test.Mocks;
 
-namespace Descope.Test.HttpClient
+namespace Descope.Test.HttpClient.Management
 {
     public class DescopeManagementHttpClientFixture : IDisposable
     {
         private readonly DescopeManagementHttpClient _client;
 
-        public DescopeManagementHttpClientFixture()
+        public DescopeManagementHttpClientFixture(ClientServerFixture fixture)
         {
-            var config = new IDescopeConfigurationMock();
+            var config = new IDescopeConfigurationMock(fixture.ServerUrl);
             _client = new DescopeManagementHttpClient(config.DescopeConfiguration);
         }
 

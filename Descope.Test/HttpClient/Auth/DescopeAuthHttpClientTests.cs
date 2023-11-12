@@ -7,7 +7,7 @@
 
 using RestSharp;
 
-namespace Descope.Test.HttpClient
+namespace Descope.Test.HttpClient.Auth
 {
     public class DescopeAuthHttpClientTests : IClassFixture<DescopeAuthHttpClientFixture>
     {

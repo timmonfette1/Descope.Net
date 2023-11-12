@@ -6,11 +6,8 @@
  */
 
 using Descope.Configuration;
-using Descope.Extensions;
 using Descope.HttpClient;
 using Descope.Models;
-using Descope.Utilities;
-using RestSharp;
 
 namespace Descope.Management.Tenants
 {
@@ -25,49 +22,35 @@ namespace Descope.Management.Tenants
 
         public async Task<DescopeTenantListResponse> GetAll()
         {
-            var request = Requests.GetRequest(Endpoints.Management.LoadAllTenants);
-            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopeTenantListResponse>(restResponse);
+            return await _httpClient.GetAsync<DescopeTenantListResponse>(Endpoints.Management.LoadAllTenants);
         }
 
         public async Task<DescopeTenant> Get(string id)
         {
-            var request = Requests.GetRequest(Endpoints.Management.LoadTenant);
-            request.AddQueryParameter("id", id);
-
-            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopeTenant>(restResponse);
+            return await _httpClient.GetAsync<DescopeTenant>(Endpoints.Management.LoadTenant, new { id });
         }
 
         public async Task<DescopeTenantListResponse> Search(DescopeTenantSearchRequest search)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.SearchTenants, search);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopeTenantListResponse>(restResponse);
+            return await _httpClient.PostAsync<DescopeTenantSearchRequest, DescopeTenantListResponse>(Endpoints.Management.SearchTenants, search);
         }
 
         public async Task<DescopeTenant> Create(DescopeTenant tenant)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.CreateTenant, tenant);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            var response = _httpClient.Client.Serializers.DeserializeResponse<DescopeTenant>(restResponse);
+            var response = await _httpClient.PostAsync<DescopeTenant, DescopeTenant>(Endpoints.Management.CreateTenant, tenant);
             tenant.Id = response.Id;
             return tenant;
         }
 
         public async Task<DescopeTenant> Update(DescopeTenant tenant)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.UpdateTenant, tenant);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await _httpClient.PostAsync(Endpoints.Management.UpdateTenant, tenant);
             return tenant;
         }
 
         public async Task Delete(DescopeTenantDeleteRequest tenant)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.DeleteTenant, tenant);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await _httpClient.PostAsync(Endpoints.Management.DeleteTenant, tenant);
         }
     }
 }

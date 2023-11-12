@@ -6,10 +6,10 @@
  */
 
 using Descope.Models;
-using Descope.Test.Management._Fixtures;
 
 namespace Descope.Test.Management.Roles
 {
+    [Collection("ClientServer")]
     public class RolesApiClientTests : IClassFixture<RolesApiClientFixture>
     {
         private readonly RolesApiClientFixture _fixture;

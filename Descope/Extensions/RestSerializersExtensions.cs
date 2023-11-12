@@ -26,7 +26,7 @@ namespace Descope.Extensions
         {
             if (response.IsSuccessStatusCode)
             {
-                return serializers.DeserializeContent<T> (response);
+                return serializers.DeserializeContent<T>(response);
             }
             else
             {

@@ -12,7 +12,6 @@ using Descope.Management;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;
-using Descope.Management.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Descope.Test.DependencyInjection
@@ -43,9 +42,6 @@ namespace Descope.Test.DependencyInjection
 
             var tenant = Record.Exception(serviceProvider.GetRequiredService<ITenantsApiClient>);
             Assert.Null(tenant);
-
-            var user = Record.Exception(serviceProvider.GetRequiredService<IUsersApiClient>);
-            Assert.Null(user);
 
             var mgmt = Record.Exception(serviceProvider.GetRequiredService<IManagementApiClient>);
             Assert.Null(mgmt);

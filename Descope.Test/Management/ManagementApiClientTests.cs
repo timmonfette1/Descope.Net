@@ -9,7 +9,6 @@ using Descope.Management;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;
-using Descope.Management.Users;
 using NSubstitute;
 
 namespace Descope.Test.Management
@@ -22,13 +21,11 @@ namespace Descope.Test.Management
             var permissionMock = Substitute.For<IPermissionsApiClient>();
             var roleMock = Substitute.For<IRolesApiClient>();
             var tenantMock = Substitute.For<ITenantsApiClient>();
-            var userMock = Substitute.For<IUsersApiClient>();
-            var client = new ManagementApiClient(permissionMock, roleMock, tenantMock, userMock);
+            var client = new ManagementApiClient(permissionMock, roleMock, tenantMock);
 
             Assert.IsAssignableFrom<IPermissionsApiClient>(client.Permissions);
             Assert.IsAssignableFrom<IRolesApiClient>(client.Roles);
             Assert.IsAssignableFrom<ITenantsApiClient>(client.Tenants);
-            Assert.IsAssignableFrom<IUsersApiClient>(client.Users);
         }
     }
 }

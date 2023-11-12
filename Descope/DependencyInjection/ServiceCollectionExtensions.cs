@@ -11,7 +11,6 @@ using Descope.Management;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;
-using Descope.Management.Users;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Descope.DependencyInjection
@@ -27,7 +26,6 @@ namespace Descope.DependencyInjection
                 .AddTransient<IPermissionsApiClient, PermissionsApiClient>()
                 .AddTransient<IRolesApiClient, RolesApiClient>()
                 .AddTransient<ITenantsApiClient, TenantsApiClient>()
-                .AddTransient<IUsersApiClient, UsersApiClient>()
                 .AddTransient<IManagementApiClient, ManagementApiClient>();
 
             services.AddTransient<IDescopeApiClient, DescopeApiClient>();

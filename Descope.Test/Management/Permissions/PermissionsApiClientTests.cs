@@ -9,6 +9,7 @@ using Descope.Models;
 
 namespace Descope.Test.Management.Permissions
 {
+    [Collection("ClientServer")]
     public class PermissionsApiClientTests : IClassFixture<PermissionsApiClientFixture>
     {
         private readonly PermissionsApiClientFixture _fixture;

@@ -1,34 +1,23 @@
-﻿/* <copyright file="PermissionsApiClientFixture" company="Solidus">
+﻿/* <copyright file="ServerExtensions_Permissions" company="Solidus">
  * Copyright (c) 2023 All Rights Reserved
  * </copyright>
  * <author>Solidus</author>
- * <date>11/3/2023 20:33:30</date>
+ * <date>11/7/2023 21:19:55</date>
  */
 
-using Descope.HttpClient;
-using Descope.Management.Permissions;
 using Descope.Models;
-using Descope.Test.Mocks;
 using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
-namespace Descope.Test.Management
+namespace Descope.Test
 {
-    public class PermissionsApiClientFixture : IDisposable
+    public static class ServerExtensions_Permissions
     {
-        private readonly WireMockServer _server;
-        private readonly IDescopeManagementHttpClient _httpClient;
-        private readonly PermissionsApiClient _permissionsApiClient;
-
-        public PermissionsApiClientFixture()
+        public static WireMockServer GetAllPermissions(this WireMockServer server)
         {
-            _server = WireMockServer.Start();
-
-            #region Get All Permissions Mocks
-
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -52,11 +41,12 @@ namespace Descope.Test.Management
                         })
                 );
 
-            #endregion Get All Permissions Mocks
+            return server;
+        }
 
-            #region Create Permission Mocks
-
-            _server
+        public static WireMockServer CreatePermissions(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -75,7 +65,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new { })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -100,11 +90,12 @@ namespace Descope.Test.Management
                         })
                 );
 
-            #endregion Create Permission Mocks
+            return server;
+        }
 
-            #region Update Permission Mocks
-
-            _server
+        public static WireMockServer UpdatePermissions(this WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -124,7 +115,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new { })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -150,7 +141,7 @@ namespace Descope.Test.Management
                         })
                 );
 
-            _server
+            server
                 .Given(
                     Request
                         .Create()
@@ -176,11 +167,12 @@ namespace Descope.Test.Management
                         })
                 );
 
-            #endregion Update Permission Mocks
+            return server;
+        }
 
-            #region Delete Permission Mocks
-
-            _server
+        public static WireMockServer DeletePermissions(this  WireMockServer server)
+        {
+            server
                 .Given(
                     Request
                         .Create()
@@ -198,21 +190,7 @@ namespace Descope.Test.Management
                         .WithBodyAsJson(new { })
                 );
 
-            #endregion Delete Permission Mocks
-
-            var config = new IDescopeConfigurationMock(_server.Url);
-            _httpClient = new DescopeManagementHttpClient(config.DescopeConfiguration);
-            _permissionsApiClient = new PermissionsApiClient(_httpClient);
-        }
-
-        internal PermissionsApiClient PermissionsApiClient => _permissionsApiClient;
-
-        public void Dispose()
-        {
-            _server?.Stop();
-            _server?.Dispose();
-            _httpClient?.Dispose();
-            GC.SuppressFinalize(this);
+            return server;
         }
     }
 }

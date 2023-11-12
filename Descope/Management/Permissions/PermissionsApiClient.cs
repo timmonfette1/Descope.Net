@@ -6,11 +6,8 @@
  */
 
 using Descope.Configuration;
-using Descope.Extensions;
 using Descope.HttpClient;
 using Descope.Models;
-using Descope.Utilities;
-using RestSharp;
 
 namespace Descope.Management.Permissions
 {
@@ -25,24 +22,18 @@ namespace Descope.Management.Permissions
 
         public async Task<DescopePermissionListResponse> GetAll()
         {
-            var request = Requests.GetRequest(Endpoints.Management.LoadAllPermissions);
-            var restResponse = await _httpClient.Client.ExecuteGetAsync(request);
-            return _httpClient.Client.Serializers.DeserializeResponse<DescopePermissionListResponse>(restResponse);
+            return await _httpClient.GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
         }
 
         public async Task<DescopePermission> Create(DescopePermission permission)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.CreatePermission, permission);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await _httpClient.PostAsync(Endpoints.Management.CreatePermission, permission);
             return permission;
         }
 
         public async Task<DescopePermission> Update(DescopePermissionUpdateRequest permission)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.UpdatePermission, permission);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await _httpClient.PostAsync(Endpoints.Management.UpdatePermission, permission);
             return new DescopePermission
             {
                 Name = permission.NewName,
@@ -52,9 +43,7 @@ namespace Descope.Management.Permissions
 
         public async Task Delete(DescopePermissionDeleteRequest permission)
         {
-            var request = Requests.JsonPostRequest(Endpoints.Management.DeletePermission, permission);
-            var restResponse = await _httpClient.Client.ExecutePostAsync(request);
-            _httpClient.Client.Serializers.ParseResponse(restResponse);
+            await _httpClient.PostAsync(Endpoints.Management.DeletePermission, permission);
         }
     }
 }
