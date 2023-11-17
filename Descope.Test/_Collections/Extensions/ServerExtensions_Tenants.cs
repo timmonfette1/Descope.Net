@@ -1,11 +1,4 @@
-﻿/* <copyright file="ServerExtensions_Tenants" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/7/2023 21:27:04</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;

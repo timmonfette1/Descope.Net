@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeTenantDeleteRequestTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/26/2023 22:14:48</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Models.Tenants
 {

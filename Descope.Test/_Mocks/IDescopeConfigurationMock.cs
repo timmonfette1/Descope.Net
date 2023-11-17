@@ -1,11 +1,4 @@
-﻿/* <copyright file="IDescopeConfigurationMock" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/28/2023 21:43:05</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using NSubstitute;
 using RestSharp.Authenticators.OAuth2;
 

@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeTenant" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/24/2023 20:52:24</date>
- */
-
-namespace Descope.Models
+﻿namespace Descope.Models
 {
     public class DescopeTenant
     {

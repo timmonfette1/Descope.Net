@@ -1,11 +1,4 @@
-﻿/* <copyright file="TenantsApiClient" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/24/2023 20:54:35</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Models;
 

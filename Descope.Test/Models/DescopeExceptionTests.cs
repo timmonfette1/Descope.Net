@@ -1,12 +1,4 @@
-﻿/* <copyright file="DescopeExceptionTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/26/2023 21:57:45</date>
- */
-
-using System.Runtime.Serialization;
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Models
 {
