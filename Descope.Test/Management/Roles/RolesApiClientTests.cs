@@ -1,11 +1,4 @@
-﻿/* <copyright file="RolesApiClientTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/6/2023 20:55:29</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Management.Roles
 {

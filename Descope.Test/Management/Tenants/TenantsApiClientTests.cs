@@ -1,11 +1,4 @@
-﻿/* <copyright file="TenantsApiClientTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/28/2023 22:34:18</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Management.Tenants
 {

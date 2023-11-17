@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeApiClientTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/27/2023 22:18:01</date>
- */
-
-using Descope.Management;
+﻿using Descope.Management;
 using NSubstitute;
 
 namespace Descope.Test

@@ -1,11 +1,4 @@
-﻿/* <copyright file="ServerExtensions_Dummy" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/10/2023 22:08:50</date>
- */
-
-using WireMock.Matchers;
+﻿using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;

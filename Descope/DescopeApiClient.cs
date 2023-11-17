@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeApiClient" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/23/2023 19:51:15</date>
- */
-
-using Descope.Management;
+﻿using Descope.Management;
 
 namespace Descope
 {

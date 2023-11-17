@@ -1,11 +1,4 @@
-﻿/* <copyright file="PermissionsApiClient" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/3/2023 20:12:59</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Models;
 

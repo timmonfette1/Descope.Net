@@ -1,11 +1,4 @@
-﻿/* <copyright file="ManagementApiClientTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/28/2023 21:39:48</date>
- */
-
-using Descope.Management;
+﻿using Descope.Management;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;

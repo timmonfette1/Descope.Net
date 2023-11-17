@@ -1,11 +1,4 @@
-﻿/* <copyright file="ServiceCollectionExtensions" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/23/2023 19:18:28</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Management;
 using Descope.Management.Permissions;
