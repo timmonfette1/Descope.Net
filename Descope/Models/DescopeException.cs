@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeException" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/24/2023 21:02:34</date>
- */
-
-namespace Descope.Models
+﻿namespace Descope.Models
 {
     public class DescopeException : Exception
     {

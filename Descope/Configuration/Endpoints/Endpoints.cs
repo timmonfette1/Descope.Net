@@ -1,11 +1,4 @@
-﻿/* <copyright file="Endpoints" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/23/2023 20:45:50</date>
- */
-
-namespace Descope.Configuration
+﻿namespace Descope.Configuration
 {
     internal static class Endpoints
     {

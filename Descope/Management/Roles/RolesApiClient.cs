@@ -1,11 +1,4 @@
-﻿/* <copyright file="RolesApiClient" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/3/2023 23:11:25</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Models;
 

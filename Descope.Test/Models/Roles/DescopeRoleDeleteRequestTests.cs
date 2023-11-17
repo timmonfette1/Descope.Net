@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeRoleDeleteRequestTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/3/2023 23:02:07</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Models.Roles
 {

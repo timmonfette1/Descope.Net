@@ -1,11 +1,4 @@
-﻿/* <copyright file="EndpointsTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/26/2023 21:34:32</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 
 namespace Descope.Test.Configuration
 {

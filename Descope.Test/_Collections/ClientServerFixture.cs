@@ -1,11 +1,4 @@
-﻿/* <copyright file="ClientServerFixture" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/7/2023 21:08:17</date>
- */
-
-using Descope.HttpClient;
+﻿using Descope.HttpClient;
 using Descope.Test.Mocks;
 using WireMock.Server;
 

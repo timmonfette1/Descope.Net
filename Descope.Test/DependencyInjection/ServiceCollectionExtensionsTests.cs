@@ -1,11 +1,4 @@
-﻿/* <copyright file="ServiceCollectionExtensionsTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/26/2023 21:40:09</date>
- */
-
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using Descope.DependencyInjection;
 using Descope.HttpClient;
 using Descope.Management;

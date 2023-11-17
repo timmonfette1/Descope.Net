@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeManagementHttpClient" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/23/2023 19:58:12</date>
- */
-
-using System.Text.Json;
+﻿using System.Text.Json;
 using Descope.Configuration;
 using Descope.Extensions;
 using RestSharp;

@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeRoleTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/3/2023 22:57:55</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Models.Roles
 {

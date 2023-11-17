@@ -1,11 +1,4 @@
-﻿/* <copyright file="RestSerializersExtensions" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/24/2023 21:27:07</date>
- */
-
-using Descope.Models;
+﻿using Descope.Models;
 using RestSharp;
 using RestSharp.Serializers;
 

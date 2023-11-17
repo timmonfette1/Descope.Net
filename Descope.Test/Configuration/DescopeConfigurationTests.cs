@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeConfigurationTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/26/2023 21:23:06</date>
- */
-
-using RestSharp.Authenticators.OAuth2;
+﻿using RestSharp.Authenticators.OAuth2;
 
 namespace Descope.Test.Configuration
 {

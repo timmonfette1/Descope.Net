@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeRoleUpdateRequest" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/3/2023 22:57:14</date>
- */
-
-namespace Descope.Models
+﻿namespace Descope.Models
 {
     public class DescopeRoleUpdateRequest
     {

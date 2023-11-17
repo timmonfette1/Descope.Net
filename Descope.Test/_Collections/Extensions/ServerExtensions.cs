@@ -1,11 +1,4 @@
-﻿/* <copyright file="ServerExtensions" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>11/7/2023 21:13:21</date>
- */
-
-using WireMock.Server;
+﻿using WireMock.Server;
 
 namespace Descope.Test
 {

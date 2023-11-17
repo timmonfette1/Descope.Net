@@ -1,11 +1,4 @@
-﻿/* <copyright file="DescopeAuthHttpClientTests" company="Solidus">
- * Copyright (c) 2023 All Rights Reserved
- * </copyright>
- * <author>Solidus</author>
- * <date>10/28/2023 21:42:13</date>
- */
-
-using RestSharp;
+﻿using RestSharp;
 
 namespace Descope.Test.HttpClient.Auth
 {
