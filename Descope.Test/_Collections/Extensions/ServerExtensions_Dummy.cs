@@ -72,7 +72,8 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(500)
-                        .WithBodyAsJson(new {
+                        .WithBodyAsJson(new
+                        {
                             ErrorCode = "E123456",
                             ErrorDescription = "Failed to GET data",
                             ErrorMessage = "Failed to GET data",

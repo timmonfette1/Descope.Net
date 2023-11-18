@@ -6,13 +6,13 @@
 
         internal static class Management
         {
-            internal static string LoadAccessKey => ManagementEndpoints.LoadAccessKey;
-            internal static string SearchAccessKeys => ManagementEndpoints.SearchAccessKeys;
-            internal static string CreateAccessKey => ManagementEndpoints.CreateAccessKey;
-            internal static string UpdateAccessKey => ManagementEndpoints.UpdateAccessKey;
-            internal static string ActivateAccessKey => ManagementEndpoints.ActivateAccessKey;
-            internal static string DeactivateAccessKey => ManagementEndpoints.DeactivateAccessKey;
-            internal static string DeleteAccessKey => ManagementEndpoints.DeleteAccessKey;
+            internal static string LoadAccessKey => Url(ManagementEndpoints.LoadAccessKey);
+            internal static string SearchAccessKeys => Url(ManagementEndpoints.SearchAccessKeys);
+            internal static string CreateAccessKey => Url(ManagementEndpoints.CreateAccessKey);
+            internal static string UpdateAccessKey => Url(ManagementEndpoints.UpdateAccessKey);
+            internal static string ActivateAccessKey => Url(ManagementEndpoints.ActivateAccessKey);
+            internal static string DeactivateAccessKey => Url(ManagementEndpoints.DeactivateAccessKey);
+            internal static string DeleteAccessKey => Url(ManagementEndpoints.DeleteAccessKey);
             internal static string LoadAllPermissions => Url(ManagementEndpoints.LoadAllPermissions);
             internal static string CreatePermission => Url(ManagementEndpoints.CreatePermission);
             internal static string UpdatePermission => Url(ManagementEndpoints.UpdatePermission);

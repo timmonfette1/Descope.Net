@@ -7,13 +7,13 @@ namespace Descope.Test.Configuration
         [Fact]
         public void ShouldGetEndpoints()
         {
-            Assert.Equal("mgmt/accesskey", Endpoints.Management.LoadAccessKey);
-            Assert.Equal("mgmt/accesskey/search", Endpoints.Management.SearchAccessKeys);
-            Assert.Equal("mgmt/accesskey/create", Endpoints.Management.CreateAccessKey);
-            Assert.Equal("mgmt/accesskey/update", Endpoints.Management.UpdateAccessKey);
-            Assert.Equal("mgmt/accesskey/activate", Endpoints.Management.ActivateAccessKey);
-            Assert.Equal("mgmt/accesskey/deactivate", Endpoints.Management.DeactivateAccessKey);
-            Assert.Equal("mgmt/accesskey/delete", Endpoints.Management.DeleteAccessKey);
+            Assert.Equal("v1/mgmt/accesskey", Endpoints.Management.LoadAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/search", Endpoints.Management.SearchAccessKeys);
+            Assert.Equal("v1/mgmt/accesskey/create", Endpoints.Management.CreateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/update", Endpoints.Management.UpdateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/activate", Endpoints.Management.ActivateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/deactivate", Endpoints.Management.DeactivateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/delete", Endpoints.Management.DeleteAccessKey);
             Assert.Equal("v1/mgmt/permission/all", Endpoints.Management.LoadAllPermissions);
             Assert.Equal("v1/mgmt/permission/create", Endpoints.Management.CreatePermission);
             Assert.Equal("v1/mgmt/permission/update", Endpoints.Management.UpdatePermission);

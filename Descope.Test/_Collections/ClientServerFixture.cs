@@ -9,7 +9,7 @@ namespace Descope.Test
         private readonly WireMockServer _server;
         private readonly IDescopeManagementHttpClient _httpClient;
 
-        private string _serverUrl;
+        private readonly string _serverUrl;
 
         public ClientServerFixture()
         {
@@ -17,6 +17,7 @@ namespace Descope.Test
 
             _server
                 .ConfigureDummy()
+                .ConfigureAccessKeys()
                 .ConifgurePermissions()
                 .ConifgureRoles()
                 .ConifgureTenants();

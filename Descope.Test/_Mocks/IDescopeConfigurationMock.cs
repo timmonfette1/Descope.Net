@@ -10,7 +10,7 @@ namespace Descope.Test.Mocks
 
         public IDescopeConfigurationMock() : this("http://localhost:9999")
         {
-            
+
         }
 
         public IDescopeConfigurationMock(string baseUrl)
