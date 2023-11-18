@@ -149,26 +149,14 @@ namespace Descope.Test
                         {
                             Key = new()
                             {
-                                Id = "TEST",
+                                Id = _accessKeyMock.Id,
                                 Name = "Updated Testing",
-                                RoleNames = new string[1] { "Role1" },
-                                KeyTenants = new DescopeAccessKeyTenant[2]
-                                {
-                                    new()
-                                    {
-                                        TenantId = "Tenant1",
-                                        RoleNames = new string[1] { "TenantRole1" }
-                                    },
-                                    new()
-                                    {
-                                        TenantId = "Tenant2",
-                                        RoleNames = new string[1] { "TenantRole2" }
-                                    }
-                                },
-                                Status = "Active",
-                                CreatedTime = 12345,
-                                ExpireTime = 99999,
-                                CreatedBy = "Mr. Tester"
+                                RoleNames = _accessKeyMock.RoleNames,
+                                KeyTenants = _accessKeyMock.KeyTenants,
+                                Status = _accessKeyMock.Status,
+                                CreatedTime = _accessKeyMock.CreatedTime,
+                                ExpireTime = _accessKeyMock.ExpireTime,
+                                CreatedBy = _accessKeyMock.CreatedBy
                             }
                         })
                 );
