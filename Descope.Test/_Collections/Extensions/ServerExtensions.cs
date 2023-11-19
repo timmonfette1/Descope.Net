@@ -18,6 +18,7 @@ namespace Descope.Test
             server
                 .GetAccessKey()
                 .SearchAccessKeys()
+                .CreateAccessKey()
                 .UpdateAccessKey()
                 .ActivateAccessKey()
                 .DeactivateAccessKey()

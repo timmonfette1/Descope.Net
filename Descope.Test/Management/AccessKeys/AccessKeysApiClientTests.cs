@@ -31,6 +31,17 @@ namespace Descope.Test.Management.AccessKeys
         }
 
         [Fact]
+        public async Task ShouldNotGetAccessKey_IdTooShort()
+        {
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Get("X"));
+
+            Assert.NotNull(exception);
+            Assert.Equal("E011003", exception.ErrorCode);
+            Assert.Equal("Request is invalid", exception.ErrorDescription);
+            Assert.Equal("The id field must be at least 27 characters", exception.ErrorMessage);
+        }
+
+        [Fact]
         public async Task ShouldSearchAccessKeys()
         {
             var accessKeys = await _fixture.AccessKeysApiClient.Search(new DescopeAccessKeySearchRequest
@@ -53,6 +64,16 @@ namespace Descope.Test.Management.AccessKeys
 
             Assert.NotNull(accessKeys);
             Assert.Empty(accessKeys.Keys);
+        }
+
+        [Fact]
+        public async Task ShouldCreateAccessKey()
+        {
+            var accessKey = await _fixture.AccessKeysApiClient.Create(new DescopeAccessKeyCreateRequest());
+
+            Assert.NotNull(accessKey);
+            Assert.Equal("Secret", accessKey.ClearText);
+            AccessKeyAssertations(accessKey.Key);
         }
 
         [Fact]
@@ -165,7 +186,6 @@ namespace Descope.Test.Management.AccessKeys
 
         private static void AccessKeyCantFindAssertations(DescopeException exception)
         {
-            Assert.NotNull(exception);
             Assert.Equal("E111502", exception.ErrorCode);
             Assert.Equal("Access key not found", exception.ErrorDescription);
             Assert.Equal("Can't find access key", exception.ErrorMessage);
@@ -173,7 +193,6 @@ namespace Descope.Test.Management.AccessKeys
 
         private static void AccessKeyUnableToUpdateAssertations(DescopeException exception)
         {
-            Assert.NotNull(exception);
             Assert.Equal("E111502", exception.ErrorCode);
             Assert.Equal("Access key not found", exception.ErrorDescription);
             Assert.Equal("Unable to update access key because it's not found", exception.ErrorMessage);

@@ -83,6 +83,27 @@ namespace Descope.Test
                         .WithBodyAsJson(_accessKeyCantFindMock)
                 );
 
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/accesskey")
+                        .WithParam("id", true, "X")
+                        .UsingGet()
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(500)
+                        .WithBodyAsJson(new
+                        {
+                            ErrorCode = "E011003",
+                            ErrorDescription = "Request is invalid",
+                            ErrorMessage = "The id field must be at least 27 characters",
+                            Message = "The id field must be at least 27 characters"
+                        })
+                );
+
             return server;
         }
 
@@ -122,6 +143,29 @@ namespace Descope.Test
                         .Create()
                         .WithStatusCode(200)
                         .WithBodyAsJson(new DescopeAccessKeyListResponse { Keys = Array.Empty<DescopeAccessKey>() })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer CreateAccessKey(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/accesskey/create")
+                        .UsingPost()
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new DescopeAccessKeyCreateResponse
+                        {
+                            ClearText = "Secret",
+                            Key = _accessKeyMock
+                        })
                 );
 
             return server;
