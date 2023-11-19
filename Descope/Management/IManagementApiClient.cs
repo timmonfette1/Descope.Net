@@ -2,6 +2,7 @@
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;
+using Descope.Management.Themes;
 
 namespace Descope.Management
 {
@@ -11,5 +12,6 @@ namespace Descope.Management
         IPermissionsApiClient Permissions { get; }
         IRolesApiClient Roles { get; }
         ITenantsApiClient Tenants { get; }
+        IThemesApiClient Themes { get; }
     }
 }

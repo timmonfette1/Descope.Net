@@ -1,6 +1,6 @@
 ﻿using Descope.Models;
 
-namespace Descope.Test.Models
+namespace Descope.Test.Models.Management
 {
     public class DescopeTenantTests
     {

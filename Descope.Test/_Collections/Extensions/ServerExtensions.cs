@@ -61,5 +61,14 @@ namespace Descope.Test
 
             return server;
         }
+
+        public static WireMockServer ConfigureThemes(this WireMockServer server)
+        {
+            server
+                .ExportTheme()
+                .ImportTheme();
+
+            return server;
+        }
     }
 }

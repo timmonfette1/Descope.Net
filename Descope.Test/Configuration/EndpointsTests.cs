@@ -28,6 +28,8 @@ namespace Descope.Test.Configuration
             Assert.Equal("v1/mgmt/tenant/create", Endpoints.Management.CreateTenant);
             Assert.Equal("v1/mgmt/tenant/update", Endpoints.Management.UpdateTenant);
             Assert.Equal("v1/mgmt/tenant/delete", Endpoints.Management.DeleteTenant);
+            Assert.Equal("v1/mgmt/theme/export", Endpoints.Management.ExportTheme);
+            Assert.Equal("v1/mgmt/theme/import", Endpoints.Management.ImportTheme);
         }
     }
 }
