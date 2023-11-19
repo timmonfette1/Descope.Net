@@ -163,7 +163,7 @@ namespace Descope.Test
             return server;
         }
 
-        public static WireMockServer DeletePermissions(this  WireMockServer server)
+        public static WireMockServer DeletePermissions(this WireMockServer server)
         {
             server
                 .Given(

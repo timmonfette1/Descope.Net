@@ -7,6 +7,13 @@ namespace Descope.Test.Configuration
         [Fact]
         public void ShouldGetEndpoints()
         {
+            Assert.Equal("v1/mgmt/accesskey", Endpoints.Management.LoadAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/search", Endpoints.Management.SearchAccessKeys);
+            Assert.Equal("v1/mgmt/accesskey/create", Endpoints.Management.CreateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/update", Endpoints.Management.UpdateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/activate", Endpoints.Management.ActivateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/deactivate", Endpoints.Management.DeactivateAccessKey);
+            Assert.Equal("v1/mgmt/accesskey/delete", Endpoints.Management.DeleteAccessKey);
             Assert.Equal("v1/mgmt/permission/all", Endpoints.Management.LoadAllPermissions);
             Assert.Equal("v1/mgmt/permission/create", Endpoints.Management.CreatePermission);
             Assert.Equal("v1/mgmt/permission/update", Endpoints.Management.UpdatePermission);
@@ -21,7 +28,6 @@ namespace Descope.Test.Configuration
             Assert.Equal("v1/mgmt/tenant/create", Endpoints.Management.CreateTenant);
             Assert.Equal("v1/mgmt/tenant/update", Endpoints.Management.UpdateTenant);
             Assert.Equal("v1/mgmt/tenant/delete", Endpoints.Management.DeleteTenant);
-            Assert.Equal("v1/mgmt/user", Endpoints.Management.LoadUser);
         }
     }
 }

@@ -6,6 +6,13 @@
 
         internal static class Management
         {
+            internal static string LoadAccessKey => Url(ManagementEndpoints.LoadAccessKey);
+            internal static string SearchAccessKeys => Url(ManagementEndpoints.SearchAccessKeys);
+            internal static string CreateAccessKey => Url(ManagementEndpoints.CreateAccessKey);
+            internal static string UpdateAccessKey => Url(ManagementEndpoints.UpdateAccessKey);
+            internal static string ActivateAccessKey => Url(ManagementEndpoints.ActivateAccessKey);
+            internal static string DeactivateAccessKey => Url(ManagementEndpoints.DeactivateAccessKey);
+            internal static string DeleteAccessKey => Url(ManagementEndpoints.DeleteAccessKey);
             internal static string LoadAllPermissions => Url(ManagementEndpoints.LoadAllPermissions);
             internal static string CreatePermission => Url(ManagementEndpoints.CreatePermission);
             internal static string UpdatePermission => Url(ManagementEndpoints.UpdatePermission);
@@ -20,7 +27,6 @@
             internal static string CreateTenant => Url(ManagementEndpoints.CreateTenant);
             internal static string UpdateTenant => Url(ManagementEndpoints.UpdateTenant);
             internal static string DeleteTenant => Url(ManagementEndpoints.DeleteTenant);
-            internal static string LoadUser => Url(ManagementEndpoints.LoadUser);
         }
 
         #region Private Methods
@@ -33,6 +39,13 @@
 
         private static class ManagementEndpoints
         {
+            internal const string LoadAccessKey = "mgmt/accesskey";
+            internal const string SearchAccessKeys = "mgmt/accesskey/search";
+            internal const string CreateAccessKey = "mgmt/accesskey/create";
+            internal const string UpdateAccessKey = "mgmt/accesskey/update";
+            internal const string ActivateAccessKey = "mgmt/accesskey/activate";
+            internal const string DeactivateAccessKey = "mgmt/accesskey/deactivate";
+            internal const string DeleteAccessKey = "mgmt/accesskey/delete";
             internal const string LoadAllPermissions = "mgmt/permission/all";
             internal const string CreatePermission = "mgmt/permission/create";
             internal const string UpdatePermission = "mgmt/permission/update";
@@ -47,7 +60,6 @@
             internal const string CreateTenant = "mgmt/tenant/create";
             internal const string UpdateTenant = "mgmt/tenant/update";
             internal const string DeleteTenant = "mgmt/tenant/delete";
-            internal const string LoadUser = "mgmt/user";
         }
 
         #endregion Management Endpoint Config

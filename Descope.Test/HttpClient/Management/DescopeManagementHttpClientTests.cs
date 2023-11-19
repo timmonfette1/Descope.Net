@@ -67,7 +67,7 @@ namespace Descope.Test.HttpClient.Management
         [Fact]
         public async Task ShouldPostAsync_EmptyResponse()
         {
-            var exception = await Record.ExceptionAsync(async() => await _fixture.DescopeManagementClient.PostAsync<object>("/dummy/post", new { Name = "EMPTY" }));
+            var exception = await Record.ExceptionAsync(async () => await _fixture.DescopeManagementClient.PostAsync<object>("/dummy/post", new { Name = "EMPTY" }));
 
             Assert.Null(exception);
         }

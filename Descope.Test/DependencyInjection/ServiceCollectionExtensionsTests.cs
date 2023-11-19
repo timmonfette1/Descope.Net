@@ -2,6 +2,7 @@
 using Descope.DependencyInjection;
 using Descope.HttpClient;
 using Descope.Management;
+using Descope.Management.AccessKeys;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;
@@ -26,6 +27,9 @@ namespace Descope.Test.DependencyInjection
 
             var mgmtClient = Record.Exception(serviceProvider.GetRequiredService<IDescopeManagementHttpClient>);
             Assert.Null(mgmtClient);
+
+            var accessKey = Record.Exception(serviceProvider.GetRequiredService<IAccessKeysApiClient>);
+            Assert.Null(accessKey);
 
             var role = Record.Exception(serviceProvider.GetRequiredService<IRolesApiClient>);
             Assert.Null(role);
