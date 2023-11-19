@@ -27,6 +27,8 @@
             internal static string CreateTenant => Url(ManagementEndpoints.CreateTenant);
             internal static string UpdateTenant => Url(ManagementEndpoints.UpdateTenant);
             internal static string DeleteTenant => Url(ManagementEndpoints.DeleteTenant);
+            internal static string ExportTheme => Url(ManagementEndpoints.ExportTheme);
+            internal static string ImportTheme => Url(ManagementEndpoints.ImportTheme);
         }
 
         #region Private Methods
@@ -60,6 +62,8 @@
             internal const string CreateTenant = "mgmt/tenant/create";
             internal const string UpdateTenant = "mgmt/tenant/update";
             internal const string DeleteTenant = "mgmt/tenant/delete";
+            internal const string ExportTheme = "mgmt/theme/export";
+            internal const string ImportTheme = "mgmt/theme/import";
         }
 
         #endregion Management Endpoint Config

@@ -1,6 +1,6 @@
 ﻿using Descope.Models;
 
-namespace Descope.Test.Models.Management
+namespace Descope.Test.Models
 {
     public class DescopeExceptionTests
     {
