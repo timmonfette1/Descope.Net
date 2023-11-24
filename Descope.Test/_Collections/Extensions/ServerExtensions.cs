@@ -27,6 +27,16 @@ namespace Descope.Test
             return server;
         }
 
+        public static WireMockServer ConfigureFlows(this  WireMockServer server)
+        {
+            server
+                .ListFlows()
+                .ExportFlow()
+                .ImportFlow();
+
+            return server;
+        }
+
         public static WireMockServer ConifgurePermissions(this WireMockServer server)
         {
             server

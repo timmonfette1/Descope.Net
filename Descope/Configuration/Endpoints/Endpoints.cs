@@ -13,6 +13,9 @@
             internal static string ActivateAccessKey => Url(ManagementEndpoints.ActivateAccessKey);
             internal static string DeactivateAccessKey => Url(ManagementEndpoints.DeactivateAccessKey);
             internal static string DeleteAccessKey => Url(ManagementEndpoints.DeleteAccessKey);
+            internal static string LoadAllFlows => Url(ManagementEndpoints.LoadAllFlows);
+            internal static string ExportFlow => Url(ManagementEndpoints.ExportFlow);
+            internal static string ImportFlow => Url(ManagementEndpoints.ImportFlow);
             internal static string LoadAllPermissions => Url(ManagementEndpoints.LoadAllPermissions);
             internal static string CreatePermission => Url(ManagementEndpoints.CreatePermission);
             internal static string UpdatePermission => Url(ManagementEndpoints.UpdatePermission);
@@ -48,6 +51,9 @@
             internal const string ActivateAccessKey = "mgmt/accesskey/activate";
             internal const string DeactivateAccessKey = "mgmt/accesskey/deactivate";
             internal const string DeleteAccessKey = "mgmt/accesskey/delete";
+            internal const string LoadAllFlows = "mgmt/flow/list";
+            internal const string ExportFlow = "mgmt/flow/export";
+            internal const string ImportFlow = "mgmt/flow/import";
             internal const string LoadAllPermissions = "mgmt/permission/all";
             internal const string CreatePermission = "mgmt/permission/create";
             internal const string UpdatePermission = "mgmt/permission/update";
