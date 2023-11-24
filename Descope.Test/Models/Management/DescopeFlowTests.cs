@@ -62,5 +62,47 @@ namespace Descope.Test.Models.Management
             Assert.Empty(list.Flows);
             Assert.Equal(0, list.Total);
         }
+
+        [Fact]
+        public void ShouldCreateObject_ExportRequest()
+        {
+            var request = new DescopeFlowExportRequest
+            {
+                FlowId = "FTEST"
+            };
+
+            Assert.Equal("FTEST", request.FlowId);
+        }
+
+        [Fact]
+        public void ShouldCreateObject_SearchRequest()
+        {
+            var request = new DescopeFlowSearchRequest
+            {
+                Ids = new string[2] { "FTEST", "FTEST2" }
+            };
+
+            Assert.Equal(2, request.Ids.Length);
+            Assert.Equal("FTEST", request.Ids[0]);
+            Assert.Equal("FTEST2", request.Ids[1]);
+        }
+
+        [Fact]
+        public void ShouldCreateObject_ImportRequest()
+        {
+            var request = new DescopeFlowImportRequest
+            {
+                FlowId = "FTEST",
+                Flow = new DescopeFlowMetadata
+                {
+                    Id = "FTEST"
+                },
+                Screens = Array.Empty<DescopeScreen>(),
+            };
+
+            Assert.Equal("FTEST", request.FlowId);
+            Assert.Equal("FTEST", request.Flow.Id);
+            Assert.Empty(request.Screens);
+        }
     }
 }

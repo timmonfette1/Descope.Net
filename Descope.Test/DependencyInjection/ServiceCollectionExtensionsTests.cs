@@ -3,6 +3,7 @@ using Descope.DependencyInjection;
 using Descope.HttpClient;
 using Descope.Management;
 using Descope.Management.AccessKeys;
+using Descope.Management.Flows;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
 using Descope.Management.Tenants;
@@ -31,6 +32,9 @@ namespace Descope.Test.DependencyInjection
 
             var accessKey = Record.Exception(serviceProvider.GetRequiredService<IAccessKeysApiClient>);
             Assert.Null(accessKey);
+
+            var flow = Record.Exception(serviceProvider.GetRequiredService<IFlowsApiClient>);
+            Assert.Null(flow);
 
             var role = Record.Exception(serviceProvider.GetRequiredService<IRolesApiClient>);
             Assert.Null(role);
