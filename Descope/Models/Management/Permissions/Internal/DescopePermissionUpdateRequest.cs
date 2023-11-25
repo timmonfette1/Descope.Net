@@ -1,6 +1,6 @@
 ﻿namespace Descope.Models
 {
-    public class DescopePermissionUpdateRequest
+    internal class DescopePermissionUpdateRequest
     {
         public string Name { get; set; }
         public string NewName { get; set; }

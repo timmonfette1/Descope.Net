@@ -19,20 +19,32 @@ namespace Descope.Management.Roles
             return role;
         }
 
-        public async Task<DescopeRole> Update(DescopeRoleUpdateRequest role)
+        public async Task<DescopeRole> Update(DescopeRole role, string newName)
         {
-            await _httpClient.PostAsync(Endpoints.Management.UpdateRole, role);
+            var request = new DescopeRoleUpdateRequest
+            {
+                Name = role.Name,
+                NewName = newName,
+                Description = role.Description,
+                PermissionNames = role.PermissionNames,
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.UpdateRole, request);
             return new DescopeRole
             {
-                Name = role.NewName,
+                Name = newName,
                 Description = role.Description,
                 PermissionNames = role.PermissionNames
             };
         }
 
-        public async Task Delete(DescopeRoleDeleteRequest role)
+        public async Task Delete(string name)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeleteRole, role);
+            var request = new DescopeRoleDeleteRequest
+            {
+                Name = name
+            };
+            await _httpClient.PostAsync(Endpoints.Management.DeleteRole, request);
         }
     }
 }

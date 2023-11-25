@@ -1,6 +1,6 @@
 ﻿namespace Descope.Models
 {
-    public class DescopeRoleDeleteRequest
+    internal class DescopeRoleDeleteRequest
     {
         public string Name { get; set; }
     }

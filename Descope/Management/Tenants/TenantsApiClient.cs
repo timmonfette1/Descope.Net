@@ -36,9 +36,14 @@ namespace Descope.Management.Tenants
             return tenant;
         }
 
-        public async Task Delete(DescopeTenantDeleteRequest tenant)
+        public async Task Delete(string id)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeleteTenant, tenant);
+            var request = new DescopeTenantDeleteRequest
+            {
+                Id = id
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.DeleteTenant, request);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Descope.Management.Roles
     {
         Task<DescopeRoleListResponse> GetAll();
         Task<DescopeRole> Create(DescopeRole role);
-        Task<DescopeRole> Update(DescopeRoleUpdateRequest role);
-        Task Delete(DescopeRoleDeleteRequest role);
+        Task<DescopeRole> Update(DescopeRole role, string newName);
+        Task Delete(string name);
     }
 }

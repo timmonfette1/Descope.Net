@@ -9,6 +9,6 @@ namespace Descope.Management.Tenants
         Task<DescopeTenantListResponse> Search(DescopeTenantSearchRequest search);
         Task<DescopeTenant> Create(DescopeTenant tenant);
         Task<DescopeTenant> Update(DescopeTenant tenant);
-        Task Delete(DescopeTenantDeleteRequest tenant);
+        Task Delete(string id);
     }
 }

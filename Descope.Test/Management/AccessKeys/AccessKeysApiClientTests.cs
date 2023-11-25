@@ -39,10 +39,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldSearchAccessKeys()
         {
-            var accessKeys = await _fixture.AccessKeysApiClient.Search(new DescopeAccessKeySearchRequest
-            {
-                TenantIds = ["TEST"]
-            });
+            var accessKeys = await _fixture.AccessKeysApiClient.Search("TEST");
 
             Assert.NotNull(accessKeys);
             Assert.Single(accessKeys.Keys);
@@ -52,10 +49,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldNotGetAnyAccessKeysBySearch()
         {
-            var accessKeys = await _fixture.AccessKeysApiClient.Search(new DescopeAccessKeySearchRequest
-            {
-                TenantIds = ["TESTBAD"]
-            });
+            var accessKeys = await _fixture.AccessKeysApiClient.Search("TESTBAD");
 
             Assert.NotNull(accessKeys);
             Assert.Empty(accessKeys.Keys);
@@ -74,11 +68,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldUpdateAccessKey()
         {
-            var accessKey = await _fixture.AccessKeysApiClient.Update(new DescopeAccessKeyUpdateRequest
-            {
-                Id = "TEST",
-                Name = "Updated Testing"
-            });
+            var accessKey = await _fixture.AccessKeysApiClient.Update("TEST", "Updated Testing");
 
             Assert.NotNull(accessKey);
             AccessKeyAssertations(accessKey, "Updated Testing");
@@ -87,11 +77,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldNotUpdateAccessKey()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Update(new DescopeAccessKeyUpdateRequest
-            {
-                Id = "TESTBAD",
-                Name = "Updated Testing"
-            }));
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Update("TESTBAD", "Updated Testing"));
 
             Assert.NotNull(exception);
             AccessKeyCantFindAssertations(exception);
@@ -100,10 +86,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldActivateAccessKey()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.AccessKeysApiClient.Activate(new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.AccessKeysApiClient.Activate("TEST"));
 
             Assert.Null(delete);
         }
@@ -111,10 +94,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldNotActivateAccessKey()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Activate(new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TESTBAD"
-            }));
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Activate("TESTBAD"));
 
             Assert.NotNull(exception);
             AccessKeyUnableToUpdateAssertations(exception);
@@ -123,10 +103,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldDeactivateAccessKey()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.AccessKeysApiClient.Deactivate(new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.AccessKeysApiClient.Deactivate("TEST"));
 
             Assert.Null(delete);
         }
@@ -134,10 +111,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldNotDeactivateAccessKey()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Deactivate(new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TESTBAD"
-            }));
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.AccessKeysApiClient.Deactivate("TESTBAD"));
 
             Assert.NotNull(exception);
             AccessKeyUnableToUpdateAssertations(exception);
@@ -146,10 +120,7 @@ namespace Descope.Test.Management.AccessKeys
         [Fact]
         public async Task ShouldDeleteAccessKey()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.AccessKeysApiClient.Delete(new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.AccessKeysApiClient.Delete("TEST"));
 
             Assert.Null(delete);
         }

@@ -149,10 +149,7 @@ namespace Descope.Test.Management.Tenants
         [Fact]
         public async Task ShouldDeleteTenant()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.TenantsApiClient.Delete(new DescopeTenantDeleteRequest
-            {
-                Id = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.TenantsApiClient.Delete("TEST"));
 
             Assert.Null(delete);
         }
