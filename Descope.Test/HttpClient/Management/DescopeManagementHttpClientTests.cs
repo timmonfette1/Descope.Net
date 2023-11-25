@@ -3,19 +3,14 @@
 namespace Descope.Test.HttpClient.Management
 {
     [Collection("ClientServer")]
-    public class DescopeManagementHttpClientTests : IClassFixture<DescopeManagementHttpClientFixture>
+    public class DescopeManagementHttpClientTests(DescopeManagementHttpClientFixture fixture) : IClassFixture<DescopeManagementHttpClientFixture>
     {
         class Dummy
         {
             public string Message { get; set; }
         }
 
-        private readonly DescopeManagementHttpClientFixture _fixture;
-
-        public DescopeManagementHttpClientTests(DescopeManagementHttpClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly DescopeManagementHttpClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAsync()

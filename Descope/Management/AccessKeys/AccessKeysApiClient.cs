@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.AccessKeys
 {
-    internal class AccessKeysApiClient : IAccessKeysApiClient
+    internal class AccessKeysApiClient(IDescopeManagementHttpClient httpClient) : IAccessKeysApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public AccessKeysApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopeAccessKey> Get(string id)
         {

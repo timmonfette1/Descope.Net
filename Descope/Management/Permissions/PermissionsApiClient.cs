@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.Permissions
 {
-    internal class PermissionsApiClient : IPermissionsApiClient
+    internal class PermissionsApiClient(IDescopeManagementHttpClient httpClient) : IPermissionsApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public PermissionsApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopePermissionListResponse> GetAll()
         {

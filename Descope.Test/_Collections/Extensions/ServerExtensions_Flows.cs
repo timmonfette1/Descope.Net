@@ -24,19 +24,19 @@ namespace Descope.Test
             Translate = true,
             TranslateConnectorId = "TID",
             TranslateSourceLang = "ENG",
-            TranslateTargetLangs = new string[1] { "JP" },
+            TranslateTargetLangs = ["JP"],
             Fingerprint = true,
         };
 
-        private static readonly DescopeScreen[] _screensMock = new DescopeScreen[1]
-        {
+        private static readonly DescopeScreen[] _screensMock =
+        [
             new()
             {
                Id = "TEST",
                Version = 1,
                FlowId = "FTEST",
-               Inputs = new DescopeScreenInput[1]
-               {
+               Inputs =
+               [
                    new()
                     {
                         Type = "TEST",
@@ -45,21 +45,21 @@ namespace Descope.Test
                         Visible = true,
                         DisplayName = "Testing",
                         DisplayType = "Test",
-                        DependsOn = new string[1] { "Dependency" },
+                        DependsOn = ["Dependency"],
                         NameValueMap = null,
                         ContextAware = true,
-                        Options = new DescopeScreenInputOption[1]
-                        {
+                        Options =
+                        [
                             new()
                             {
                                 Label = "Label",
                                 Value = "Value"
                             }
-                        }
+                        ]
                     }
-               },
-               Interactions = new DescopeScreenInteraction[1]
-               {
+               ],
+               Interactions =
+               [
                    new()
                     {
                         Id = "TEST",
@@ -68,14 +68,14 @@ namespace Descope.Test
                         Icon = "Smile",
                         SubType = "Tester Jr."
                     }
-               },
+               ],
                HtmlTemplate = new
                {
                    Inner = "Inner"
                },
                ComponentsVersion = "1.0.0",
             }
-        };
+        ];
 
         private static readonly DescopeFlow _flowMock = new()
         {
@@ -93,7 +93,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeFlowSearchRequest
                         {
-                            Ids = new string[1] { "TEST" }
+                            Ids = ["TEST"]
                         }, true))
                 )
                 .RespondWith(
@@ -102,10 +102,10 @@ namespace Descope.Test
                         .WithStatusCode(200)
                         .WithBodyAsJson(new DescopeFlowListResponse
                         {
-                            Flows = new DescopeFlowMetadata[1]
-                            {
+                            Flows =
+                            [
                                 _flowMetadataMock
-                            },
+                            ],
                             Total = 1
                         })
                 );
@@ -118,7 +118,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeFlowSearchRequest
                         {
-                            Ids = Array.Empty<string>()
+                            Ids = []
                         }, true))
                 )
                 .RespondWith(
@@ -127,10 +127,10 @@ namespace Descope.Test
                         .WithStatusCode(200)
                         .WithBodyAsJson(new DescopeFlowListResponse
                         {
-                            Flows = new DescopeFlowMetadata[1]
-                            {
+                            Flows =
+                            [
                                 _flowMetadataMock
-                            },
+                            ],
                             Total = 1
                         })
                 );
@@ -143,7 +143,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeFlowSearchRequest
                         {
-                            Ids = new string[1] { "TESTBAD" }
+                            Ids = ["TESTBAD"]
                         }, true))
                 )
                 .RespondWith(

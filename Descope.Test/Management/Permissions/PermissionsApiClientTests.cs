@@ -3,14 +3,9 @@
 namespace Descope.Test.Management.Permissions
 {
     [Collection("ClientServer")]
-    public class PermissionsApiClientTests : IClassFixture<PermissionsApiClientFixture>
+    public class PermissionsApiClientTests(PermissionsApiClientFixture fixture) : IClassFixture<PermissionsApiClientFixture>
     {
-        private readonly PermissionsApiClientFixture _fixture;
-
-        public PermissionsApiClientTests(PermissionsApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly PermissionsApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAllPermissions()

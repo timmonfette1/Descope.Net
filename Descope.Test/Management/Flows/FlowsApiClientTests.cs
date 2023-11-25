@@ -4,14 +4,9 @@ using Descope.Models;
 namespace Descope.Test.Management.Flows
 {
     [Collection("ClientServer")]
-    public class FlowsApiClientTests : IClassFixture<FlowsApiClientFixture>
+    public class FlowsApiClientTests(FlowsApiClientFixture fixture) : IClassFixture<FlowsApiClientFixture>
     {
-        private readonly FlowsApiClientFixture _fixture;
-
-        public FlowsApiClientTests(FlowsApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly FlowsApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldListFlows()
@@ -77,7 +72,7 @@ namespace Descope.Test.Management.Flows
                 {
                     Id = "TEST"
                 },
-                Screens = Array.Empty<DescopeScreen>()
+                Screens = []
             });
 
             Assert.NotNull(flow);

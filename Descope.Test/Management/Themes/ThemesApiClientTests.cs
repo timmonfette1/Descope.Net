@@ -4,14 +4,9 @@ using Descope.Models;
 namespace Descope.Test.Management.Themes
 {
     [Collection("ClientServer")]
-    public class ThemesApiClientTests : IClassFixture<ThemesApiClientFixture>
+    public class ThemesApiClientTests(ThemesApiClientFixture fixture) : IClassFixture<ThemesApiClientFixture>
     {
-        private readonly ThemesApiClientFixture _fixture;
-
-        public ThemesApiClientTests(ThemesApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly ThemesApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldExportTheme()

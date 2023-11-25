@@ -3,14 +3,9 @@
 namespace Descope.Test.Management.Roles
 {
     [Collection("ClientServer")]
-    public class RolesApiClientTests : IClassFixture<RolesApiClientFixture>
+    public class RolesApiClientTests(RolesApiClientFixture fixture) : IClassFixture<RolesApiClientFixture>
     {
-        private readonly RolesApiClientFixture _fixture;
-
-        public RolesApiClientTests(RolesApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly RolesApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAllRoles()
@@ -36,10 +31,10 @@ namespace Descope.Test.Management.Roles
             {
                 Name = "TEST",
                 Description = "Testing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             });
 
             Assert.NotNull(role);
@@ -57,10 +52,10 @@ namespace Descope.Test.Management.Roles
             {
                 Name = "EXIST",
                 Description = "Existing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);
@@ -76,10 +71,10 @@ namespace Descope.Test.Management.Roles
             {
                 Name = "TEST",
                 Description = "Testing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "FakePerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);
@@ -96,10 +91,10 @@ namespace Descope.Test.Management.Roles
                 Name = "TEST",
                 NewName = "UTEST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             });
 
             Assert.NotNull(role);
@@ -118,10 +113,10 @@ namespace Descope.Test.Management.Roles
                 Name = "TESTBAD",
                 NewName = "UTEST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);
@@ -138,10 +133,10 @@ namespace Descope.Test.Management.Roles
                 Name = "TEST",
                 NewName = "EXIST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);
@@ -158,10 +153,10 @@ namespace Descope.Test.Management.Roles
                 Name = "TEST",
                 NewName = "UTEST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "FakePerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);

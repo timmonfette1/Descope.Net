@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.Roles
 {
-    internal class RolesApiClient : IRolesApiClient
+    internal class RolesApiClient(IDescopeManagementHttpClient httpClient) : IRolesApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public RolesApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopeRoleListResponse> GetAll()
         {

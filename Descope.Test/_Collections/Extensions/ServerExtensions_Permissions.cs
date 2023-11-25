@@ -23,14 +23,14 @@ namespace Descope.Test
                         .WithStatusCode(200)
                         .WithBodyAsJson(new DescopePermissionListResponse
                         {
-                            Permissions = new DescopePermission[1]
-                            {
-                                new DescopePermission
+                            Permissions =
+                            [
+                                new()
                                 {
                                     Name = "TEST",
                                     Description = "Testing"
                                 }
-                            }
+                            ]
                         })
                 );
 

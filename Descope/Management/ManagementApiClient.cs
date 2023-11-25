@@ -7,30 +7,20 @@ using Descope.Management.Themes;
 
 namespace Descope.Management
 {
-    internal class ManagementApiClient : IManagementApiClient
+    internal class ManagementApiClient(
+        IAccessKeysApiClient accKeysApiClient,
+        IFlowsApiClient flowsApiClient,
+        IPermissionsApiClient permissionsApiClient,
+        IRolesApiClient rolesApiClient,
+        ITenantsApiClient tenants,
+        IThemesApiClient themes) : IManagementApiClient
     {
-        private readonly IAccessKeysApiClient _accKeysApiClient;
-        private readonly IFlowsApiClient _flowsApiClient;
-        private readonly IPermissionsApiClient _permissionsApiClient;
-        private readonly IRolesApiClient _rolesApiClient;
-        private readonly ITenantsApiClient _tenantsApiClient;
-        private readonly IThemesApiClient _themesApiClient;
-
-        public ManagementApiClient(
-            IAccessKeysApiClient accKeysApiClient,
-            IFlowsApiClient flowsApiClient,
-            IPermissionsApiClient permissionsApiClient,
-            IRolesApiClient rolesApiClient,
-            ITenantsApiClient tenants,
-            IThemesApiClient themes)
-        {
-            _accKeysApiClient = accKeysApiClient;
-            _flowsApiClient = flowsApiClient;
-            _permissionsApiClient = permissionsApiClient;
-            _rolesApiClient = rolesApiClient;
-            _tenantsApiClient = tenants;
-            _themesApiClient = themes;
-        }
+        private readonly IAccessKeysApiClient _accKeysApiClient = accKeysApiClient;
+        private readonly IFlowsApiClient _flowsApiClient = flowsApiClient;
+        private readonly IPermissionsApiClient _permissionsApiClient = permissionsApiClient;
+        private readonly IRolesApiClient _rolesApiClient = rolesApiClient;
+        private readonly ITenantsApiClient _tenantsApiClient = tenants;
+        private readonly IThemesApiClient _themesApiClient = themes;
 
         public IAccessKeysApiClient AccessKeys => _accKeysApiClient;
         public IFlowsApiClient Flows => _flowsApiClient;

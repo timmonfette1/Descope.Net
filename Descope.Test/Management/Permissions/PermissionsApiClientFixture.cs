@@ -2,14 +2,9 @@
 
 namespace Descope.Test.Management.Permissions
 {
-    public class PermissionsApiClientFixture
+    public class PermissionsApiClientFixture(ClientServerFixture fixture)
     {
-        private readonly PermissionsApiClient _permissionsApiClient;
-
-        public PermissionsApiClientFixture(ClientServerFixture fixture)
-        {
-            _permissionsApiClient = new PermissionsApiClient(fixture.HttpClient);
-        }
+        private readonly PermissionsApiClient _permissionsApiClient = new(fixture.HttpClient);
 
         internal PermissionsApiClient PermissionsApiClient => _permissionsApiClient;
     }

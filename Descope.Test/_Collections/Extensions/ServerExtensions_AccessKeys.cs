@@ -12,20 +12,20 @@ namespace Descope.Test
         {
             Id = "TEST",
             Name = "Testing",
-            RoleNames = new string[1] { "Role1" },
-            KeyTenants = new DescopeAccessKeyTenant[2]
+            RoleNames = ["Role1"],
+            KeyTenants =
+            [
+                new()
                 {
-                    new()
-                    {
-                        TenantId = "Tenant1",
-                        RoleNames = new string[1] { "TenantRole1" }
-                    },
-                    new()
-                    {
-                        TenantId = "Tenant2",
-                        RoleNames = new string[1] { "TenantRole2" }
-                    }
+                    TenantId = "Tenant1",
+                    RoleNames = ["TenantRole1"]
                 },
+                new()
+                {
+                    TenantId = "Tenant2",
+                    RoleNames = ["TenantRole2"]
+                }
+            ],
             Status = "Active",
             CreatedTime = 12345,
             ExpireTime = 99999,
@@ -117,7 +117,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeAccessKeySearchRequest
                         {
-                            TenantIds = new string[1] { "TEST" }
+                            TenantIds = ["TEST"]
                         }, true))
                 )
                 .RespondWith(
@@ -135,7 +135,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeAccessKeySearchRequest
                         {
-                            TenantIds = new string[1] { "TESTBAD" }
+                            TenantIds = ["TESTBAD"]
                         }, true))
                 )
                 .RespondWith(

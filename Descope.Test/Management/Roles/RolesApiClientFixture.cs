@@ -2,14 +2,9 @@
 
 namespace Descope.Test.Management.Roles
 {
-    public class RolesApiClientFixture
+    public class RolesApiClientFixture(ClientServerFixture fixture)
     {
-        private readonly RolesApiClient _rolesApiClient;
-
-        public RolesApiClientFixture(ClientServerFixture fixture)
-        {
-            _rolesApiClient = new RolesApiClient(fixture.HttpClient);
-        }
+        private readonly RolesApiClient _rolesApiClient = new(fixture.HttpClient);
 
         internal RolesApiClient RolesApiClient => _rolesApiClient;
     }

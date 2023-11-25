@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.Tenants
 {
-    internal class TenantsApiClient : ITenantsApiClient
+    internal class TenantsApiClient(IDescopeManagementHttpClient httpClient) : ITenantsApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public TenantsApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopeTenantListResponse> GetAll()
         {

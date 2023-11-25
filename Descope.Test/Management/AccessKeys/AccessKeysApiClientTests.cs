@@ -3,14 +3,9 @@
 namespace Descope.Test.Management.AccessKeys
 {
     [Collection("ClientServer")]
-    public class AccessKeysApiClientTests : IClassFixture<AccessKeysApiClientFixture>
+    public class AccessKeysApiClientTests(AccessKeysApiClientFixture fixture) : IClassFixture<AccessKeysApiClientFixture>
     {
-        private readonly AccessKeysApiClientFixture _fixture;
-
-        public AccessKeysApiClientTests(AccessKeysApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly AccessKeysApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAccessKey()
@@ -46,7 +41,7 @@ namespace Descope.Test.Management.AccessKeys
         {
             var accessKeys = await _fixture.AccessKeysApiClient.Search(new DescopeAccessKeySearchRequest
             {
-                TenantIds = new string[1] { "TEST" }
+                TenantIds = ["TEST"]
             });
 
             Assert.NotNull(accessKeys);
@@ -59,7 +54,7 @@ namespace Descope.Test.Management.AccessKeys
         {
             var accessKeys = await _fixture.AccessKeysApiClient.Search(new DescopeAccessKeySearchRequest
             {
-                TenantIds = new string[1] { "TESTBAD" }
+                TenantIds = ["TESTBAD"]
             });
 
             Assert.NotNull(accessKeys);

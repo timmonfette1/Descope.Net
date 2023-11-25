@@ -2,14 +2,9 @@
 
 namespace Descope.Test.Management.Tenants
 {
-    public class TenantsApiClientFixture
+    public class TenantsApiClientFixture(ClientServerFixture fixture)
     {
-        private readonly TenantsApiClient _tenantsApiClient;
-
-        public TenantsApiClientFixture(ClientServerFixture fixture)
-        {
-            _tenantsApiClient = new TenantsApiClient(fixture.HttpClient);
-        }
+        private readonly TenantsApiClient _tenantsApiClient = new(fixture.HttpClient);
 
         internal TenantsApiClient TenantsApiClient => _tenantsApiClient;
     }

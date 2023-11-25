@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.Flows
 {
-    internal class FlowsApiClient : IFlowsApiClient
+    internal class FlowsApiClient(IDescopeManagementHttpClient httpClient) : IFlowsApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public FlowsApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopeFlowListResponse> GetAll(params string[] ids)
         {
