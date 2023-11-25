@@ -42,8 +42,8 @@ namespace Descope.Test.Management.AccessKeys
             var accessKeys = await _fixture.AccessKeysApiClient.Search("TEST");
 
             Assert.NotNull(accessKeys);
-            Assert.Single(accessKeys.Keys);
-            AccessKeyAssertations(accessKeys.Keys.ElementAt(0));
+            Assert.Single(accessKeys);
+            AccessKeyAssertations(accessKeys.ElementAt(0));
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace Descope.Test.Management.AccessKeys
             var accessKeys = await _fixture.AccessKeysApiClient.Search("TESTBAD");
 
             Assert.NotNull(accessKeys);
-            Assert.Empty(accessKeys.Keys);
+            Assert.Empty(accessKeys);
         }
 
         [Fact]

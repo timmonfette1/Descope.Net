@@ -14,9 +14,8 @@ namespace Descope.Test.Management.Flows
             var flows = await _fixture.FlowsApiClient.GetAll();
 
             Assert.NotNull(flows);
-            Assert.Single(flows.Flows);
-            Assert.Equal(1, flows.Total);
-            FlowMetadataAssertations(flows.Flows[0]);
+            Assert.Single(flows);
+            FlowMetadataAssertations(flows.ElementAt(0));
         }
 
         [Fact]
@@ -25,9 +24,8 @@ namespace Descope.Test.Management.Flows
             var flows = await _fixture.FlowsApiClient.GetAll("TEST");
 
             Assert.NotNull(flows);
-            Assert.Single(flows.Flows);
-            Assert.Equal(1, flows.Total);
-            FlowMetadataAssertations(flows.Flows[0]);
+            Assert.Single(flows);
+            FlowMetadataAssertations(flows.ElementAt(0));
         }
 
         [Fact]

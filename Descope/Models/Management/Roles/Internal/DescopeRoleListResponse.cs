@@ -1,6 +1,6 @@
 ﻿namespace Descope.Models
 {
-    public class DescopeRoleListResponse
+    internal class DescopeRoleListResponse
     {
         public IEnumerable<DescopeRole> Roles { get; set; }
     }

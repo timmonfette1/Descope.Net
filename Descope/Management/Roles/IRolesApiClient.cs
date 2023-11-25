@@ -4,7 +4,7 @@ namespace Descope.Management.Roles
 {
     public interface IRolesApiClient
     {
-        Task<DescopeRoleListResponse> GetAll();
+        Task<IEnumerable<DescopeRole>> GetAll();
         Task<DescopeRole> Create(DescopeRole role);
         Task<DescopeRole> Update(DescopeRole role, string newName);
         Task Delete(string name);

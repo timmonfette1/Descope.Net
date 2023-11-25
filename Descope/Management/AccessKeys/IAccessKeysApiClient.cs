@@ -5,7 +5,7 @@ namespace Descope.Management.AccessKeys
     public interface IAccessKeysApiClient
     {
         Task<DescopeAccessKey> Get(string id);
-        Task<DescopeAccessKeyListResponse> Search(params string[] tenantIds);
+        Task<IEnumerable<DescopeAccessKey>> Search(params string[] tenantIds);
         Task<DescopeAccessKeyCreateResponse> Create(DescopeAccessKeyCreateRequest accessKey);
         Task<DescopeAccessKey> Update(string id, string name);
         Task Activate(string id);

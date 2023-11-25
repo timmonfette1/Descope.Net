@@ -8,9 +8,10 @@ namespace Descope.Management.Roles
     {
         private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public async Task<DescopeRoleListResponse> GetAll()
+        public async Task<IEnumerable<DescopeRole>> GetAll()
         {
-            return await _httpClient.GetAsync<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
+            var response = await _httpClient.GetAsync<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
+            return response.Roles;
         }
 
         public async Task<DescopeRole> Create(DescopeRole role)

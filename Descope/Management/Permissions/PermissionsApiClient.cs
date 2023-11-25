@@ -8,9 +8,10 @@ namespace Descope.Management.Permissions
     {
         private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public async Task<DescopePermissionListResponse> GetAll()
+        public async Task<IEnumerable<DescopePermission>> GetAll()
         {
-            return await _httpClient.GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
+            var response = await _httpClient.GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
+            return response.Permissions;
         }
 
         public async Task<DescopePermission> Create(DescopePermission permission)

@@ -13,9 +13,9 @@ namespace Descope.Test.Management.Permissions
             var permissions = await _fixture.PermissionsApiClient.GetAll();
 
             Assert.NotNull(permissions);
-            Assert.Single(permissions.Permissions);
+            Assert.Single(permissions);
 
-            var permission = permissions.Permissions.Single();
+            var permission = permissions.Single();
 
             Assert.Equal("TEST", permission.Name);
             Assert.Equal("Testing", permission.Description);

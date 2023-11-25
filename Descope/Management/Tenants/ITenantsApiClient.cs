@@ -4,9 +4,9 @@ namespace Descope.Management.Tenants
 {
     public interface ITenantsApiClient
     {
-        Task<DescopeTenantListResponse> GetAll();
+        Task<IEnumerable<DescopeTenant>> GetAll();
         Task<DescopeTenant> Get(string id);
-        Task<DescopeTenantListResponse> Search(DescopeTenantSearchRequest search);
+        Task<IEnumerable<DescopeTenant>> Search(DescopeTenantSearchRequest search);
         Task<DescopeTenant> Create(DescopeTenant tenant);
         Task<DescopeTenant> Update(DescopeTenant tenant);
         Task Delete(string id);

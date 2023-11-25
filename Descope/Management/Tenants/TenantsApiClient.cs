@@ -8,9 +8,10 @@ namespace Descope.Management.Tenants
     {
         private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public async Task<DescopeTenantListResponse> GetAll()
+        public async Task<IEnumerable<DescopeTenant>> GetAll()
         {
-            return await _httpClient.GetAsync<DescopeTenantListResponse>(Endpoints.Management.LoadAllTenants);
+            var response = await _httpClient.GetAsync<DescopeTenantListResponse>(Endpoints.Management.LoadAllTenants);
+            return response.Tenants;
         }
 
         public async Task<DescopeTenant> Get(string id)
@@ -18,9 +19,10 @@ namespace Descope.Management.Tenants
             return await _httpClient.GetAsync<DescopeTenant>(Endpoints.Management.LoadTenant, new { id });
         }
 
-        public async Task<DescopeTenantListResponse> Search(DescopeTenantSearchRequest search)
+        public async Task<IEnumerable<DescopeTenant>> Search(DescopeTenantSearchRequest search)
         {
-            return await _httpClient.PostAsync<DescopeTenantSearchRequest, DescopeTenantListResponse>(Endpoints.Management.SearchTenants, search);
+            var response = await _httpClient.PostAsync<DescopeTenantSearchRequest, DescopeTenantListResponse>(Endpoints.Management.SearchTenants, search);
+            return response.Tenants;
         }
 
         public async Task<DescopeTenant> Create(DescopeTenant tenant)

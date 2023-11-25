@@ -14,14 +14,15 @@ namespace Descope.Management.AccessKeys
             return response.Key;
         }
 
-        public async Task<DescopeAccessKeyListResponse> Search(params string[] tenantIds)
+        public async Task<IEnumerable<DescopeAccessKey>> Search(params string[] tenantIds)
         {
             var request = new DescopeAccessKeySearchRequest
             {
                 TenantIds = tenantIds
             };
 
-            return await _httpClient.PostAsync<DescopeAccessKeySearchRequest, DescopeAccessKeyListResponse>(Endpoints.Management.SearchAccessKeys, request);
+            var response = await _httpClient.PostAsync<DescopeAccessKeySearchRequest, DescopeAccessKeyListResponse>(Endpoints.Management.SearchAccessKeys, request);
+            return response.Keys;
         }
 
         public async Task<DescopeAccessKeyCreateResponse> Create(DescopeAccessKeyCreateRequest accessKey)

@@ -13,9 +13,9 @@ namespace Descope.Test.Management.Tenants
             var tenants = await _fixture.TenantsApiClient.GetAll();
 
             Assert.NotNull(tenants);
-            Assert.Single(tenants.Tenants);
+            Assert.Single(tenants);
 
-            var tenant = tenants.Tenants.Single();
+            var tenant = tenants.Single();
 
             Assert.Equal("TEST", tenant.Id);
             Assert.Equal("Test Client", tenant.Name);
@@ -51,9 +51,9 @@ namespace Descope.Test.Management.Tenants
             });
 
             Assert.NotNull(tenants);
-            Assert.Single(tenants.Tenants);
+            Assert.Single(tenants);
 
-            var tenant = tenants.Tenants.Single();
+            var tenant = tenants.Single();
 
             Assert.Equal("TEST", tenant.Id);
             Assert.Equal("Test Client", tenant.Name);
@@ -68,9 +68,9 @@ namespace Descope.Test.Management.Tenants
             });
 
             Assert.NotNull(tenants);
-            Assert.Single(tenants.Tenants);
+            Assert.Single(tenants);
 
-            var tenant = tenants.Tenants.Single();
+            var tenant = tenants.Single();
 
             Assert.Equal("TEST", tenant.Id);
             Assert.Equal("Test Client", tenant.Name);
@@ -85,7 +85,7 @@ namespace Descope.Test.Management.Tenants
             });
 
             Assert.NotNull(tenants);
-            Assert.Empty(tenants.Tenants);
+            Assert.Empty(tenants);
         }
 
         [Fact]

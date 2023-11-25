@@ -14,9 +14,9 @@ namespace Descope.Test.Management.Roles
             var roles = await _fixture.RolesApiClient.GetAll();
 
             Assert.NotNull(roles);
-            Assert.Single(roles.Roles);
+            Assert.Single(roles);
 
-            var role = roles.Roles.Single();
+            var role = roles.Single();
 
             Assert.Equal("TEST", role.Name);
             Assert.Equal("Testing", role.Description);
