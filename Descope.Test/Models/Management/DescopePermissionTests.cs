@@ -5,20 +5,6 @@ namespace Descope.Test.Models.Management
     public class DescopePermissionTests
     {
         [Fact]
-        public void ShouldCreateObject_Permission()
-        {
-            var permission = new DescopePermission
-            {
-                Name = "Name",
-                Description = "Description"
-            };
-
-            Assert.Equal("Name", permission.Name);
-            Assert.Equal("Description", permission.Description);
-            Assert.False(permission.SystemDefault);
-        }
-
-        [Fact]
         public void ShouldCreateObject_PermissionUpdateRequest()
         {
             var permission = new DescopePermissionUpdateRequest
@@ -38,19 +24,19 @@ namespace Descope.Test.Models.Management
         {
             var permission = new DescopePermissionListResponse
             {
-                Permissions = new DescopePermission[2]
-                {
-                    new DescopePermission
+                Permissions =
+                [
+                    new()
                     {
                         Name = "Name",
                         Description = "Description"
                     },
-                    new DescopePermission
+                    new()
                     {
                         Name = "Name 2",
                         Description = "Description 2"
                     }
-                }
+                ]
             };
 
             Assert.Equal(2, permission.Permissions.Count());

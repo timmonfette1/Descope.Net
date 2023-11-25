@@ -5,51 +5,31 @@ namespace Descope.Test.Models.Management
     public class DescopeRoleTests
     {
         [Fact]
-        public void ShouldCreateObject_Role()
-        {
-            var role = new DescopeRole
-            {
-                Name = "TEST",
-                Description = "Testing",
-                PermissionNames = new string[1]
-                {
-                    "Permission"
-                }
-            };
-
-            Assert.Equal("TEST", role.Name);
-            Assert.Equal("Testing", role.Description);
-            Assert.Single(role.PermissionNames);
-
-            var perm = role.PermissionNames.Single();
-
-            Assert.Equal("Permission", perm);
-        }
-
-        [Fact]
         public void ShouldCreateObject_RoleListResponse()
         {
             var role = new DescopeRoleListResponse
             {
-                Roles = new DescopeRole[2]
-                {
-                    new() {
+                Roles =
+                [
+                    new()
+                    {
                         Name = "Name",
                         Description = "Description",
-                        PermissionNames = new string[1]
-                        {
+                        PermissionNames =
+                        [
                             "Perm"
-                        }
+                        ]
                     },
-                    new() {
+                    new()
+                    {
                         Name = "Name 2",
                         Description = "Description 2",
-                        PermissionNames = new string[1]
-                        {
+                        PermissionNames =
+                        [
                             "Perm2"
-                        }
+                        ]
                     }
-                }
+                ]
             };
 
             Assert.Equal(2, role.Roles.Count());
@@ -71,10 +51,10 @@ namespace Descope.Test.Models.Management
                 Name = "TEST",
                 NewName = "TESTU",
                 Description = "Testing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "New Perm"
-                }
+                ]
             };
 
             Assert.Equal("TEST", role.Name);

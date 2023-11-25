@@ -25,10 +25,10 @@ namespace Descope.Test.Models.Management
                     Translate = true,
                     TranslateConnectorId = "TID",
                     TranslateSourceLang = "ENG",
-                    TranslateTargetLangs = new string[1] { "JP" },
+                    TranslateTargetLangs = ["JP"],
                     Fingerprint = true,
                 },
-                Screens = Array.Empty<DescopeScreen>()
+                Screens = []
             };
 
             string dslInner = flow.Flow.Dsl.GetType().GetProperty("Inner")?.GetValue(flow.Flow.Dsl, null)?.ToString();
@@ -55,7 +55,7 @@ namespace Descope.Test.Models.Management
         {
             var list = new DescopeFlowListResponse
             {
-                Flows = Array.Empty<DescopeFlowMetadata>(),
+                Flows = [],
                 Total = 0,
             };
 
@@ -79,7 +79,7 @@ namespace Descope.Test.Models.Management
         {
             var request = new DescopeFlowSearchRequest
             {
-                Ids = new string[2] { "FTEST", "FTEST2" }
+                Ids = ["FTEST", "FTEST2"]
             };
 
             Assert.Equal(2, request.Ids.Length);
@@ -97,7 +97,7 @@ namespace Descope.Test.Models.Management
                 {
                     Id = "FTEST"
                 },
-                Screens = Array.Empty<DescopeScreen>(),
+                Screens = [],
             };
 
             Assert.Equal("FTEST", request.FlowId);
