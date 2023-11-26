@@ -1,6 +1,6 @@
 ﻿namespace Descope.Models
 {
-    public class DescopeTenantDeleteRequest
+    internal class DescopeIdModel
     {
         public string Id { get; set; }
     }

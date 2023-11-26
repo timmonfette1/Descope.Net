@@ -3,14 +3,9 @@
 namespace Descope.Test.Management.Roles
 {
     [Collection("ClientServer")]
-    public class RolesApiClientTests : IClassFixture<RolesApiClientFixture>
+    public class RolesApiClientTests(RolesApiClientFixture fixture) : IClassFixture<RolesApiClientFixture>
     {
-        private readonly RolesApiClientFixture _fixture;
-
-        public RolesApiClientTests(RolesApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly RolesApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAllRoles()
@@ -18,9 +13,9 @@ namespace Descope.Test.Management.Roles
             var roles = await _fixture.RolesApiClient.GetAll();
 
             Assert.NotNull(roles);
-            Assert.Single(roles.Roles);
+            Assert.Single(roles);
 
-            var role = roles.Roles.Single();
+            var role = roles.Single();
 
             Assert.Equal("TEST", role.Name);
             Assert.Equal("Testing", role.Description);
@@ -36,10 +31,10 @@ namespace Descope.Test.Management.Roles
             {
                 Name = "TEST",
                 Description = "Testing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             });
 
             Assert.NotNull(role);
@@ -57,10 +52,10 @@ namespace Descope.Test.Management.Roles
             {
                 Name = "EXIST",
                 Description = "Existing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);
@@ -76,10 +71,10 @@ namespace Descope.Test.Management.Roles
             {
                 Name = "TEST",
                 Description = "Testing",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "FakePerm"
-                }
+                ]
             }));
 
             Assert.NotNull(exception);
@@ -91,38 +86,40 @@ namespace Descope.Test.Management.Roles
         [Fact]
         public async Task ShouldUpdateRole()
         {
-            var role = await _fixture.RolesApiClient.Update(new DescopeRoleUpdateRequest
+            var role = new DescopeRole
             {
                 Name = "TEST",
-                NewName = "UTEST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
-            });
+                ]
+            };
 
-            Assert.NotNull(role);
-            Assert.Equal("UTEST", role.Name);
-            Assert.Equal("Testing Updated", role.Description);
-            Assert.Equal(default, role.CreatedTime);
-            Assert.Single(role.PermissionNames);
-            Assert.Equal("TestPerm", role.PermissionNames[0]);
+            var updatedRole = await _fixture.RolesApiClient.Update(role, "UTEST");
+
+            Assert.NotNull(updatedRole);
+            Assert.Equal("UTEST", updatedRole.Name);
+            Assert.Equal("Testing Updated", updatedRole.Description);
+            Assert.Equal(default, updatedRole.CreatedTime);
+            Assert.Single(updatedRole.PermissionNames);
+            Assert.Equal("TestPerm", updatedRole.PermissionNames[0]);
         }
 
         [Fact]
         public async Task ShouldNotUpdateRole_NotFound()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.RolesApiClient.Update(new DescopeRoleUpdateRequest
+            var role = new DescopeRole
             {
                 Name = "TESTBAD",
-                NewName = "UTEST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
-            }));
+                ]
+            };
+
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.RolesApiClient.Update(role, "UTEST"));
 
             Assert.NotNull(exception);
             Assert.Equal("E111403", exception.ErrorCode);
@@ -133,16 +130,17 @@ namespace Descope.Test.Management.Roles
         [Fact]
         public async Task ShouldNotUpdateRole_Existing()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.RolesApiClient.Update(new DescopeRoleUpdateRequest
+            var role = new DescopeRole
             {
                 Name = "TEST",
-                NewName = "EXIST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "TestPerm"
-                }
-            }));
+                ]
+            };
+
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.RolesApiClient.Update(role, "EXIST"));
 
             Assert.NotNull(exception);
             Assert.Equal("E024209", exception.ErrorCode);
@@ -153,16 +151,17 @@ namespace Descope.Test.Management.Roles
         [Fact]
         public async Task ShouldNotUpdateRole_NoPermission()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.RolesApiClient.Update(new DescopeRoleUpdateRequest
+            var role = new DescopeRole
             {
                 Name = "TEST",
-                NewName = "UTEST",
                 Description = "Testing Updated",
-                PermissionNames = new string[1]
-                {
+                PermissionNames =
+                [
                     "FakePerm"
-                }
-            }));
+                ]
+            };
+
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.RolesApiClient.Update(role, "UTEST"));
 
             Assert.NotNull(exception);
             Assert.Equal("E111303", exception.ErrorCode);
@@ -173,10 +172,7 @@ namespace Descope.Test.Management.Roles
         [Fact]
         public async Task ShouldDeleteRole()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.RolesApiClient.Delete(new DescopeRoleDeleteRequest
-            {
-                Name = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.RolesApiClient.Delete("TEST"));
 
             Assert.Null(delete);
         }

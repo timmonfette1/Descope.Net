@@ -5,34 +5,13 @@ namespace Descope.Test.Models.Management
     public class DescopeTenantTests
     {
         [Fact]
-        public void ShouldCreateObject_Tenant()
-        {
-            var tenant = new DescopeTenant
-            {
-                Id = "Id",
-                Name = "Name",
-                SelfProvisioningDomains = new string[1] { "My Domain" },
-                CustomAttributes = new
-                {
-                    Attr1 = "Value"
-                }
-            };
-
-            Assert.Equal("Id", tenant.Id);
-            Assert.Equal("Name", tenant.Name);
-            Assert.Single(tenant.SelfProvisioningDomains);
-            Assert.Equal("My Domain", tenant.SelfProvisioningDomains[0]);
-            Assert.NotNull(tenant.CustomAttributes);
-        }
-
-        [Fact]
         public void ShouldCreateObject_TenantSearchRequest()
         {
             var search = new DescopeTenantSearchRequest
             {
-                TenantIds = new string[1] { "1" },
-                TenantNames = new string[2] { "One", "Two" },
-                TenantSelfProvisioningDomains = new string[1] { "My Domain" },
+                TenantIds = ["1"],
+                TenantNames = ["One", "Two"],
+                TenantSelfProvisioningDomains = ["My Domain"],
                 CustomAttributes = new
                 {
                     Attr1 = "Value"
@@ -54,37 +33,42 @@ namespace Descope.Test.Models.Management
         {
             var list = new DescopeTenantListResponse
             {
-                Tenants = new DescopeTenant[2]
-                {
-                    new DescopeTenant
+                Tenants =
+                [
+                    new()
                     {
                         Id = "1",
-                        Name = "One"
+                        Name = "One",
+                        SelfProvisioningDomains = ["My One Domain"],
+                        CustomAttributes = new
+                        {
+                            Attr1 = "One Value"
+                        }
                     },
-                    new DescopeTenant
+                    new()
                     {
                         Id = "2",
-                        Name = "Two"
+                        Name = "Two",
+                        SelfProvisioningDomains = ["My Two Domain"],
+                        CustomAttributes = new
+                        {
+                            Attr1 = "Two Value"
+                        }
                     }
-                }
+                ]
             };
 
             Assert.Equal(2, list.Tenants.Count());
             Assert.Equal("1", list.Tenants.ElementAt(0).Id);
             Assert.Equal("One", list.Tenants.ElementAt(0).Name);
+            Assert.Single(list.Tenants.ElementAt(0).SelfProvisioningDomains);
+            Assert.Equal("My One Domain", list.Tenants.ElementAt(0).SelfProvisioningDomains[0]);
+            Assert.NotNull(list.Tenants.ElementAt(0).CustomAttributes);
             Assert.Equal("2", list.Tenants.ElementAt(1).Id);
             Assert.Equal("Two", list.Tenants.ElementAt(1).Name);
-        }
-
-        [Fact]
-        public void ShouldCreateObject_TenantDeleteRequest()
-        {
-            var request = new DescopeTenantDeleteRequest
-            {
-                Id = "My Id"
-            };
-
-            Assert.Equal("My Id", request.Id);
+            Assert.Single(list.Tenants.ElementAt(1).SelfProvisioningDomains);
+            Assert.Equal("My Two Domain", list.Tenants.ElementAt(1).SelfProvisioningDomains[0]);
+            Assert.NotNull(list.Tenants.ElementAt(1).CustomAttributes);
         }
     }
 }

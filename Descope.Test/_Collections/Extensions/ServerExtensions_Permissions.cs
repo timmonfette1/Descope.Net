@@ -23,14 +23,14 @@ namespace Descope.Test
                         .WithStatusCode(200)
                         .WithBodyAsJson(new DescopePermissionListResponse
                         {
-                            Permissions = new DescopePermission[1]
-                            {
-                                new DescopePermission
+                            Permissions =
+                            [
+                                new()
                                 {
                                     Name = "TEST",
                                     Description = "Testing"
                                 }
-                            }
+                            ]
                         })
                 );
 
@@ -171,7 +171,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermissionDeleteRequest
+                        .WithBody(new JsonMatcher(new DescopeNameModel
                         {
                             Name = "TEST"
                         }, true))

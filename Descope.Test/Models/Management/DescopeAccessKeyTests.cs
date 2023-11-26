@@ -4,47 +4,16 @@ namespace Descope.Test.Models.Management
 {
     public class DescopeAccessKeyTests
     {
-        private readonly DescopeAccessKey _accessKey = new()
-        {
-            Id = "TEST",
-            Name = "Testing",
-            RoleNames = new string[1] { "Role1" },
-            KeyTenants = new DescopeAccessKeyTenant[2]
-                {
-                    new()
-                    {
-                        TenantId = "Tenant1",
-                        RoleNames = new string[1] { "TenantRole1" }
-                    },
-                    new()
-                    {
-                        TenantId = "Tenant2",
-                        RoleNames = new string[1] { "TenantRole2" }
-                    }
-                },
-            Status = "Active",
-            CreatedTime = 12345,
-            ExpireTime = 99999,
-            CreatedBy = "Mr. Tester"
-        };
-
-        [Fact]
-        public void ShouldCreateObject_AccessKey()
-        {
-            var accessKey = _accessKey;
-
-            AccessKeyAssertations(accessKey);
-        }
-
         [Fact]
         public void ShouldCreateObject_AccessKeyResponse()
         {
             var accessKey = new DescopeAccessKeyResponse
             {
-                Key = _accessKey
+                Key = null
             };
 
-            AccessKeyAssertations(accessKey.Key);
+            Assert.NotNull(accessKey);
+            Assert.Null(accessKey.Key);
         }
 
         [Fact]
@@ -52,11 +21,54 @@ namespace Descope.Test.Models.Management
         {
             var accessKeys = new DescopeAccessKeyListResponse
             {
-                Keys = new DescopeAccessKey[1] { _accessKey }
+                Keys =
+                [
+                    new()
+                    {
+                        Id = "TEST",
+                        Name = "Testing",
+                        RoleNames = ["Role1"],
+                        KeyTenants =
+                        [
+                            new()
+                            {
+                                TenantId = "Tenant1",
+                                RoleNames = ["TenantRole1"]
+                            },
+                            new()
+                            {
+                                TenantId = "Tenant2",
+                                RoleNames = ["TenantRole2"]
+                            }
+                        ],
+                        Status = "Active",
+                        CreatedTime = 12345,
+                        ExpireTime = 99999,
+                        CreatedBy = "Mr. Tester"
+                    }
+                ]
             };
 
             Assert.Single(accessKeys.Keys);
-            AccessKeyAssertations(accessKeys.Keys.ElementAt(0));
+            Assert.Equal("TEST", accessKeys.Keys.ElementAt(0).Id);
+            Assert.Equal("Testing", accessKeys.Keys.ElementAt(0).Name);
+            Assert.Single(accessKeys.Keys.ElementAt(0).RoleNames);
+            Assert.Equal("Role1", accessKeys.Keys.ElementAt(0).RoleNames[0]);
+            Assert.Equal(2, accessKeys.Keys.ElementAt(0).KeyTenants.Length);
+            Assert.Equal("Active", accessKeys.Keys.ElementAt(0).Status);
+            Assert.Equal(12345, accessKeys.Keys.ElementAt(0).CreatedTime);
+            Assert.Equal(99999, accessKeys.Keys.ElementAt(0).ExpireTime);
+            Assert.Equal("Mr. Tester", accessKeys.Keys.ElementAt(0).CreatedBy);
+
+            var keyTenant1 = accessKeys.Keys.ElementAt(0).KeyTenants[0];
+            var keyTenant2 = accessKeys.Keys.ElementAt(0).KeyTenants[1];
+
+            Assert.Equal("Tenant1", keyTenant1.TenantId);
+            Assert.Single(keyTenant1.RoleNames);
+            Assert.Equal("TenantRole1", keyTenant1.RoleNames[0]);
+            Assert.Equal("Tenant2", keyTenant2.TenantId);
+            Assert.Single(keyTenant2.RoleNames);
+            Assert.Equal("TenantRole2", keyTenant2.RoleNames[0]);
         }
 
         [Fact]
@@ -66,20 +78,20 @@ namespace Descope.Test.Models.Management
             {
                 Name = "Testing",
                 ExpireTime = 12345,
-                RoleNames = new string[1] { "Role1" },
-                KeyTenants = new DescopeAccessKeyTenant[2]
-                {
+                RoleNames = ["Role1"],
+                KeyTenants =
+                [
                     new()
                     {
                         TenantId = "Tenant1",
-                        RoleNames = new string[1] { "TenantRole1" }
+                        RoleNames = ["TenantRole1"]
                     },
                     new()
                     {
                         TenantId = "Tenant2",
-                        RoleNames = new string[1] { "TenantRole2" }
+                        RoleNames = ["TenantRole2"]
                     }
-                }
+                ]
             };
 
             Assert.Equal("Testing", accessKey.Name);
@@ -105,11 +117,11 @@ namespace Descope.Test.Models.Management
             var created = new DescopeAccessKeyCreateResponse
             {
                 ClearText = "Password",
-                Key = _accessKey
+                Key = null
             };
 
             Assert.Equal("Password", created.ClearText);
-            AccessKeyAssertations(created.Key);
+            Assert.Null(created.Key);
         }
 
         [Fact]
@@ -118,7 +130,7 @@ namespace Descope.Test.Models.Management
             var accessKeyTenant = new DescopeAccessKeyTenant
             {
                 TenantId = "TEST",
-                RoleNames = new string[2] { "Role1", "Role2" }
+                RoleNames = ["Role1", "Role2"]
             };
 
             Assert.Equal("TEST", accessKeyTenant.TenantId);
@@ -132,7 +144,7 @@ namespace Descope.Test.Models.Management
         {
             var search = new DescopeAccessKeySearchRequest
             {
-                TenantIds = new string[2] { "1", "2" },
+                TenantIds = ["1", "2"],
             };
 
             Assert.Equal(2, search.TenantIds.Length);
@@ -152,43 +164,5 @@ namespace Descope.Test.Models.Management
             Assert.Equal("TEST", acessKey.Id);
             Assert.Equal("Testing", acessKey.Name);
         }
-
-        [Fact]
-        public void ShouldCreateObject_AccessKeyStatusChangeRequest()
-        {
-            var accessKey = new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TEST"
-            };
-
-            Assert.Equal("TEST", accessKey.Id);
-        }
-
-        #region Private Methods
-
-        private static void AccessKeyAssertations(DescopeAccessKey accessKey)
-        {
-            Assert.Equal("TEST", accessKey.Id);
-            Assert.Equal("Testing", accessKey.Name);
-            Assert.Single(accessKey.RoleNames);
-            Assert.Equal("Role1", accessKey.RoleNames[0]);
-            Assert.Equal(2, accessKey.KeyTenants.Length);
-            Assert.Equal("Active", accessKey.Status);
-            Assert.Equal(12345, accessKey.CreatedTime);
-            Assert.Equal(99999, accessKey.ExpireTime);
-            Assert.Equal("Mr. Tester", accessKey.CreatedBy);
-
-            var keyTenant1 = accessKey.KeyTenants[0];
-            var keyTenant2 = accessKey.KeyTenants[1];
-
-            Assert.Equal("Tenant1", keyTenant1.TenantId);
-            Assert.Single(keyTenant1.RoleNames);
-            Assert.Equal("TenantRole1", keyTenant1.RoleNames[0]);
-            Assert.Equal("Tenant2", keyTenant2.TenantId);
-            Assert.Single(keyTenant2.RoleNames);
-            Assert.Equal("TenantRole2", keyTenant2.RoleNames[0]);
-        }
-
-        #endregion Private Methods
     }
 }

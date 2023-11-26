@@ -3,14 +3,9 @@
 namespace Descope.Test.Management.Permissions
 {
     [Collection("ClientServer")]
-    public class PermissionsApiClientTests : IClassFixture<PermissionsApiClientFixture>
+    public class PermissionsApiClientTests(PermissionsApiClientFixture fixture) : IClassFixture<PermissionsApiClientFixture>
     {
-        private readonly PermissionsApiClientFixture _fixture;
-
-        public PermissionsApiClientTests(PermissionsApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly PermissionsApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAllPermissions()
@@ -18,9 +13,9 @@ namespace Descope.Test.Management.Permissions
             var permissions = await _fixture.PermissionsApiClient.GetAll();
 
             Assert.NotNull(permissions);
-            Assert.Single(permissions.Permissions);
+            Assert.Single(permissions);
 
-            var permission = permissions.Permissions.Single();
+            var permission = permissions.Single();
 
             Assert.Equal("TEST", permission.Name);
             Assert.Equal("Testing", permission.Description);
@@ -59,27 +54,28 @@ namespace Descope.Test.Management.Permissions
         [Fact]
         public async Task ShouldUpdatePermission()
         {
-            var permission = await _fixture.PermissionsApiClient.Update(new DescopePermissionUpdateRequest
+            var permission = new DescopePermission
             {
                 Name = "TEST",
-                NewName = "TESTU",
                 Description = "Testing"
-            });
+            };
+            var updatedPermission = await _fixture.PermissionsApiClient.Update(permission, "TESTU");
 
-            Assert.NotNull(permission);
-            Assert.Equal("TESTU", permission.Name);
-            Assert.Equal("Testing", permission.Description);
+            Assert.NotNull(updatedPermission);
+            Assert.Equal("TESTU", updatedPermission.Name);
+            Assert.Equal("Testing", updatedPermission.Description);
         }
 
         [Fact]
         public async Task ShouldNotUpdatePermission_Duplicate()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.PermissionsApiClient.Update(new DescopePermissionUpdateRequest
+            var permission = new DescopePermission
             {
                 Name = "TEST",
-                NewName = "EXIST",
                 Description = "Testing"
-            }));
+            };
+
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.PermissionsApiClient.Update(permission, "EXIST"));
 
             Assert.NotNull(exception);
             Assert.Equal("E024104", exception.ErrorCode);
@@ -90,12 +86,13 @@ namespace Descope.Test.Management.Permissions
         [Fact]
         public async Task ShouldNotUpdatePermission_NotFound()
         {
-            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.PermissionsApiClient.Update(new DescopePermissionUpdateRequest
+            var permission = new DescopePermission
             {
                 Name = "TESTBAD",
-                NewName = "TEST",
                 Description = "Testing"
-            }));
+            };
+
+            var exception = await Assert.ThrowsAsync<DescopeException>(async () => await _fixture.PermissionsApiClient.Update(permission, "TEST"));
 
             Assert.NotNull(exception);
             Assert.Equal("E111303", exception.ErrorCode);
@@ -106,10 +103,7 @@ namespace Descope.Test.Management.Permissions
         [Fact]
         public async Task ShouldDeletePermission()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.PermissionsApiClient.Delete(new DescopePermissionDeleteRequest
-            {
-                Name = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.PermissionsApiClient.Delete("TEST"));
 
             Assert.Null(delete);
         }

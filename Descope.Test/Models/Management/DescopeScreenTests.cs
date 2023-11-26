@@ -9,48 +9,48 @@ namespace Descope.Test.Models.Management
         {
             var screen = new DescopeScreen
             {
-               Id = "TEST",
-               Version = 1,
-               FlowId = "FTEST",
-               Inputs = new DescopeScreenInput[1]
-               {
+                Id = "TEST",
+                Version = 1,
+                FlowId = "FTEST",
+                Inputs =
+               [
                    new()
-                    {
-                        Type = "TEST",
-                        Name = "Tester",
-                        Required = false,
-                        Visible = true,
-                        DisplayName = "Testing",
-                        DisplayType = "Test",
-                        DependsOn = new string[1] { "Dependency" },
-                        NameValueMap = null,
-                        ContextAware = true,
-                        Options = new DescopeScreenInputOption[1]
-                        {
+                   {
+                       Type = "TEST",
+                       Name = "Tester",
+                       Required = false,
+                       Visible = true,
+                       DisplayName = "Testing",
+                       DisplayType = "Test",
+                       DependsOn = ["Dependency"],
+                       NameValueMap = null,
+                       ContextAware = true,
+                       Options =
+                        [
                             new()
                             {
                                 Label = "Label",
                                 Value = "Value"
                             }
-                        }
-                    }
-               },
-               Interactions = new DescopeScreenInteraction[1]
-               {
+                        ]
+                   }
+               ],
+                Interactions =
+               [
                    new()
-                    {
-                        Id = "TEST",
-                        Type = "Tester",
-                        Label = "Testing",
-                        Icon = "Smile",
-                        SubType = "Tester Jr."
-                    }
-               },
-               HtmlTemplate = new
-               {
-                   Inner = "Inner"
-               },
-               ComponentsVersion = "1.0.0",
+                   {
+                       Id = "TEST",
+                       Type = "Tester",
+                       Label = "Testing",
+                       Icon = "Smile",
+                       SubType = "Tester Jr."
+                   }
+               ],
+                HtmlTemplate = new
+                {
+                    Inner = "Inner"
+                },
+                ComponentsVersion = "1.0.0",
             };
 
             string htmlTemplateInner = screen.HtmlTemplate.GetType().GetProperty("Inner")?.GetValue(screen.HtmlTemplate, null)?.ToString();

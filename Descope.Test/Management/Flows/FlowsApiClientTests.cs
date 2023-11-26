@@ -4,14 +4,9 @@ using Descope.Models;
 namespace Descope.Test.Management.Flows
 {
     [Collection("ClientServer")]
-    public class FlowsApiClientTests : IClassFixture<FlowsApiClientFixture>
+    public class FlowsApiClientTests(FlowsApiClientFixture fixture) : IClassFixture<FlowsApiClientFixture>
     {
-        private readonly FlowsApiClientFixture _fixture;
-
-        public FlowsApiClientTests(FlowsApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly FlowsApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldListFlows()
@@ -19,9 +14,8 @@ namespace Descope.Test.Management.Flows
             var flows = await _fixture.FlowsApiClient.GetAll();
 
             Assert.NotNull(flows);
-            Assert.Single(flows.Flows);
-            Assert.Equal(1, flows.Total);
-            FlowMetadataAssertations(flows.Flows[0]);
+            Assert.Single(flows);
+            FlowMetadataAssertations(flows.ElementAt(0));
         }
 
         [Fact]
@@ -30,9 +24,8 @@ namespace Descope.Test.Management.Flows
             var flows = await _fixture.FlowsApiClient.GetAll("TEST");
 
             Assert.NotNull(flows);
-            Assert.Single(flows.Flows);
-            Assert.Equal(1, flows.Total);
-            FlowMetadataAssertations(flows.Flows[0]);
+            Assert.Single(flows);
+            FlowMetadataAssertations(flows.ElementAt(0));
         }
 
         [Fact]
@@ -77,7 +70,7 @@ namespace Descope.Test.Management.Flows
                 {
                     Id = "TEST"
                 },
-                Screens = Array.Empty<DescopeScreen>()
+                Screens = []
             });
 
             Assert.NotNull(flow);

@@ -4,23 +4,19 @@ using Descope.Models;
 
 namespace Descope.Management.Flows
 {
-    internal class FlowsApiClient : IFlowsApiClient
+    internal class FlowsApiClient(IDescopeManagementHttpClient httpClient) : IFlowsApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public FlowsApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
-
-        public async Task<DescopeFlowListResponse> GetAll(params string[] ids)
+        public async Task<IEnumerable<DescopeFlowMetadata>> GetAll(params string[] ids)
         {
             var request = new DescopeFlowSearchRequest
             {
                 Ids = ids
             };
 
-            return await _httpClient.PostAsync<DescopeFlowSearchRequest, DescopeFlowListResponse>(Endpoints.Management.LoadAllFlows, request);
+            var response = await _httpClient.PostAsync<DescopeFlowSearchRequest, DescopeFlowListResponse>(Endpoints.Management.LoadAllFlows, request);
+            return response.Flows;
         }
 
         public async Task<DescopeFlow> Export(string flowId)

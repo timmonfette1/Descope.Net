@@ -1,6 +1,6 @@
 ﻿namespace Descope.Models
 {
-    public class DescopeAccessKeySearchRequest
+    internal class DescopeAccessKeySearchRequest
     {
         public string[] TenantIds { get; set; }
     }

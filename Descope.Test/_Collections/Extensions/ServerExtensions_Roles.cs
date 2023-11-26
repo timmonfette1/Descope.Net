@@ -23,9 +23,9 @@ namespace Descope.Test
                         .WithStatusCode(200)
                         .WithBodyAsJson(new DescopeRoleListResponse
                         {
-                            Roles = new DescopeRole[1]
-                            {
-                                new DescopeRole
+                            Roles =
+                            [
+                                new()
                                 {
                                     Name = "TEST",
                                     Description = "Testing",
@@ -34,7 +34,7 @@ namespace Descope.Test
                                         "TestPerm"
                                     }
                                 }
-                            }
+                            ]
                         })
                 );
 
@@ -53,10 +53,10 @@ namespace Descope.Test
                         {
                             Name = "TEST",
                             Description = "Testing",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "TestPerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -76,10 +76,10 @@ namespace Descope.Test
                         {
                             Name = "EXIST",
                             Description = "Existing",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "TestPerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -105,10 +105,10 @@ namespace Descope.Test
                         {
                             Name = "TEST",
                             Description = "Testing",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "FakePerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -140,10 +140,10 @@ namespace Descope.Test
                             Name = "TEST",
                             NewName = "UTEST",
                             Description = "Testing Updated",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "TestPerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -164,10 +164,10 @@ namespace Descope.Test
                             Name = "TESTBAD",
                             NewName = "UTEST",
                             Description = "Testing Updated",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "TestPerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -194,10 +194,10 @@ namespace Descope.Test
                             Name = "TEST",
                             NewName = "EXIST",
                             Description = "Testing Updated",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "TestPerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -224,10 +224,10 @@ namespace Descope.Test
                             Name = "TEST",
                             NewName = "UTEST",
                             Description = "Testing Updated",
-                            PermissionNames = new string[1]
-                            {
+                            PermissionNames =
+                            [
                                 "FakePerm"
-                            }
+                            ]
                         }, true))
                 )
                 .RespondWith(
@@ -254,7 +254,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRoleDeleteRequest
+                        .WithBody(new JsonMatcher(new DescopeNameModel
                         {
                             Name = "TEST"
                         }, true))

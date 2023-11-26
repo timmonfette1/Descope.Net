@@ -16,10 +16,10 @@ namespace Descope.Test
 
         private static readonly DescopeTenantListResponse _tenantListMock = new()
         {
-            Tenants = new DescopeTenant[1]
-            {
+            Tenants =
+            [
                 _tenantMock
-            }
+            ]
         };
 
         public static WireMockServer GetAllTenants(this WireMockServer server)
@@ -92,7 +92,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeTenantSearchRequest
                         {
-                            TenantIds = new string[1] { "TEST" }
+                            TenantIds = ["TEST"]
                         }, true))
                 )
                 .RespondWith(
@@ -110,7 +110,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeTenantSearchRequest
                         {
-                            TenantNames = new string[1] { "Test Client" }
+                            TenantNames = ["Test Client"]
                         }, true))
                 )
                 .RespondWith(
@@ -128,7 +128,7 @@ namespace Descope.Test
                         .UsingPost()
                         .WithBody(new JsonMatcher(new DescopeTenantSearchRequest
                         {
-                            TenantIds = new string[1] { "TESTBAD" }
+                            TenantIds = ["TESTBAD"]
                         }, true))
                 )
                 .RespondWith(
@@ -247,7 +247,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenantDeleteRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TEST"
                         }, true))

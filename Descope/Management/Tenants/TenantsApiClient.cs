@@ -4,18 +4,14 @@ using Descope.Models;
 
 namespace Descope.Management.Tenants
 {
-    internal class TenantsApiClient : ITenantsApiClient
+    internal class TenantsApiClient(IDescopeManagementHttpClient httpClient) : ITenantsApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public TenantsApiClient(IDescopeManagementHttpClient httpClient)
+        public async Task<IEnumerable<DescopeTenant>> GetAll()
         {
-            _httpClient = httpClient;
-        }
-
-        public async Task<DescopeTenantListResponse> GetAll()
-        {
-            return await _httpClient.GetAsync<DescopeTenantListResponse>(Endpoints.Management.LoadAllTenants);
+            var response = await _httpClient.GetAsync<DescopeTenantListResponse>(Endpoints.Management.LoadAllTenants);
+            return response.Tenants;
         }
 
         public async Task<DescopeTenant> Get(string id)
@@ -23,9 +19,10 @@ namespace Descope.Management.Tenants
             return await _httpClient.GetAsync<DescopeTenant>(Endpoints.Management.LoadTenant, new { id });
         }
 
-        public async Task<DescopeTenantListResponse> Search(DescopeTenantSearchRequest search)
+        public async Task<IEnumerable<DescopeTenant>> Search(DescopeTenantSearchRequest search)
         {
-            return await _httpClient.PostAsync<DescopeTenantSearchRequest, DescopeTenantListResponse>(Endpoints.Management.SearchTenants, search);
+            var response = await _httpClient.PostAsync<DescopeTenantSearchRequest, DescopeTenantListResponse>(Endpoints.Management.SearchTenants, search);
+            return response.Tenants;
         }
 
         public async Task<DescopeTenant> Create(DescopeTenant tenant)
@@ -41,9 +38,14 @@ namespace Descope.Management.Tenants
             return tenant;
         }
 
-        public async Task Delete(DescopeTenantDeleteRequest tenant)
+        public async Task Delete(string id)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeleteTenant, tenant);
+            var request = new DescopeIdModel
+            {
+                Id = id
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.DeleteTenant, request);
         }
     }
 }

@@ -4,57 +4,40 @@ namespace Descope.Test.Models.Management
 {
     public class DescopeThemeTests
     {
-        private static readonly DescopeTheme _theme = new()
-        {
-            Id = "TEST",
-            Version = 1,
-            CssTemplate = new
-            {
-                Dark = new
-                {
-                    Font = "Fun Font",
-                    Color = "Black"
-                },
-                Light = new
-                {
-                    Font = "Less Fun Font",
-                    Color = "White"
-                }
-            },
-            ComponentsVersion = "1.0.0"
-        };
-
-        [Fact]
-        public static void ShouldCreateObject_Theme()
-        {
-            var theme = _theme;
-
-            Assert.NotNull(theme);
-            ThemeAssertations(theme);
-        }
-
         [Fact]
         public static void ShouldCreateObject_ThemeRequestResponse()
         {
             var theme = new DescopeThemeRequestResponse
             {
-                Theme = _theme
+                Theme = new DescopeTheme
+                {
+                    Id = "TEST",
+                    Version = 1,
+                    CssTemplate = new
+                    {
+                        Dark = new
+                        {
+                            Font = "Fun Font",
+                            Color = "Black"
+                        },
+                        Light = new
+                        {
+                            Font = "Less Fun Font",
+                            Color = "White"
+                        }
+                    },
+                    ComponentsVersion = "1.0.0"
+                }
             };
 
             Assert.NotNull(theme);
-            ThemeAssertations(theme.Theme);
-        }
+            Assert.NotNull(theme.Theme);
+            Assert.Equal("TEST", theme.Theme.Id);
+            Assert.Equal(1, theme.Theme.Version);
+            Assert.NotNull(theme.Theme.CssTemplate);
 
-        #region Private Methods
-
-        private static void ThemeAssertations(DescopeTheme theme)
-        {
-            Assert.Equal("TEST", theme.Id);
-            Assert.Equal(1, theme.Version);
-            Assert.NotNull(theme.CssTemplate);
-
-            object dark = theme.CssTemplate.GetType().GetProperty("Dark")?.GetValue(theme.CssTemplate, null);
-            object light = theme.CssTemplate.GetType().GetProperty("Light")?.GetValue(theme.CssTemplate, null);
+            object dark = theme.Theme.CssTemplate.GetType().GetProperty("Dark")?.GetValue(theme.Theme.CssTemplate, null);
+            object light = theme.Theme.CssTemplate.GetType().GetProperty("Light")?.GetValue(theme.Theme.CssTemplate, null);
 
             Assert.NotNull(dark);
             Assert.NotNull(light);
@@ -75,9 +58,7 @@ namespace Descope.Test.Models.Management
             Assert.Equal("Less Fun Font", lightFont);
             Assert.Equal("White", lightColor);
 
-            Assert.Equal("1.0.0", theme.ComponentsVersion);
+            Assert.Equal("1.0.0", theme.Theme.ComponentsVersion);
         }
-
-        #endregion Private Methods
     }
 }

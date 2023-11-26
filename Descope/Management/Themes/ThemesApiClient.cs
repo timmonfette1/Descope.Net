@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.Themes
 {
-    internal class ThemesApiClient : IThemesApiClient
+    internal class ThemesApiClient(IDescopeManagementHttpClient httpClient) : IThemesApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public ThemesApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopeTheme> Export()
         {

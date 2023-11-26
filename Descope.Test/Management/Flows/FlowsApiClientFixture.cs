@@ -2,14 +2,9 @@
 
 namespace Descope.Test.Management.Flows
 {
-    public class FlowsApiClientFixture
+    public class FlowsApiClientFixture(ClientServerFixture fixture)
     {
-        private readonly FlowsApiClient _flowsApiClient;
-
-        public FlowsApiClientFixture(ClientServerFixture fixture)
-        {
-            _flowsApiClient = new FlowsApiClient(fixture.HttpClient);
-        }
+        private readonly FlowsApiClient _flowsApiClient = new(fixture.HttpClient);
 
         internal FlowsApiClient FlowsApiClient => _flowsApiClient;
     }

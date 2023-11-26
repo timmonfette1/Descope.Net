@@ -3,14 +3,9 @@
 namespace Descope.Test.Management.Tenants
 {
     [Collection("ClientServer")]
-    public class TenantsApiClientTests : IClassFixture<TenantsApiClientFixture>
+    public class TenantsApiClientTests(TenantsApiClientFixture fixture) : IClassFixture<TenantsApiClientFixture>
     {
-        private readonly TenantsApiClientFixture _fixture;
-
-        public TenantsApiClientTests(TenantsApiClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly TenantsApiClientFixture _fixture = fixture;
 
         [Fact]
         public async Task ShouldGetAllTenants()
@@ -18,9 +13,9 @@ namespace Descope.Test.Management.Tenants
             var tenants = await _fixture.TenantsApiClient.GetAll();
 
             Assert.NotNull(tenants);
-            Assert.Single(tenants.Tenants);
+            Assert.Single(tenants);
 
-            var tenant = tenants.Tenants.Single();
+            var tenant = tenants.Single();
 
             Assert.Equal("TEST", tenant.Id);
             Assert.Equal("Test Client", tenant.Name);
@@ -52,13 +47,13 @@ namespace Descope.Test.Management.Tenants
         {
             var tenants = await _fixture.TenantsApiClient.Search(new DescopeTenantSearchRequest
             {
-                TenantIds = new string[1] { "TEST" }
+                TenantIds = ["TEST"]
             });
 
             Assert.NotNull(tenants);
-            Assert.Single(tenants.Tenants);
+            Assert.Single(tenants);
 
-            var tenant = tenants.Tenants.Single();
+            var tenant = tenants.Single();
 
             Assert.Equal("TEST", tenant.Id);
             Assert.Equal("Test Client", tenant.Name);
@@ -69,13 +64,13 @@ namespace Descope.Test.Management.Tenants
         {
             var tenants = await _fixture.TenantsApiClient.Search(new DescopeTenantSearchRequest
             {
-                TenantNames = new string[1] { "Test Client" }
+                TenantNames = ["Test Client"]
             });
 
             Assert.NotNull(tenants);
-            Assert.Single(tenants.Tenants);
+            Assert.Single(tenants);
 
-            var tenant = tenants.Tenants.Single();
+            var tenant = tenants.Single();
 
             Assert.Equal("TEST", tenant.Id);
             Assert.Equal("Test Client", tenant.Name);
@@ -86,11 +81,11 @@ namespace Descope.Test.Management.Tenants
         {
             var tenants = await _fixture.TenantsApiClient.Search(new DescopeTenantSearchRequest
             {
-                TenantIds = new string[1] { "TESTBAD" }
+                TenantIds = ["TESTBAD"]
             });
 
             Assert.NotNull(tenants);
-            Assert.Empty(tenants.Tenants);
+            Assert.Empty(tenants);
         }
 
         [Fact]
@@ -154,10 +149,7 @@ namespace Descope.Test.Management.Tenants
         [Fact]
         public async Task ShouldDeleteTenant()
         {
-            var delete = await Record.ExceptionAsync(async () => await _fixture.TenantsApiClient.Delete(new DescopeTenantDeleteRequest
-            {
-                Id = "TEST"
-            }));
+            var delete = await Record.ExceptionAsync(async () => await _fixture.TenantsApiClient.Delete("TEST"));
 
             Assert.Null(delete);
         }

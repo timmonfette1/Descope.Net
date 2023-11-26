@@ -4,14 +4,9 @@ using Descope.Models;
 
 namespace Descope.Management.AccessKeys
 {
-    internal class AccessKeysApiClient : IAccessKeysApiClient
+    internal class AccessKeysApiClient(IDescopeManagementHttpClient httpClient) : IAccessKeysApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
-
-        public AccessKeysApiClient(IDescopeManagementHttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
         public async Task<DescopeAccessKey> Get(string id)
         {
@@ -19,9 +14,15 @@ namespace Descope.Management.AccessKeys
             return response.Key;
         }
 
-        public async Task<DescopeAccessKeyListResponse> Search(DescopeAccessKeySearchRequest search)
+        public async Task<IEnumerable<DescopeAccessKey>> Search(params string[] tenantIds)
         {
-            return await _httpClient.PostAsync<DescopeAccessKeySearchRequest, DescopeAccessKeyListResponse>(Endpoints.Management.SearchAccessKeys, search);
+            var request = new DescopeAccessKeySearchRequest
+            {
+                TenantIds = tenantIds
+            };
+
+            var response = await _httpClient.PostAsync<DescopeAccessKeySearchRequest, DescopeAccessKeyListResponse>(Endpoints.Management.SearchAccessKeys, request);
+            return response.Keys;
         }
 
         public async Task<DescopeAccessKeyCreateResponse> Create(DescopeAccessKeyCreateRequest accessKey)
@@ -29,25 +30,46 @@ namespace Descope.Management.AccessKeys
             return await _httpClient.PostAsync<DescopeAccessKeyCreateRequest, DescopeAccessKeyCreateResponse>(Endpoints.Management.CreateAccessKey, accessKey);
         }
 
-        public async Task<DescopeAccessKey> Update(DescopeAccessKeyUpdateRequest accessKey)
+        public async Task<DescopeAccessKey> Update(string id, string name)
         {
-            var response = await _httpClient.PostAsync<DescopeAccessKeyUpdateRequest, DescopeAccessKeyResponse>(Endpoints.Management.UpdateAccessKey, accessKey);
+            var request = new DescopeAccessKeyUpdateRequest
+            {
+                Id = id,
+                Name = name
+            };
+
+            var response = await _httpClient.PostAsync<DescopeAccessKeyUpdateRequest, DescopeAccessKeyResponse>(Endpoints.Management.UpdateAccessKey, request);
             return response.Key;
         }
 
-        public async Task Activate(DescopeAccessKeyStatusChangeRequest accessKey)
+        public async Task Activate(string id)
         {
-            await _httpClient.PostAsync(Endpoints.Management.ActivateAccessKey, accessKey);
+            var request = new DescopeIdModel
+            {
+                Id = id
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.ActivateAccessKey, request);
         }
 
-        public async Task Deactivate(DescopeAccessKeyStatusChangeRequest accessKey)
+        public async Task Deactivate(string id)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeactivateAccessKey, accessKey);
+            var request = new DescopeIdModel
+            {
+                Id = id
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.DeactivateAccessKey, request);
         }
 
-        public async Task Delete(DescopeAccessKeyStatusChangeRequest accessKey)
+        public async Task Delete(string id)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeleteAccessKey, accessKey);
+            var request = new DescopeIdModel
+            {
+                Id = id
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.DeleteAccessKey, request);
         }
     }
 }

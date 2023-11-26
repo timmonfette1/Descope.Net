@@ -4,18 +4,14 @@ using Descope.Models;
 
 namespace Descope.Management.Roles
 {
-    internal class RolesApiClient : IRolesApiClient
+    internal class RolesApiClient(IDescopeManagementHttpClient httpClient) : IRolesApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public RolesApiClient(IDescopeManagementHttpClient httpClient)
+        public async Task<IEnumerable<DescopeRole>> GetAll()
         {
-            _httpClient = httpClient;
-        }
-
-        public async Task<DescopeRoleListResponse> GetAll()
-        {
-            return await _httpClient.GetAsync<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
+            var response = await _httpClient.GetAsync<DescopeRoleListResponse>(Endpoints.Management.LoadAllRoles);
+            return response.Roles;
         }
 
         public async Task<DescopeRole> Create(DescopeRole role)
@@ -24,20 +20,32 @@ namespace Descope.Management.Roles
             return role;
         }
 
-        public async Task<DescopeRole> Update(DescopeRoleUpdateRequest role)
+        public async Task<DescopeRole> Update(DescopeRole role, string newName)
         {
-            await _httpClient.PostAsync(Endpoints.Management.UpdateRole, role);
+            var request = new DescopeRoleUpdateRequest
+            {
+                Name = role.Name,
+                NewName = newName,
+                Description = role.Description,
+                PermissionNames = role.PermissionNames,
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.UpdateRole, request);
             return new DescopeRole
             {
-                Name = role.NewName,
+                Name = newName,
                 Description = role.Description,
                 PermissionNames = role.PermissionNames
             };
         }
 
-        public async Task Delete(DescopeRoleDeleteRequest role)
+        public async Task Delete(string name)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeleteRole, role);
+            var request = new DescopeNameModel
+            {
+                Name = name
+            };
+            await _httpClient.PostAsync(Endpoints.Management.DeleteRole, request);
         }
     }
 }

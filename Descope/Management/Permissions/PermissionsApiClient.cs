@@ -4,18 +4,14 @@ using Descope.Models;
 
 namespace Descope.Management.Permissions
 {
-    internal class PermissionsApiClient : IPermissionsApiClient
+    internal class PermissionsApiClient(IDescopeManagementHttpClient httpClient) : IPermissionsApiClient
     {
-        private readonly IDescopeManagementHttpClient _httpClient;
+        private readonly IDescopeManagementHttpClient _httpClient = httpClient;
 
-        public PermissionsApiClient(IDescopeManagementHttpClient httpClient)
+        public async Task<IEnumerable<DescopePermission>> GetAll()
         {
-            _httpClient = httpClient;
-        }
-
-        public async Task<DescopePermissionListResponse> GetAll()
-        {
-            return await _httpClient.GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
+            var response = await _httpClient.GetAsync<DescopePermissionListResponse>(Endpoints.Management.LoadAllPermissions);
+            return response.Permissions;
         }
 
         public async Task<DescopePermission> Create(DescopePermission permission)
@@ -24,19 +20,31 @@ namespace Descope.Management.Permissions
             return permission;
         }
 
-        public async Task<DescopePermission> Update(DescopePermissionUpdateRequest permission)
+        public async Task<DescopePermission> Update(DescopePermission permission, string newName)
         {
-            await _httpClient.PostAsync(Endpoints.Management.UpdatePermission, permission);
+            var request = new DescopePermissionUpdateRequest
+            {
+                Name = permission.Name,
+                NewName = newName,
+                Description = permission.Description,
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.UpdatePermission, request);
             return new DescopePermission
             {
-                Name = permission.NewName,
+                Name = newName,
                 Description = permission.Description
             };
         }
 
-        public async Task Delete(DescopePermissionDeleteRequest permission)
+        public async Task Delete(string name)
         {
-            await _httpClient.PostAsync(Endpoints.Management.DeletePermission, permission);
+            var request = new DescopeNameModel
+            {
+                Name = name
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.DeletePermission, request);
         }
     }
 }

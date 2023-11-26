@@ -2,14 +2,9 @@
 
 namespace Descope.Test.HttpClient.Auth
 {
-    public class DescopeAuthHttpClientTests : IClassFixture<DescopeAuthHttpClientFixture>
+    public class DescopeAuthHttpClientTests(DescopeAuthHttpClientFixture fixture) : IClassFixture<DescopeAuthHttpClientFixture>
     {
-        private readonly DescopeAuthHttpClientFixture _fixture;
-
-        public DescopeAuthHttpClientTests(DescopeAuthHttpClientFixture fixture)
-        {
-            _fixture = fixture;
-        }
+        private readonly DescopeAuthHttpClientFixture _fixture = fixture;
 
         [Fact]
         public void ShouldCreateRestClient()

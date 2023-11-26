@@ -1,6 +1,6 @@
 ﻿namespace Descope.Models
 {
-    public class DescopePermissionListResponse
+    internal class DescopePermissionListResponse
     {
         public IEnumerable<DescopePermission> Permissions { get; set; }
     }
