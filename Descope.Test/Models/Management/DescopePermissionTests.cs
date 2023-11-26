@@ -45,16 +45,5 @@ namespace Descope.Test.Models.Management
             Assert.Equal("Name 2", permission.Permissions.ElementAt(1).Name);
             Assert.Equal("Description 2", permission.Permissions.ElementAt(1).Description);
         }
-
-        [Fact]
-        public void ShouldCreateObject_PermissionDeleteRequest()
-        {
-            var permission = new DescopePermissionDeleteRequest
-            {
-                Name = "Name"
-            };
-
-            Assert.Equal("Name", permission.Name);
-        }
     }
 }

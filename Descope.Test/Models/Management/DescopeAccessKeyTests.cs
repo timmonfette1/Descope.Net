@@ -164,16 +164,5 @@ namespace Descope.Test.Models.Management
             Assert.Equal("TEST", acessKey.Id);
             Assert.Equal("Testing", acessKey.Name);
         }
-
-        [Fact]
-        public void ShouldCreateObject_AccessKeyStatusChangeRequest()
-        {
-            var accessKey = new DescopeAccessKeyStatusChangeRequest
-            {
-                Id = "TEST"
-            };
-
-            Assert.Equal("TEST", accessKey.Id);
-        }
     }
 }

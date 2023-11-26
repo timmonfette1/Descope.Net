@@ -171,7 +171,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermissionDeleteRequest
+                        .WithBody(new JsonMatcher(new DescopeNameModel
                         {
                             Name = "TEST"
                         }, true))

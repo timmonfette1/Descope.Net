@@ -32,23 +32,23 @@ namespace Descope.Test
         [
             new()
             {
-               Id = "TEST",
-               Version = 1,
-               FlowId = "FTEST",
-               Inputs =
+                Id = "TEST",
+                Version = 1,
+                FlowId = "FTEST",
+                Inputs =
                [
                    new()
-                    {
-                        Type = "TEST",
-                        Name = "Tester",
-                        Required = false,
-                        Visible = true,
-                        DisplayName = "Testing",
-                        DisplayType = "Test",
-                        DependsOn = ["Dependency"],
-                        NameValueMap = null,
-                        ContextAware = true,
-                        Options =
+                   {
+                       Type = "TEST",
+                       Name = "Tester",
+                       Required = false,
+                       Visible = true,
+                       DisplayName = "Testing",
+                       DisplayType = "Test",
+                       DependsOn = ["Dependency"],
+                       NameValueMap = null,
+                       ContextAware = true,
+                       Options =
                         [
                             new()
                             {
@@ -56,24 +56,24 @@ namespace Descope.Test
                                 Value = "Value"
                             }
                         ]
-                    }
+                   }
                ],
-               Interactions =
+                Interactions =
                [
                    new()
-                    {
-                        Id = "TEST",
-                        Type = "Tester",
-                        Label = "Testing",
-                        Icon = "Smile",
-                        SubType = "Tester Jr."
-                    }
+                   {
+                       Id = "TEST",
+                       Type = "Tester",
+                       Label = "Testing",
+                       Icon = "Smile",
+                       SubType = "Tester Jr."
+                   }
                ],
-               HtmlTemplate = new
-               {
-                   Inner = "Inner"
-               },
-               ComponentsVersion = "1.0.0",
+                HtmlTemplate = new
+                {
+                    Inner = "Inner"
+                },
+                ComponentsVersion = "1.0.0",
             }
         ];
 

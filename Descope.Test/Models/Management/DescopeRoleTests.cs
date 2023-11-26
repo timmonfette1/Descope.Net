@@ -66,16 +66,5 @@ namespace Descope.Test.Models.Management
 
             Assert.Equal("New Perm", perm);
         }
-
-        [Fact]
-        public void ShouldCreateObject_RoleDeleteRequest()
-        {
-            var role = new DescopeRoleDeleteRequest
-            {
-                Name = "TEST"
-            };
-
-            Assert.Equal("TEST", role.Name);
-        }
     }
 }

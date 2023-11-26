@@ -25,7 +25,8 @@ namespace Descope.Test
                         {
                             Roles =
                             [
-                                new() {
+                                new()
+                                {
                                     Name = "TEST",
                                     Description = "Testing",
                                     PermissionNames = new string[1]
@@ -253,7 +254,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRoleDeleteRequest
+                        .WithBody(new JsonMatcher(new DescopeNameModel
                         {
                             Name = "TEST"
                         }, true))

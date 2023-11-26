@@ -39,7 +39,7 @@ namespace Descope.Management.Permissions
 
         public async Task Delete(string name)
         {
-            var request = new DescopePermissionDeleteRequest
+            var request = new DescopeNameModel
             {
                 Name = name
             };

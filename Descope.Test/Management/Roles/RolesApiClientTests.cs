@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using Descope.Models;
+﻿using Descope.Models;
 
 namespace Descope.Test.Management.Roles
 {

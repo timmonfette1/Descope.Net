@@ -41,7 +41,7 @@ namespace Descope.Management.Roles
 
         public async Task Delete(string name)
         {
-            var request = new DescopeRoleDeleteRequest
+            var request = new DescopeNameModel
             {
                 Name = name
             };

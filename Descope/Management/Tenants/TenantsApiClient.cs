@@ -40,7 +40,7 @@ namespace Descope.Management.Tenants
 
         public async Task Delete(string id)
         {
-            var request = new DescopeTenantDeleteRequest
+            var request = new DescopeIdModel
             {
                 Id = id
             };

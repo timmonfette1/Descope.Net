@@ -235,7 +235,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/activate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyStatusChangeRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TEST"
                         }, true))
@@ -253,7 +253,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/activate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyStatusChangeRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TESTBAD"
                         }, true))
@@ -276,7 +276,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/deactivate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyStatusChangeRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TEST"
                         }, true))
@@ -294,7 +294,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/deactivate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyStatusChangeRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TESTBAD"
                         }, true))
@@ -317,7 +317,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyStatusChangeRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TEST"
                         }, true))

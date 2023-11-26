@@ -70,16 +70,5 @@ namespace Descope.Test.Models.Management
             Assert.Equal("My Two Domain", list.Tenants.ElementAt(1).SelfProvisioningDomains[0]);
             Assert.NotNull(list.Tenants.ElementAt(1).CustomAttributes);
         }
-
-        [Fact]
-        public void ShouldCreateObject_TenantDeleteRequest()
-        {
-            var request = new DescopeTenantDeleteRequest
-            {
-                Id = "My Id"
-            };
-
-            Assert.Equal("My Id", request.Id);
-        }
     }
 }

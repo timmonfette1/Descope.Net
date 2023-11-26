@@ -44,7 +44,7 @@ namespace Descope.Management.AccessKeys
 
         public async Task Activate(string id)
         {
-            var request = new DescopeAccessKeyStatusChangeRequest
+            var request = new DescopeIdModel
             {
                 Id = id
             };
@@ -54,7 +54,7 @@ namespace Descope.Management.AccessKeys
 
         public async Task Deactivate(string id)
         {
-            var request = new DescopeAccessKeyStatusChangeRequest
+            var request = new DescopeIdModel
             {
                 Id = id
             };
@@ -64,7 +64,7 @@ namespace Descope.Management.AccessKeys
 
         public async Task Delete(string id)
         {
-            var request = new DescopeAccessKeyStatusChangeRequest
+            var request = new DescopeIdModel
             {
                 Id = id
             };

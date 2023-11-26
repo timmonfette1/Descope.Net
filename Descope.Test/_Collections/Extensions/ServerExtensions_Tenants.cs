@@ -247,7 +247,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenantDeleteRequest
+                        .WithBody(new JsonMatcher(new DescopeIdModel
                         {
                             Id = "TEST"
                         }, true))
