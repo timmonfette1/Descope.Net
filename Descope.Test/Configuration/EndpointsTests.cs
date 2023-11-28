@@ -14,6 +14,7 @@ namespace Descope.Test.Configuration
             Assert.Equal("v1/mgmt/accesskey/activate", Endpoints.Management.ActivateAccessKey);
             Assert.Equal("v1/mgmt/accesskey/deactivate", Endpoints.Management.DeactivateAccessKey);
             Assert.Equal("v1/mgmt/accesskey/delete", Endpoints.Management.DeleteAccessKey);
+            Assert.Equal("v1/mgmt/audit/search", Endpoints.Management.SearchAudit);
             Assert.Equal("v1/mgmt/flow/list", Endpoints.Management.LoadAllFlows);
             Assert.Equal("v1/mgmt/flow/export", Endpoints.Management.ExportFlow);
             Assert.Equal("v1/mgmt/flow/import", Endpoints.Management.ImportFlow);

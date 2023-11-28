@@ -2,6 +2,7 @@
 using Descope.HttpClient;
 using Descope.Management;
 using Descope.Management.AccessKeys;
+using Descope.Management.Audit;
 using Descope.Management.Flows;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
@@ -20,6 +21,7 @@ namespace Descope.DependencyInjection
                 .AddSingleton<IDescopeAuthHttpClient, DescopeAuthHttpClient>()
                 .AddSingleton<IDescopeManagementHttpClient, DescopeManagementHttpClient>()
                 .AddTransient<IAccessKeysApiClient, AccessKeysApiClient>()
+                .AddTransient<IAuditApiClient, AuditApiClient>()
                 .AddTransient<IFlowsApiClient, FlowsApiClient>()
                 .AddTransient<IPermissionsApiClient, PermissionsApiClient>()
                 .AddTransient<IRolesApiClient, RolesApiClient>()
