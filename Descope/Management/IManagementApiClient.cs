@@ -1,4 +1,5 @@
 ﻿using Descope.Management.AccessKeys;
+using Descope.Management.Audit;
 using Descope.Management.Flows;
 using Descope.Management.Permissions;
 using Descope.Management.Roles;
@@ -10,6 +11,7 @@ namespace Descope.Management
     public interface IManagementApiClient
     {
         IAccessKeysApiClient AccessKeys { get; }
+        IAuditApiClient Audit { get; }
         IFlowsApiClient Flows { get; }
         IPermissionsApiClient Permissions { get; }
         IRolesApiClient Roles { get; }

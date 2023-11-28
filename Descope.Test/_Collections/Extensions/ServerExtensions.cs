@@ -27,6 +27,13 @@ namespace Descope.Test
             return server;
         }
 
+        public static WireMockServer ConfigureAudit(this WireMockServer server)
+        {
+            server.SearchAudit();
+
+            return server;
+        }
+
         public static WireMockServer ConfigureFlows(this WireMockServer server)
         {
             server

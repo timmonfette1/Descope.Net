@@ -18,6 +18,7 @@ namespace Descope.Test
             _server
                 .ConfigureDummy()
                 .ConfigureAccessKeys()
+                .ConfigureAudit()
                 .ConfigureFlows()
                 .ConifgurePermissions()
                 .ConifgureRoles()

@@ -13,6 +13,7 @@
             internal static string ActivateAccessKey => Url(ManagementEndpoints.ActivateAccessKey);
             internal static string DeactivateAccessKey => Url(ManagementEndpoints.DeactivateAccessKey);
             internal static string DeleteAccessKey => Url(ManagementEndpoints.DeleteAccessKey);
+            internal static string SearchAudit => Url(ManagementEndpoints.SearchAudit);
             internal static string LoadAllFlows => Url(ManagementEndpoints.LoadAllFlows);
             internal static string ExportFlow => Url(ManagementEndpoints.ExportFlow);
             internal static string ImportFlow => Url(ManagementEndpoints.ImportFlow);
@@ -51,6 +52,7 @@
             internal const string ActivateAccessKey = "mgmt/accesskey/activate";
             internal const string DeactivateAccessKey = "mgmt/accesskey/deactivate";
             internal const string DeleteAccessKey = "mgmt/accesskey/delete";
+            internal const string SearchAudit = "mgmt/audit/search";
             internal const string LoadAllFlows = "mgmt/flow/list";
             internal const string ExportFlow = "mgmt/flow/export";
             internal const string ImportFlow = "mgmt/flow/import";
