@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using Descope.Configuration;
 using Descope.Extensions;
+using Descope.Types.Converters;
 using RestSharp;
 using RestSharp.Serializers.Json;
 
@@ -22,6 +23,11 @@ namespace Descope.HttpClient
                 IncludeFields = true,
                 PropertyNameCaseInsensitive = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Converters =
+                {
+                    new SecondsSinceEpochJsonConverter(),
+                    new MillisecondsSinceEpochConverter(),
+                }
             }));
         }
 

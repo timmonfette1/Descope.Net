@@ -1,4 +1,6 @@
-﻿namespace Descope.Models
+﻿using Descope.Types;
+
+namespace Descope.Models
 {
     public class DescopeAccessKey
     {
@@ -7,8 +9,8 @@
         public IEnumerable<string> RoleNames { get; set; }
         public IEnumerable<DescopeAccessKeyTenant> KeyTenants { get; set; }
         public string Status { get; set; }
-        public long CreatedTime { get; set; }
-        public long ExpireTime { get; set; }
+        public SecondsSinceEpoch CreatedTime { get; set; }
+        public SecondsSinceEpoch ExpireTime { get; set; }
         public string CreatedBy { get; set; }
     }
 }
