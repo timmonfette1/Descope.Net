@@ -132,22 +132,22 @@ namespace Descope.Test.Management.AccessKeys
             Assert.Equal("TEST", accessKey.Id);
             Assert.Equal(expectedName, accessKey.Name);
             Assert.Single(accessKey.RoleNames);
-            Assert.Equal("Role1", accessKey.RoleNames[0]);
-            Assert.Equal(2, accessKey.KeyTenants.Length);
+            Assert.Equal("Role1", accessKey.RoleNames.ElementAt(0));
+            Assert.Equal(2, accessKey.KeyTenants.Count());
             Assert.Equal("Active", accessKey.Status);
             Assert.Equal(12345, accessKey.CreatedTime);
             Assert.Equal(99999, accessKey.ExpireTime);
             Assert.Equal("Mr. Tester", accessKey.CreatedBy);
 
-            var keyTenant1 = accessKey.KeyTenants[0];
-            var keyTenant2 = accessKey.KeyTenants[1];
+            var keyTenant1 = accessKey.KeyTenants.ElementAt(0);
+            var keyTenant2 = accessKey.KeyTenants.ElementAt(1);
 
             Assert.Equal("Tenant1", keyTenant1.TenantId);
             Assert.Single(keyTenant1.RoleNames);
-            Assert.Equal("TenantRole1", keyTenant1.RoleNames[0]);
+            Assert.Equal("TenantRole1", keyTenant1.RoleNames.ElementAt(0));
             Assert.Equal("Tenant2", keyTenant2.TenantId);
             Assert.Single(keyTenant2.RoleNames);
-            Assert.Equal("TenantRole2", keyTenant2.RoleNames[0]);
+            Assert.Equal("TenantRole2", keyTenant2.RoleNames.ElementAt(0));
         }
 
         private static void AccessKeyCantFindAssertations(DescopeException exception)

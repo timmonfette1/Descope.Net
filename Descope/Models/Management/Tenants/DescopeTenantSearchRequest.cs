@@ -2,9 +2,9 @@
 {
     public class DescopeTenantSearchRequest
     {
-        public string[] TenantIds { get; set; }
-        public string[] TenantNames { get; set; }
-        public string[] TenantSelfProvisioningDomains { get; set; }
+        public IEnumerable<string> TenantIds { get; set; }
+        public IEnumerable<string> TenantNames { get; set; }
+        public IEnumerable<string> TenantSelfProvisioningDomains { get; set; }
         public object CustomAttributes { get; set; }
     }
 }

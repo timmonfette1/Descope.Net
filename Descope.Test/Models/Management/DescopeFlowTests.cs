@@ -45,7 +45,7 @@ namespace Descope.Test.Models.Management
             Assert.Equal("TID", flow.Flow.TranslateConnectorId);
             Assert.Equal("ENG", flow.Flow.TranslateSourceLang);
             Assert.Single(flow.Flow.TranslateTargetLangs);
-            Assert.Equal("JP", flow.Flow.TranslateTargetLangs[0]);
+            Assert.Equal("JP", flow.Flow.TranslateTargetLangs.ElementAt(0));
             Assert.True(flow.Flow.Fingerprint);
             Assert.Empty(flow.Screens);
         }
@@ -82,9 +82,9 @@ namespace Descope.Test.Models.Management
                 Ids = ["FTEST", "FTEST2"]
             };
 
-            Assert.Equal(2, request.Ids.Length);
-            Assert.Equal("FTEST", request.Ids[0]);
-            Assert.Equal("FTEST2", request.Ids[1]);
+            Assert.Equal(2, request.Ids.Count());
+            Assert.Equal("FTEST", request.Ids.ElementAt(0));
+            Assert.Equal("FTEST2", request.Ids.ElementAt(1));
         }
 
         [Fact]

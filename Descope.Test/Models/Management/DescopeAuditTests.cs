@@ -55,25 +55,25 @@ namespace Descope.Test.Models.Management
             Assert.Equal(12345, request.From);
             Assert.Equal(99999, request.To);
             Assert.Single(request.UserIds);
-            Assert.Equal("UTEST", request.UserIds[0]);
+            Assert.Equal("UTEST", request.UserIds.ElementAt(0));
             Assert.Single(request.Actions);
-            Assert.Equal("Action", request.Actions[0]);
+            Assert.Equal("Action", request.Actions.ElementAt(0));
             Assert.Single(request.Devices);
-            Assert.Equal("Desktop", request.Devices[0]);
+            Assert.Equal("Desktop", request.Devices.ElementAt(0));
             Assert.Single(request.Methods);
-            Assert.Equal("Delete", request.Methods[0]);
+            Assert.Equal("Delete", request.Methods.ElementAt(0));
             Assert.Single(request.Geos);
-            Assert.Equal("USA", request.Geos[0]);
+            Assert.Equal("USA", request.Geos.ElementAt(0));
             Assert.Single(request.RemoteAddresses);
-            Assert.Equal("0.0.0.0", request.RemoteAddresses[0]);
+            Assert.Equal("0.0.0.0", request.RemoteAddresses.ElementAt(0));
             Assert.Single(request.ExternalIds);
-            Assert.Equal("ExTEST", request.ExternalIds[0]);
+            Assert.Equal("ExTEST", request.ExternalIds.ElementAt(0));
             Assert.Single(request.Tenants);
-            Assert.Equal("TEST", request.Tenants[0]);
+            Assert.Equal("TEST", request.Tenants.ElementAt(0));
             Assert.False(request.NoTenants);
             Assert.Equal("Text", request.Text);
             Assert.Single(request.ExcludedActions);
-            Assert.Equal("ExcludedAction", request.ExcludedActions[0]);
+            Assert.Equal("ExcludedAction", request.ExcludedActions.ElementAt(0));
         }
 
         [Fact]
@@ -126,9 +126,9 @@ namespace Descope.Test.Models.Management
             Assert.Equal("USA", response.Audits.ElementAt(0).Geo);
             Assert.Equal("0.0.0.0", response.Audits.ElementAt(0).RemoteAddress);
             Assert.Single(response.Audits.ElementAt(0).ExternalIds);
-            Assert.Equal("ExTEST", response.Audits.ElementAt(0).ExternalIds[0]);
+            Assert.Equal("ExTEST", response.Audits.ElementAt(0).ExternalIds.ElementAt(0));
             Assert.Single(response.Audits.ElementAt(0).Tenants);
-            Assert.Equal("TEST", response.Audits.ElementAt(0).Tenants[0]);
+            Assert.Equal("TEST", response.Audits.ElementAt(0).Tenants.ElementAt(0));
             Assert.Equal("Inner", dataInner);
             Assert.Equal("Info", response.Audits.ElementAt(0).Type);
         }

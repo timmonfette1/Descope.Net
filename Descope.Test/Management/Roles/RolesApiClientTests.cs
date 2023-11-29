@@ -21,7 +21,7 @@ namespace Descope.Test.Management.Roles
             Assert.Equal("Testing", role.Description);
             Assert.Equal(default, role.CreatedTime);
             Assert.Single(role.PermissionNames);
-            Assert.Equal("TestPerm", role.PermissionNames[0]);
+            Assert.Equal("TestPerm", role.PermissionNames.ElementAt(0));
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace Descope.Test.Management.Roles
             Assert.Equal("Testing", role.Description);
             Assert.Equal(default, role.CreatedTime);
             Assert.Single(role.PermissionNames);
-            Assert.Equal("TestPerm", role.PermissionNames[0]);
+            Assert.Equal("TestPerm", role.PermissionNames.ElementAt(0));
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace Descope.Test.Management.Roles
             Assert.Equal("Testing Updated", updatedRole.Description);
             Assert.Equal(default, updatedRole.CreatedTime);
             Assert.Single(updatedRole.PermissionNames);
-            Assert.Equal("TestPerm", updatedRole.PermissionNames[0]);
+            Assert.Equal("TestPerm", updatedRole.PermissionNames.ElementAt(0));
         }
 
         [Fact]

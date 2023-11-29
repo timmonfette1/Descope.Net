@@ -19,12 +19,12 @@ namespace Descope.Test.Models.Management
             };
 
             Assert.Single(search.TenantIds);
-            Assert.Equal("1", search.TenantIds[0]);
-            Assert.Equal(2, search.TenantNames.Length);
-            Assert.Equal("One", search.TenantNames[0]);
-            Assert.Equal("Two", search.TenantNames[1]);
+            Assert.Equal("1", search.TenantIds.ElementAt(0));
+            Assert.Equal(2, search.TenantNames.Count());
+            Assert.Equal("One", search.TenantNames.ElementAt(0));
+            Assert.Equal("Two", search.TenantNames.ElementAt(1));
             Assert.Single(search.TenantSelfProvisioningDomains);
-            Assert.Equal("My Domain", search.TenantSelfProvisioningDomains[0]);
+            Assert.Equal("My Domain", search.TenantSelfProvisioningDomains.ElementAt(0));
             Assert.NotNull(search.CustomAttributes);
         }
 
@@ -62,12 +62,12 @@ namespace Descope.Test.Models.Management
             Assert.Equal("1", list.Tenants.ElementAt(0).Id);
             Assert.Equal("One", list.Tenants.ElementAt(0).Name);
             Assert.Single(list.Tenants.ElementAt(0).SelfProvisioningDomains);
-            Assert.Equal("My One Domain", list.Tenants.ElementAt(0).SelfProvisioningDomains[0]);
+            Assert.Equal("My One Domain", list.Tenants.ElementAt(0).SelfProvisioningDomains.ElementAt(0));
             Assert.NotNull(list.Tenants.ElementAt(0).CustomAttributes);
             Assert.Equal("2", list.Tenants.ElementAt(1).Id);
             Assert.Equal("Two", list.Tenants.ElementAt(1).Name);
             Assert.Single(list.Tenants.ElementAt(1).SelfProvisioningDomains);
-            Assert.Equal("My Two Domain", list.Tenants.ElementAt(1).SelfProvisioningDomains[0]);
+            Assert.Equal("My Two Domain", list.Tenants.ElementAt(1).SelfProvisioningDomains.ElementAt(0));
             Assert.NotNull(list.Tenants.ElementAt(1).CustomAttributes);
         }
     }

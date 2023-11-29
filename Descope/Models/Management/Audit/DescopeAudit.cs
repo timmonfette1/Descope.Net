@@ -11,8 +11,8 @@
         public string Method { get; set; }
         public string Geo { get; set; }
         public string RemoteAddress { get; set; }
-        public string[] ExternalIds { get; set; }
-        public string[] Tenants { get; set; }
+        public IEnumerable<string> ExternalIds { get; set; }
+        public IEnumerable<string> Tenants { get; set; }
         public object Data { get; set; }
         public string Type { get; set; }
     }
