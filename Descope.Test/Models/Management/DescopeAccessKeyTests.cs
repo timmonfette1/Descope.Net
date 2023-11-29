@@ -53,22 +53,22 @@ namespace Descope.Test.Models.Management
             Assert.Equal("TEST", accessKeys.Keys.ElementAt(0).Id);
             Assert.Equal("Testing", accessKeys.Keys.ElementAt(0).Name);
             Assert.Single(accessKeys.Keys.ElementAt(0).RoleNames);
-            Assert.Equal("Role1", accessKeys.Keys.ElementAt(0).RoleNames[0]);
-            Assert.Equal(2, accessKeys.Keys.ElementAt(0).KeyTenants.Length);
+            Assert.Equal("Role1", accessKeys.Keys.ElementAt(0).RoleNames.ElementAt(0));
+            Assert.Equal(2, accessKeys.Keys.ElementAt(0).KeyTenants.Count());
             Assert.Equal("Active", accessKeys.Keys.ElementAt(0).Status);
             Assert.Equal(12345, accessKeys.Keys.ElementAt(0).CreatedTime);
             Assert.Equal(99999, accessKeys.Keys.ElementAt(0).ExpireTime);
             Assert.Equal("Mr. Tester", accessKeys.Keys.ElementAt(0).CreatedBy);
 
-            var keyTenant1 = accessKeys.Keys.ElementAt(0).KeyTenants[0];
-            var keyTenant2 = accessKeys.Keys.ElementAt(0).KeyTenants[1];
+            var keyTenant1 = accessKeys.Keys.ElementAt(0).KeyTenants.ElementAt(0);
+            var keyTenant2 = accessKeys.Keys.ElementAt(0).KeyTenants.ElementAt(1);
 
             Assert.Equal("Tenant1", keyTenant1.TenantId);
             Assert.Single(keyTenant1.RoleNames);
-            Assert.Equal("TenantRole1", keyTenant1.RoleNames[0]);
+            Assert.Equal("TenantRole1", keyTenant1.RoleNames.ElementAt(0));
             Assert.Equal("Tenant2", keyTenant2.TenantId);
             Assert.Single(keyTenant2.RoleNames);
-            Assert.Equal("TenantRole2", keyTenant2.RoleNames[0]);
+            Assert.Equal("TenantRole2", keyTenant2.RoleNames.ElementAt(0));
         }
 
         [Fact]
@@ -97,18 +97,18 @@ namespace Descope.Test.Models.Management
             Assert.Equal("Testing", accessKey.Name);
             Assert.Equal(12345, accessKey.ExpireTime);
             Assert.Single(accessKey.RoleNames);
-            Assert.Equal("Role1", accessKey.RoleNames[0]);
-            Assert.Equal(2, accessKey.KeyTenants.Length);
+            Assert.Equal("Role1", accessKey.RoleNames.ElementAt(0));
+            Assert.Equal(2, accessKey.KeyTenants.Count());
 
-            var keyTenant1 = accessKey.KeyTenants[0];
-            var keyTenant2 = accessKey.KeyTenants[1];
+            var keyTenant1 = accessKey.KeyTenants.ElementAt(0);
+            var keyTenant2 = accessKey.KeyTenants.ElementAt(1);
 
             Assert.Equal("Tenant1", keyTenant1.TenantId);
             Assert.Single(keyTenant1.RoleNames);
-            Assert.Equal("TenantRole1", keyTenant1.RoleNames[0]);
+            Assert.Equal("TenantRole1", keyTenant1.RoleNames.ElementAt(0));
             Assert.Equal("Tenant2", keyTenant2.TenantId);
             Assert.Single(keyTenant2.RoleNames);
-            Assert.Equal("TenantRole2", keyTenant2.RoleNames[0]);
+            Assert.Equal("TenantRole2", keyTenant2.RoleNames.ElementAt(0));
         }
 
         [Fact]
@@ -134,9 +134,9 @@ namespace Descope.Test.Models.Management
             };
 
             Assert.Equal("TEST", accessKeyTenant.TenantId);
-            Assert.Equal(2, accessKeyTenant.RoleNames.Length);
-            Assert.Equal("Role1", accessKeyTenant.RoleNames[0]);
-            Assert.Equal("Role2", accessKeyTenant.RoleNames[1]);
+            Assert.Equal(2, accessKeyTenant.RoleNames.Count());
+            Assert.Equal("Role1", accessKeyTenant.RoleNames.ElementAt(0));
+            Assert.Equal("Role2", accessKeyTenant.RoleNames.ElementAt(1));
         }
 
         [Fact]
@@ -147,9 +147,9 @@ namespace Descope.Test.Models.Management
                 TenantIds = ["1", "2"],
             };
 
-            Assert.Equal(2, search.TenantIds.Length);
-            Assert.Equal("1", search.TenantIds[0]);
-            Assert.Equal("2", search.TenantIds[1]);
+            Assert.Equal(2, search.TenantIds.Count());
+            Assert.Equal("1", search.TenantIds.ElementAt(0));
+            Assert.Equal("2", search.TenantIds.ElementAt(1));
         }
 
         [Fact]

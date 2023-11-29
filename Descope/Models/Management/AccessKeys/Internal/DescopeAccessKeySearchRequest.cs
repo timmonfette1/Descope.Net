@@ -2,6 +2,6 @@
 {
     internal class DescopeAccessKeySearchRequest
     {
-        public string[] TenantIds { get; set; }
+        public IEnumerable<string> TenantIds { get; set; }
     }
 }

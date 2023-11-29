@@ -36,11 +36,11 @@ namespace Descope.Test.Models.Management
             Assert.Equal("Name", role.Roles.ElementAt(0).Name);
             Assert.Equal("Description", role.Roles.ElementAt(0).Description);
             Assert.Single(role.Roles.ElementAt(0).PermissionNames);
-            Assert.Equal("Perm", role.Roles.ElementAt(0).PermissionNames[0]);
+            Assert.Equal("Perm", role.Roles.ElementAt(0).PermissionNames.ElementAt(0));
             Assert.Equal("Name 2", role.Roles.ElementAt(1).Name);
             Assert.Equal("Description 2", role.Roles.ElementAt(1).Description);
             Assert.Single(role.Roles.ElementAt(1).PermissionNames);
-            Assert.Equal("Perm2", role.Roles.ElementAt(1).PermissionNames[0]);
+            Assert.Equal("Perm2", role.Roles.ElementAt(1).PermissionNames.ElementAt(0));
         }
 
         [Fact]

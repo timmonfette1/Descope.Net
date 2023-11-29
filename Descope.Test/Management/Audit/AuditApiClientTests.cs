@@ -35,9 +35,9 @@ namespace Descope.Test.Management.Audit
             Assert.Equal("USA", audits.ElementAt(0).Geo);
             Assert.Equal("0.0.0.0", audits.ElementAt(0).RemoteAddress);
             Assert.Single(audits.ElementAt(0).ExternalIds);
-            Assert.Equal("ExTEST", audits.ElementAt(0).ExternalIds[0]);
+            Assert.Equal("ExTEST", audits.ElementAt(0).ExternalIds.ElementAt(0));
             Assert.Single(audits.ElementAt(0).Tenants);
-            Assert.Equal("TEST", audits.ElementAt(0).Tenants[0]);
+            Assert.Equal("TEST", audits.ElementAt(0).Tenants.ElementAt(0));
             Assert.Equal("Inner", dataInner);
             Assert.Equal("Info", audits.ElementAt(0).Type);
         }

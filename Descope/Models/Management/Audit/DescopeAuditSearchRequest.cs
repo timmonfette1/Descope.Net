@@ -4,16 +4,16 @@
     {
         public long From { get; set; }
         public long To { get; set; }
-        public string[] UserIds { get; set; }
-        public string[] Actions { get; set; }
-        public string[] Devices { get; set; }
-        public string[] Methods { get; set; }
-        public string[] Geos { get; set; }
-        public string[] RemoteAddresses { get; set; }
-        public string[] ExternalIds { get; set; }
-        public string[] Tenants { get; set; }
+        public IEnumerable<string> UserIds { get; set; }
+        public IEnumerable<string> Actions { get; set; }
+        public IEnumerable<string> Devices { get; set; }
+        public IEnumerable<string> Methods { get; set; }
+        public IEnumerable<string> Geos { get; set; }
+        public IEnumerable<string> RemoteAddresses { get; set; }
+        public IEnumerable<string> ExternalIds { get; set; }
+        public IEnumerable<string> Tenants { get; set; }
         public bool NoTenants { get; set; }
         public string Text { get; set; }
-        public string[] ExcludedActions { get; set; }
+        public IEnumerable<string> ExcludedActions { get; set; }
     }
 }

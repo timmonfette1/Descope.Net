@@ -4,6 +4,6 @@
     {
         public string FlowId { get; set; }
         public DescopeFlowMetadata Flow { get; set; }
-        public DescopeScreen[] Screens { get; set; }
+        public IEnumerable<DescopeScreen> Screens { get; set; }
     }
 }

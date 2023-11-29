@@ -2,6 +2,6 @@
 {
     internal class DescopeFlowSearchRequest
     {
-        public string[] Ids { get; set; }
+        public IEnumerable<string> Ids { get; set; }
     }
 }

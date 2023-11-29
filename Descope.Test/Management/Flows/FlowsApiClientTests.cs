@@ -47,7 +47,7 @@ namespace Descope.Test.Management.Flows
             Assert.NotNull(flow.Flow);
             Assert.Single(flow.Screens);
             FlowMetadataAssertations(flow.Flow);
-            ScreenAssertations(flow.Screens[0]);
+            ScreenAssertations(flow.Screens.ElementAt(0));
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace Descope.Test.Management.Flows
             Assert.NotNull(flow.Flow);
             Assert.Single(flow.Screens);
             FlowMetadataAssertations(flow.Flow, 2);
-            ScreenAssertations(flow.Screens[0]);
+            ScreenAssertations(flow.Screens.ElementAt(0));
         }
 
         #region Private Methods
@@ -98,7 +98,7 @@ namespace Descope.Test.Management.Flows
             Assert.Equal("TID", flow.TranslateConnectorId);
             Assert.Equal("ENG", flow.TranslateSourceLang);
             Assert.Single(flow.TranslateTargetLangs);
-            Assert.Equal("JP", flow.TranslateTargetLangs[0]);
+            Assert.Equal("JP", flow.TranslateTargetLangs.ElementAt(0));
             Assert.True(flow.Fingerprint);
         }
 
@@ -110,25 +110,25 @@ namespace Descope.Test.Management.Flows
             Assert.Equal(1, screen.Version);
             Assert.Equal("FTEST", screen.FlowId);
             Assert.Single(screen.Inputs);
-            Assert.Equal("TEST", screen.Inputs[0].Type);
-            Assert.Equal("Tester", screen.Inputs[0].Name);
-            Assert.False(screen.Inputs[0].Required);
-            Assert.True(screen.Inputs[0].Visible);
-            Assert.Equal("Testing", screen.Inputs[0].DisplayName);
-            Assert.Equal("Test", screen.Inputs[0].DisplayType);
-            Assert.Single(screen.Inputs[0].DependsOn);
-            Assert.Equal("Dependency", screen.Inputs[0].DependsOn[0]);
-            Assert.Null(screen.Inputs[0].NameValueMap);
-            Assert.True(screen.Inputs[0].ContextAware);
-            Assert.Single(screen.Inputs[0].Options);
-            Assert.Equal("Label", screen.Inputs[0].Options[0].Label);
-            Assert.Equal("Value", screen.Inputs[0].Options[0].Value);
+            Assert.Equal("TEST", screen.Inputs.ElementAt(0).Type);
+            Assert.Equal("Tester", screen.Inputs.ElementAt(0).Name);
+            Assert.False(screen.Inputs.ElementAt(0).Required);
+            Assert.True(screen.Inputs.ElementAt(0).Visible);
+            Assert.Equal("Testing", screen.Inputs.ElementAt(0).DisplayName);
+            Assert.Equal("Test", screen.Inputs.ElementAt(0).DisplayType);
+            Assert.Single(screen.Inputs.ElementAt(0).DependsOn);
+            Assert.Equal("Dependency", screen.Inputs.ElementAt(0).DependsOn.ElementAt(0));
+            Assert.Null(screen.Inputs.ElementAt(0).NameValueMap);
+            Assert.True(screen.Inputs.ElementAt(0).ContextAware);
+            Assert.Single(screen.Inputs.ElementAt(0).Options);
+            Assert.Equal("Label", screen.Inputs.ElementAt(0).Options.ElementAt(0).Label);
+            Assert.Equal("Value", screen.Inputs.ElementAt(0).Options.ElementAt(0).Value);
             Assert.Single(screen.Interactions);
-            Assert.Equal("TEST", screen.Interactions[0].Id);
-            Assert.Equal("Tester", screen.Interactions[0].Type);
-            Assert.Equal("Testing", screen.Interactions[0].Label);
-            Assert.Equal("Smile", screen.Interactions[0].Icon);
-            Assert.Equal("Tester Jr.", screen.Interactions[0].SubType);
+            Assert.Equal("TEST", screen.Interactions.ElementAt(0).Id);
+            Assert.Equal("Tester", screen.Interactions.ElementAt(0).Type);
+            Assert.Equal("Testing", screen.Interactions.ElementAt(0).Label);
+            Assert.Equal("Smile", screen.Interactions.ElementAt(0).Icon);
+            Assert.Equal("Tester Jr.", screen.Interactions.ElementAt(0).SubType);
             Assert.Equal("Inner", htmlTemplateInner);
             Assert.Equal("1.0.0", screen.ComponentsVersion);
         }

@@ -13,7 +13,7 @@
         public bool Translate { get; set; }
         public string TranslateConnectorId { get; set; }
         public string TranslateSourceLang { get; set; }
-        public string[] TranslateTargetLangs { get; set; }
+        public IEnumerable<string> TranslateTargetLangs { get; set; }
         public bool Fingerprint { get; set; }
     }
 }
