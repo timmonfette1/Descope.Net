@@ -4,7 +4,7 @@
     {
         private readonly long _seconds = seconds;
 
-        public MillisecondsSinceEpoch(DateTime date) : this(new DateTimeOffset(date.ToUniversalTime()))
+        public MillisecondsSinceEpoch(DateTime date) : this(new DateTimeOffset(date))
         {
 
         }
