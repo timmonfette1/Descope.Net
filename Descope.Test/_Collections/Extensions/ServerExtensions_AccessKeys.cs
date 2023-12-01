@@ -15,12 +15,12 @@ namespace Descope.Test
             new
             {
                 TenantId = "Tenant1",
-                RoleNames = new string[1] { "TenantRole1" }
+                RoleNames = new string[] { "TenantRole1" }
             },
             new
             {
                 TenantId = "Tenant2",
-                RoleNames = new string[1] { "TenantRole2" }
+                RoleNames = new string[] { "TenantRole2" }
             }
         ];
 

@@ -1,4 +1,6 @@
-﻿namespace Descope.Models
+﻿using Descope.Types;
+
+namespace Descope.Models
 {
     public class DescopeAudit
     {
@@ -6,7 +8,7 @@
         public string ProjectId { get; set; }
         public string UserId { get; set; }
         public string Action { get; set; }
-        public long Occurred { get; set; }
+        public MillisecondsSinceEpoch Occurred { get; set; }
         public string Device { get; set; }
         public string Method { get; set; }
         public string Geo { get; set; }
