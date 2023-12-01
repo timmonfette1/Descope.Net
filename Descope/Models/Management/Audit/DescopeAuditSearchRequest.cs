@@ -1,9 +1,11 @@
-﻿namespace Descope.Models
+﻿using Descope.Types;
+
+namespace Descope.Models
 {
     public class DescopeAuditSearchRequest
     {
-        public long From { get; set; }
-        public long To { get; set; }
+        public MillisecondsSinceEpoch From { get; set; }
+        public MillisecondsSinceEpoch To { get; set; }
         public IEnumerable<string> UserIds { get; set; }
         public IEnumerable<string> Actions { get; set; }
         public IEnumerable<string> Devices { get; set; }

@@ -1,5 +1,4 @@
-﻿using Descope.Models;
-using WireMock.Matchers;
+﻿using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -8,24 +7,29 @@ namespace Descope.Test
 {
     public static class ServerExtensions_AccessKeys
     {
-        private static readonly DescopeAccessKey _accessKeyMock = new()
+        private static readonly string[] roleNames = ["Role1"];
+        private static readonly string[] tenantIds = ["TEST"];
+        private static readonly string[] badTenantIds = ["TESTBAD"];
+        private static readonly object[] keyTenants =
+        [
+            new
+            {
+                TenantId = "Tenant1",
+                RoleNames = new string[] { "TenantRole1" }
+            },
+            new
+            {
+                TenantId = "Tenant2",
+                RoleNames = new string[] { "TenantRole2" }
+            }
+        ];
+
+        private static readonly object _accessKeyObjectMock = new
         {
             Id = "TEST",
             Name = "Testing",
-            RoleNames = ["Role1"],
-            KeyTenants =
-            [
-                new()
-                {
-                    TenantId = "Tenant1",
-                    RoleNames = ["TenantRole1"]
-                },
-                new()
-                {
-                    TenantId = "Tenant2",
-                    RoleNames = ["TenantRole2"]
-                }
-            ],
+            RoleNames = roleNames,
+            KeyTenants = keyTenants,
             Status = "Active",
             CreatedTime = 12345,
             ExpireTime = 99999,
@@ -62,9 +66,9 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeAccessKeyResponse
+                        .WithBodyAsJson(new
                         {
-                            Key = _accessKeyMock
+                            Key = _accessKeyObjectMock
                         })
                 );
 
@@ -115,16 +119,16 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/search")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeySearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            TenantIds = ["TEST"]
+                            TenantIds = tenantIds
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeAccessKeyListResponse { Keys = new DescopeAccessKey[1] { _accessKeyMock } })
+                        .WithBodyAsJson(new { Keys = new object[1] { _accessKeyObjectMock } })
                 );
 
             server
@@ -133,16 +137,16 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/search")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeySearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            TenantIds = ["TESTBAD"]
+                            TenantIds = badTenantIds
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeAccessKeyListResponse { Keys = Array.Empty<DescopeAccessKey>() })
+                        .WithBodyAsJson(new { Keys = Array.Empty<object>() })
                 );
 
             return server;
@@ -161,10 +165,10 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeAccessKeyCreateResponse
+                        .WithBodyAsJson(new
                         {
                             ClearText = "Secret",
-                            Key = _accessKeyMock
+                            Key = _accessKeyObjectMock
                         })
                 );
 
@@ -179,7 +183,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST",
                             Name = "Updated Testing"
@@ -189,18 +193,18 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeAccessKeyResponse
+                        .WithBodyAsJson(new
                         {
-                            Key = new()
+                            Key = new
                             {
-                                Id = _accessKeyMock.Id,
+                                Id = "TEST",
                                 Name = "Updated Testing",
-                                RoleNames = _accessKeyMock.RoleNames,
-                                KeyTenants = _accessKeyMock.KeyTenants,
-                                Status = _accessKeyMock.Status,
-                                CreatedTime = _accessKeyMock.CreatedTime,
-                                ExpireTime = _accessKeyMock.ExpireTime,
-                                CreatedBy = _accessKeyMock.CreatedBy
+                                RoleNames = roleNames,
+                                KeyTenants = keyTenants,
+                                Status = "Active",
+                                CreatedTime = 12345,
+                                ExpireTime = 99999,
+                                CreatedBy = "Mr. Tester"
                             }
                         })
                 );
@@ -211,7 +215,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeAccessKeyUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TESTBAD",
                             Name = "Updated Testing"
@@ -235,7 +239,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/activate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeIdModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST"
                         }, true))
@@ -253,7 +257,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/activate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeIdModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TESTBAD"
                         }, true))
@@ -276,7 +280,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/deactivate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeIdModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST"
                         }, true))
@@ -294,7 +298,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/deactivate")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeIdModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TESTBAD"
                         }, true))
@@ -317,7 +321,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/accesskey/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeIdModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST"
                         }, true))

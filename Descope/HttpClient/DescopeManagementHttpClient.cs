@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Descope.Configuration;
+﻿using Descope.Configuration;
 using Descope.Extensions;
 using RestSharp;
 using RestSharp.Serializers.Json;
@@ -17,12 +16,7 @@ namespace Descope.HttpClient
                 Authenticator = config.ManagementApiAuthenticator
             };
 
-            _client = new RestClient(options, configureSerialization: x => x.UseSystemTextJson(new JsonSerializerOptions
-            {
-                IncludeFields = true,
-                PropertyNameCaseInsensitive = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            }));
+            _client = new RestClient(options, configureSerialization: x => x.UseSystemTextJson(HttpConfigurations.JsonSerializerOptions));
         }
 
         public async Task<TResponse> GetAsync<TResponse>(string resource, object parameters = null) where TResponse : class, new()
