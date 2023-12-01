@@ -1,5 +1,4 @@
-﻿using Descope.Models;
-using WireMock.Matchers;
+﻿using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -8,6 +7,15 @@ namespace Descope.Test
 {
     public static class ServerExtensions_Permissions
     {
+        private static readonly object[] _permissions =
+        [
+            new
+            {
+                Name = "TEST",
+                Description = "Testing"
+            }
+        ];
+
         public static WireMockServer GetAllPermissions(this WireMockServer server)
         {
             server
@@ -21,16 +29,9 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopePermissionListResponse
+                        .WithBodyAsJson(new
                         {
-                            Permissions =
-                            [
-                                new()
-                                {
-                                    Name = "TEST",
-                                    Description = "Testing"
-                                }
-                            ]
+                            Permissions = _permissions
                         })
                 );
 
@@ -45,10 +46,11 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermission
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
-                            Description = "Testing"
+                            Description = "Testing",
+                            SystemDefault = false,
                         }, true))
                 )
                 .RespondWith(
@@ -64,10 +66,11 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermission
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "EXIST",
-                            Description = "Existing"
+                            Description = "Existing",
+                            SystemDefault = false,
                         }, true))
                 )
                 .RespondWith(
@@ -94,7 +97,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermissionUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             NewName = "TESTU",
@@ -114,7 +117,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermissionUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             NewName = "EXIST",
@@ -140,7 +143,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopePermissionUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TESTBAD",
                             NewName = "TEST",
@@ -171,7 +174,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/permission/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeNameModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST"
                         }, true))

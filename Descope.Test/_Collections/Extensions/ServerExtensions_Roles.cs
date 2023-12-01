@@ -1,5 +1,4 @@
-﻿using Descope.Models;
-using WireMock.Matchers;
+﻿using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -8,6 +7,18 @@ namespace Descope.Test
 {
     public static class ServerExtensions_Roles
     {
+        private static readonly string[] _permissions = ["TestPerm"];
+        private static readonly string[] _fakePermissions = ["FakePerm"];
+        private static readonly object[] _roles =
+        [
+            new
+            {
+                Name = "TEST",
+                Description = "Testing",
+                PermissionNames = _permissions
+            }
+        ];
+
         public static WireMockServer GetAllRoles(this WireMockServer server)
         {
             server
@@ -21,20 +32,9 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeRoleListResponse
+                        .WithBodyAsJson(new
                         {
-                            Roles =
-                            [
-                                new()
-                                {
-                                    Name = "TEST",
-                                    Description = "Testing",
-                                    PermissionNames = new string[1]
-                                    {
-                                        "TestPerm"
-                                    }
-                                }
-                            ]
+                            Roles = _roles
                         })
                 );
 
@@ -49,14 +49,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRole
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             Description = "Testing",
-                            PermissionNames =
-                            [
-                                "TestPerm"
-                            ]
+                            PermissionNames = _permissions,
+                            CreatedTime = (long)0,
                         }, true))
                 )
                 .RespondWith(
@@ -72,14 +70,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRole
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "EXIST",
                             Description = "Existing",
-                            PermissionNames =
-                            [
-                                "TestPerm"
-                            ]
+                            PermissionNames = _permissions,
+                            CreatedTime = (long)0,
                         }, true))
                 )
                 .RespondWith(
@@ -101,14 +97,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRole
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             Description = "Testing",
-                            PermissionNames =
-                            [
-                                "FakePerm"
-                            ]
+                            PermissionNames = _fakePermissions,
+                            CreatedTime = (long)0,
                         }, true))
                 )
                 .RespondWith(
@@ -135,15 +129,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRoleUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             NewName = "UTEST",
                             Description = "Testing Updated",
-                            PermissionNames =
-                            [
-                                "TestPerm"
-                            ]
+                            PermissionNames = _permissions
                         }, true))
                 )
                 .RespondWith(
@@ -159,15 +150,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRoleUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TESTBAD",
                             NewName = "UTEST",
                             Description = "Testing Updated",
-                            PermissionNames =
-                            [
-                                "TestPerm"
-                            ]
+                            PermissionNames = _permissions
                         }, true))
                 )
                 .RespondWith(
@@ -189,15 +177,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRoleUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             NewName = "EXIST",
                             Description = "Testing Updated",
-                            PermissionNames =
-                            [
-                                "TestPerm"
-                            ]
+                            PermissionNames = _permissions
                         }, true))
                 )
                 .RespondWith(
@@ -219,15 +204,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeRoleUpdateRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST",
                             NewName = "UTEST",
                             Description = "Testing Updated",
-                            PermissionNames =
-                            [
-                                "FakePerm"
-                            ]
+                            PermissionNames = _fakePermissions
                         }, true))
                 )
                 .RespondWith(
@@ -254,7 +236,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/role/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeNameModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Name = "TEST"
                         }, true))

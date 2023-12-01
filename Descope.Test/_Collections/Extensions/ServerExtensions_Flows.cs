@@ -1,5 +1,4 @@
-﻿using Descope.Models;
-using WireMock.Matchers;
+﻿using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -8,7 +7,52 @@ namespace Descope.Test
 {
     public static class ServerExtensions_Flows
     {
-        private static readonly DescopeFlowMetadata _flowMetadataMock = new()
+        private static readonly string[] _empty = [];
+        private static readonly string[] _flowIds = ["TEST"];
+        private static readonly string[] _badFlowIds = ["TESTBAD"];
+
+        private static readonly string[] _translateTargetLangs = ["JP"];
+        private static readonly string[] _dependsOn = ["Dependency"];
+
+        private static readonly object[] _options =
+        [
+            new
+            {
+                Label = "Label",
+                Value = "Value"
+            }
+        ];
+
+        private static readonly object[] _inputs =
+        [
+            new
+            {
+                Type = "TEST",
+                Name = "Tester",
+                Required = false,
+                Visible = true,
+                DisplayName = "Testing",
+                DisplayType = "Test",
+                DependsOn = _dependsOn,
+                NameValueMap = (object)null,
+                ContextAware = true,
+                Options = _options
+            }
+        ];
+
+        private static readonly object[] _interactions =
+        [
+            new
+            {
+                Id = "TEST",
+                Type = "Tester",
+                Label = "Testing",
+                Icon = "Smile",
+                SubType = "Tester Jr."
+            }
+        ];
+
+        private static readonly object _flowMetadataMock = new
         {
             Id = "TEST",
             Version = 1,
@@ -24,51 +68,19 @@ namespace Descope.Test
             Translate = true,
             TranslateConnectorId = "TID",
             TranslateSourceLang = "ENG",
-            TranslateTargetLangs = ["JP"],
+            TranslateTargetLangs = _translateTargetLangs,
             Fingerprint = true,
         };
 
-        private static readonly DescopeScreen[] _screensMock =
+        private static readonly object[] _screensMock =
         [
-            new()
+            new
             {
                 Id = "TEST",
                 Version = 1,
                 FlowId = "FTEST",
-                Inputs =
-               [
-                   new()
-                   {
-                       Type = "TEST",
-                       Name = "Tester",
-                       Required = false,
-                       Visible = true,
-                       DisplayName = "Testing",
-                       DisplayType = "Test",
-                       DependsOn = ["Dependency"],
-                       NameValueMap = null,
-                       ContextAware = true,
-                       Options =
-                        [
-                            new()
-                            {
-                                Label = "Label",
-                                Value = "Value"
-                            }
-                        ]
-                   }
-               ],
-                Interactions =
-               [
-                   new()
-                   {
-                       Id = "TEST",
-                       Type = "Tester",
-                       Label = "Testing",
-                       Icon = "Smile",
-                       SubType = "Tester Jr."
-                   }
-               ],
+                Inputs = _inputs,
+                Interactions = _interactions,
                 HtmlTemplate = new
                 {
                     Inner = "Inner"
@@ -77,11 +89,7 @@ namespace Descope.Test
             }
         ];
 
-        private static readonly DescopeFlow _flowMock = new()
-        {
-            Flow = _flowMetadataMock,
-            Screens = _screensMock
-        };
+        private static readonly object[] _flows = [_flowMetadataMock];
 
         public static WireMockServer ListFlows(this WireMockServer server)
         {
@@ -91,21 +99,18 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/flow/list")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeFlowSearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            Ids = ["TEST"]
+                            Ids = _flowIds
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeFlowListResponse
+                        .WithBodyAsJson(new
                         {
-                            Flows =
-                            [
-                                _flowMetadataMock
-                            ],
+                            Flows = _flows,
                             Total = 1
                         })
                 );
@@ -116,21 +121,18 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/flow/list")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeFlowSearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            Ids = []
+                            Ids = _empty
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeFlowListResponse
+                        .WithBodyAsJson(new
                         {
-                            Flows =
-                            [
-                                _flowMetadataMock
-                            ],
+                            Flows = _flows,
                             Total = 1
                         })
                 );
@@ -141,9 +143,9 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/flow/list")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeFlowSearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            Ids = ["TESTBAD"]
+                            Ids = _badFlowIds
                         }, true))
                 )
                 .RespondWith(
@@ -168,7 +170,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/flow/export")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeFlowExportRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             FlowId = "TEST"
                         }, true))
@@ -177,7 +179,11 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(_flowMock)
+                        .WithBodyAsJson(new
+                        {
+                            Flow = _flowMetadataMock,
+                            Screens = _screensMock
+                        })
                 );
 
             server
@@ -186,7 +192,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/flow/export")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeFlowExportRequest
+                        .WithBody(new JsonMatcher(new
                         {
                             FlowId = "TESTBAD"
                         }, true))
@@ -220,23 +226,26 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeFlow
+                        .WithBodyAsJson(new
                         {
-                            Flow = new DescopeFlowMetadata
+                            Flow = new
                             {
-                                Id = _flowMetadataMock.Id,
-                                Version = _flowMetadataMock.Version + 1,
-                                Name = _flowMetadataMock.Name,
-                                Description = _flowMetadataMock.Description,
-                                Dsl = _flowMetadataMock.Dsl,
-                                ModifiedTime = _flowMetadataMock.ModifiedTime,
-                                ETag = _flowMetadataMock.ETag,
-                                Disabled = _flowMetadataMock.Disabled,
-                                Translate = _flowMetadataMock.Translate,
-                                TranslateConnectorId = _flowMetadataMock.TranslateConnectorId,
-                                TranslateSourceLang = _flowMetadataMock.TranslateSourceLang,
-                                TranslateTargetLangs = _flowMetadataMock.TranslateTargetLangs,
-                                Fingerprint = _flowMetadataMock.Fingerprint,
+                                Id = "TEST",
+                                Version = 2,
+                                Name = "Test",
+                                Description = "Testing",
+                                Dsl = new
+                                {
+                                    Inner = "Inner"
+                                },
+                                ModifiedTime = 12345,
+                                ETag = "Tagged",
+                                Disabled = false,
+                                Translate = true,
+                                TranslateConnectorId = "TID",
+                                TranslateSourceLang = "ENG",
+                                TranslateTargetLangs = _translateTargetLangs,
+                                Fingerprint = true,
                             },
                             Screens = _screensMock
                         })
