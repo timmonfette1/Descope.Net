@@ -1,5 +1,4 @@
-﻿using Descope.Models;
-using WireMock.Matchers;
+﻿using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -8,19 +7,21 @@ namespace Descope.Test
 {
     public static class ServerExtensions_Tenants
     {
-        private static readonly DescopeTenant _tenantMock = new()
+        private static readonly object[] _empty = [];
+        private static readonly string[] _tenantIds = ["TEST"];
+        private static readonly string[] _badTenantIds = ["TESTBAD"];
+        private static readonly string[] _tenantNames = ["Test Client"];
+
+        private static readonly object _tenantMock = new
         {
             Id = "TEST",
             Name = "Test Client",
         };
 
-        private static readonly DescopeTenantListResponse _tenantListMock = new()
-        {
-            Tenants =
-            [
-                _tenantMock
-            ]
-        };
+        private static readonly object[] _tenantsMock =
+        [
+            _tenantMock
+        ];
 
         public static WireMockServer GetAllTenants(this WireMockServer server)
         {
@@ -35,7 +36,10 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(_tenantListMock)
+                        .WithBodyAsJson(new
+                        {
+                            Tenants = _tenantsMock
+                        })
                 );
 
             return server;
@@ -90,16 +94,22 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/search")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenantSearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            TenantIds = ["TEST"]
+                            TenantIds = _tenantIds,
+                            TenantNames = (object)null,
+                            TenantSelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(_tenantListMock)
+                        .WithBodyAsJson(new
+                        {
+                            Tenants = _tenantsMock
+                        })
                 );
 
             server
@@ -108,16 +118,22 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/search")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenantSearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            TenantNames = ["Test Client"]
+                            TenantIds = (object)null,
+                            TenantNames = _tenantNames,
+                            TenantSelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(_tenantListMock)
+                        .WithBodyAsJson(new
+                        {
+                            Tenants = _tenantsMock
+                        })
                 );
 
             server
@@ -126,16 +142,22 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/search")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenantSearchRequest
+                        .WithBody(new JsonMatcher(new
                         {
-                            TenantIds = ["TESTBAD"]
+                            TenantIds = _badTenantIds,
+                            TenantNames = (object)null,
+                            TenantSelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeTenantListResponse { Tenants = Array.Empty<DescopeTenant>() })
+                        .WithBodyAsJson(new
+                        {
+                            Tenants = _empty
+                        })
                 );
 
             return server;
@@ -149,10 +171,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenant
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST",
-                            Name = "Test Client"
+                            Name = "Test Client",
+                            SelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
@@ -168,10 +192,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/create")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenant
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "EXIST",
-                            Name = "Existing Client"
+                            Name = "Existing Client",
+                            SelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
@@ -198,10 +224,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenant
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST",
-                            Name = "Updated Client"
+                            Name = "Updated Client",
+                            SelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
@@ -217,10 +245,12 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/update")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeTenant
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TESTBAD",
-                            Name = "Updated Client"
+                            Name = "Updated Client",
+                            SelfProvisioningDomains = (object)null,
+                            CustomAttributes = (object)null,
                         }, true))
                 )
                 .RespondWith(
@@ -247,7 +277,7 @@ namespace Descope.Test
                         .Create()
                         .WithPath("/v1/mgmt/tenant/delete")
                         .UsingPost()
-                        .WithBody(new JsonMatcher(new DescopeIdModel
+                        .WithBody(new JsonMatcher(new
                         {
                             Id = "TEST"
                         }, true))

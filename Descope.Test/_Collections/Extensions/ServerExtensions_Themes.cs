@@ -1,5 +1,4 @@
-﻿using Descope.Models;
-using WireMock.RequestBuilders;
+﻿using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
@@ -7,26 +6,6 @@ namespace Descope.Test
 {
     public static class ServerExtensions_Themes
     {
-        private static readonly DescopeTheme _themeMock = new()
-        {
-            Id = "TEST",
-            Version = 1,
-            CssTemplate = new
-            {
-                Dark = new
-                {
-                    Font = "Fun Font",
-                    Color = "Black"
-                },
-                Light = new
-                {
-                    Font = "Less Fun Font",
-                    Color = "White"
-                }
-            },
-            ComponentsVersion = "1.0.0"
-        };
-
         public static WireMockServer ExportTheme(this WireMockServer server)
         {
             server
@@ -40,9 +19,27 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeThemeRequestResponse
+                        .WithBodyAsJson(new
                         {
-                            Theme = _themeMock
+                            Theme = new
+                            {
+                                Id = "TEST",
+                                Version = 1,
+                                CssTemplate = new
+                                {
+                                    Dark = new
+                                    {
+                                        Font = "Fun Font",
+                                        Color = "Black"
+                                    },
+                                    Light = new
+                                    {
+                                        Font = "Less Fun Font",
+                                        Color = "White"
+                                    }
+                                },
+                                ComponentsVersion = "1.0.0"
+                            }
                         })
                 );
 
@@ -62,14 +59,26 @@ namespace Descope.Test
                     Response
                         .Create()
                         .WithStatusCode(200)
-                        .WithBodyAsJson(new DescopeThemeRequestResponse
+                        .WithBodyAsJson(new
                         {
-                            Theme = new DescopeTheme
+                            Theme = new
                             {
-                                Id = _themeMock.Id,
-                                Version = _themeMock.Version + 1,
-                                CssTemplate = _themeMock.CssTemplate,
-                                ComponentsVersion = _themeMock.ComponentsVersion
+                                Id = "TEST",
+                                Version = 2,
+                                CssTemplate = new
+                                {
+                                    Dark = new
+                                    {
+                                        Font = "Fun Font",
+                                        Color = "Black"
+                                    },
+                                    Light = new
+                                    {
+                                        Font = "Less Fun Font",
+                                        Color = "White"
+                                    }
+                                },
+                                ComponentsVersion = "1.0.0"
                             }
                         })
                 );
