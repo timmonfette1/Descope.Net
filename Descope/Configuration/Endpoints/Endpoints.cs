@@ -33,6 +33,32 @@
             internal static string DeleteTenant => Url(ManagementEndpoints.DeleteTenant);
             internal static string ExportTheme => Url(ManagementEndpoints.ExportTheme);
             internal static string ImportTheme => Url(ManagementEndpoints.ImportTheme);
+            internal static string LoadUser => Url(ManagementEndpoints.LoadUser);
+            internal static string LoadUserToken => Url(ManagementEndpoints.LoadUserToken);
+            internal static string SearchUsers => Url(ManagementEndpoints.SearchUsers);
+            internal static string CreateUser => Url(ManagementEndpoints.CreateUser);
+            internal static string BatchCreateUsers => Url(ManagementEndpoints.BatchCreateUsers);
+            internal static string UpdateUser => Url(ManagementEndpoints.UpdateUser);
+            internal static string UpdateUserStatus => Url(ManagementEndpoints.UpdateUserStatus);
+            internal static string UpdateUserEmail => Url(ManagementEndpoints.UpdateUserEmail);
+            internal static string UpdateUserLoginId => Url(ManagementEndpoints.UpdateUserLoginId);
+            internal static string UpdateUserPhone => Url(ManagementEndpoints.UpdateUserPhone);
+            internal static string UpdateUserDisplayName => Url(ManagementEndpoints.UpdateUserDisplayName);
+            internal static string UpdateUserPicture => Url(ManagementEndpoints.UpdateUserPicture);
+            internal static string UpdateUserCustomAttributes => Url(ManagementEndpoints.UpdateUserCustomAttributes);
+            internal static string UpdateUserTenantsAdd => Url(ManagementEndpoints.UpdateUserTenantsAdd);
+            internal static string UpdateUserTenantsRemove => Url(ManagementEndpoints.UpdateUserTenantsRemove);
+            internal static string UpdateUserRolesAdd => Url(ManagementEndpoints.UpdateUserRolesAdd);
+            internal static string UpdateUserRolesRemove => Url(ManagementEndpoints.UpdateUserRolesRemove);
+            internal static string UserPasswordSet => Url(ManagementEndpoints.UserPasswordSet);
+            internal static string UserPasswordExpire => Url(ManagementEndpoints.UserPasswordExpire);
+            internal static string LogoutUser => Url(ManagementEndpoints.LogoutUser);
+            internal static string SigninUserEmbeddedLink => Url(ManagementEndpoints.SigninUserEmbeddedLink);
+            internal static string DeleteUser => Url(ManagementEndpoints.DeleteUser);
+            internal static string GenerateTestUserOtp => Url(ManagementEndpoints.GenerateTestUserOtp);
+            internal static string GenerateTestUserMagicLink => Url(ManagementEndpoints.GenerateTestUserMagicLink);
+            internal static string GenerateTestUserEnchangedLink => Url(ManagementEndpoints.GenerateTestUserEnchangedLink);
+            internal static string DeleteTestUsers => Url(ManagementEndpoints.DeleteTestUsers);
         }
 
         #region Private Methods
@@ -72,6 +98,32 @@
             internal const string DeleteTenant = "mgmt/tenant/delete";
             internal const string ExportTheme = "mgmt/theme/export";
             internal const string ImportTheme = "mgmt/theme/import";
+            internal const string LoadUser = "mgmt/user";
+            internal const string LoadUserToken = "mgmt/user/provider/token";
+            internal const string SearchUsers = "mgmt/user/search";
+            internal const string CreateUser = "mgmt/user/create";
+            internal const string BatchCreateUsers = "mgmt/user/create/batch";
+            internal const string UpdateUser = "mgmt/user/update";
+            internal const string UpdateUserStatus = "mgmt/user/update/status";
+            internal const string UpdateUserEmail = "mgmt/user/update/email";
+            internal const string UpdateUserLoginId = "mgmt/user/update/loginid";
+            internal const string UpdateUserPhone = "mgmt/user/update/phone";
+            internal const string UpdateUserDisplayName = "mgmt/user/update/name";
+            internal const string UpdateUserPicture = "mgmt/user/update/picture";
+            internal const string UpdateUserCustomAttributes = "mgmt/user/update/customAttribute";
+            internal const string UpdateUserTenantsAdd = "mgmt/user/update/tenant/add";
+            internal const string UpdateUserTenantsRemove = "mgmt/user/update/tenant/remove";
+            internal const string UpdateUserRolesAdd = "mgmt/user/update/role/add";
+            internal const string UpdateUserRolesRemove = "mgmt/user/update/role/remove";
+            internal const string UserPasswordSet = "mgmt/user/password/set";
+            internal const string UserPasswordExpire = "mgmt/user/password/expire";
+            internal const string LogoutUser = "mgmt/user/logout";
+            internal const string SigninUserEmbeddedLink = "mgmt/user/signin/embeddedlink";
+            internal const string DeleteUser = "mgmt/user/delete";
+            internal const string GenerateTestUserOtp = "mgmt/tests/generate/otp";
+            internal const string GenerateTestUserMagicLink = "mgmt/tests/generate/magiclink";
+            internal const string GenerateTestUserEnchangedLink = "mgmt/tests/generate/enchantedlink";
+            internal const string DeleteTestUsers = "mgmt/user/test/delate/all";
         }
 
         #endregion Management Endpoint Config

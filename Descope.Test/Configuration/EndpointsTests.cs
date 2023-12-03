@@ -34,6 +34,32 @@ namespace Descope.Test.Configuration
             Assert.Equal("v1/mgmt/tenant/delete", Endpoints.Management.DeleteTenant);
             Assert.Equal("v1/mgmt/theme/export", Endpoints.Management.ExportTheme);
             Assert.Equal("v1/mgmt/theme/import", Endpoints.Management.ImportTheme);
+            Assert.Equal("v1/mgmt/user", Endpoints.Management.LoadUser);
+            Assert.Equal("v1/mgmt/user/provider/token", Endpoints.Management.LoadUserToken);
+            Assert.Equal("v1/mgmt/user/search", Endpoints.Management.SearchUsers);
+            Assert.Equal("v1/mgmt/user/create", Endpoints.Management.CreateUser);
+            Assert.Equal("v1/mgmt/user/create/batch", Endpoints.Management.BatchCreateUsers);
+            Assert.Equal("v1/mgmt/user/update", Endpoints.Management.UpdateUser);
+            Assert.Equal("v1/mgmt/user/update/status", Endpoints.Management.UpdateUserStatus);
+            Assert.Equal("v1/mgmt/user/update/email", Endpoints.Management.UpdateUserEmail);
+            Assert.Equal("v1/mgmt/user/update/loginid", Endpoints.Management.UpdateUserLoginId);
+            Assert.Equal("v1/mgmt/user/update/phone", Endpoints.Management.UpdateUserPhone);
+            Assert.Equal("v1/mgmt/user/update/name", Endpoints.Management.UpdateUserDisplayName);
+            Assert.Equal("v1/mgmt/user/update/picture", Endpoints.Management.UpdateUserPicture);
+            Assert.Equal("v1/mgmt/user/update/customAttribute", Endpoints.Management.UpdateUserCustomAttributes);
+            Assert.Equal("v1/mgmt/user/update/tenant/add", Endpoints.Management.UpdateUserTenantsAdd);
+            Assert.Equal("v1/mgmt/user/update/tenant/remove", Endpoints.Management.UpdateUserTenantsRemove);
+            Assert.Equal("v1/mgmt/user/update/role/add", Endpoints.Management.UpdateUserRolesAdd);
+            Assert.Equal("v1/mgmt/user/update/role/remove", Endpoints.Management.UpdateUserRolesRemove);
+            Assert.Equal("v1/mgmt/user/password/set", Endpoints.Management.UserPasswordSet);
+            Assert.Equal("v1/mgmt/user/password/expire", Endpoints.Management.UserPasswordExpire);
+            Assert.Equal("v1/mgmt/user/logout", Endpoints.Management.LogoutUser);
+            Assert.Equal("v1/mgmt/user/signin/embeddedlink", Endpoints.Management.SigninUserEmbeddedLink);
+            Assert.Equal("v1/mgmt/user/delete", Endpoints.Management.DeleteUser);
+            Assert.Equal("v1/mgmt/tests/generate/otp", Endpoints.Management.GenerateTestUserOtp);
+            Assert.Equal("v1/mgmt/tests/generate/magiclink", Endpoints.Management.GenerateTestUserMagicLink);
+            Assert.Equal("v1/mgmt/tests/generate/enchantedlink", Endpoints.Management.GenerateTestUserEnchangedLink);
+            Assert.Equal("v1/mgmt/user/test/delate/all", Endpoints.Management.DeleteTestUsers);
         }
     }
 }
