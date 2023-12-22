@@ -87,5 +87,13 @@ namespace Descope.Test
 
             return server;
         }
+
+        public static WireMockServer ConfigureUsers(this WireMockServer server)
+        {
+            server
+                .GetUser();
+
+            return server;
+        }
     }
 }

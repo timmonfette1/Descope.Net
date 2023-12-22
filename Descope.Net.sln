@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Descope", "Descope\Descope.csproj", "{B59D2870-B7B7-4E73-AC54-034D3575695C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Descope.Test", "Descope.Test\Descope.Test.csproj", "{97DF2816-9149-4C6A-B333-C5E0864271B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Descope.Test", "Descope.Test\Descope.Test.csproj", "{97DF2816-9149-4C6A-B333-C5E0864271B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
