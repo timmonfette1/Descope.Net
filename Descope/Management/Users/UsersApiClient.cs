@@ -243,16 +243,19 @@ namespace Descope.Management.Users
             await _httpClient.PostAsync(Endpoints.Management.ExpireUserPassword, request);
         }
 
-        public async Task<DescopeUser> LogoutByUserId(string userId)
+        public async Task LogoutByUserId(string userId)
         {
-            var response = await _httpClient.GetAsync<DescopeUserResponse>(Endpoints.Management.LogoutUser, new { userId });
-            return response.User;
+            await _httpClient.PostAsync<object>(Endpoints.Management.LogoutUser, new { userId });
         }
 
-        public async Task<DescopeUser> LogoutByLoginId(string loginId)
+        public async Task LogoutByLoginId(string loginId)
         {
-            var response = await _httpClient.GetAsync<DescopeUserResponse>(Endpoints.Management.LogoutUser, new { loginId });
-            return response.User;
+            var request = new DescopeUserLoginIdRequest
+            {
+                LoginId = loginId
+            };
+
+            await _httpClient.PostAsync(Endpoints.Management.LogoutUser, request);
         }
 
         public async Task Delete(string loginId)

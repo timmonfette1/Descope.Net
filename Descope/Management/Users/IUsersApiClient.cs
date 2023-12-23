@@ -24,8 +24,8 @@ namespace Descope.Management.Users
         Task<DescopeUser> RemoveRoles(string loginId, string tenantId, IEnumerable<string> roleNames);
         Task SetPassword(string loginId, string password);
         Task ExpirePassword(string loginId);
-        Task<DescopeUser> LogoutByUserId(string userId);
-        Task<DescopeUser> LogoutByLoginId(string loginId);
+        Task LogoutByUserId(string userId);
+        Task LogoutByLoginId(string loginId);
         Task Delete(string loginId);
     }
 }

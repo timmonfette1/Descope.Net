@@ -26,6 +26,141 @@ namespace Descope.Test.Management.Users
             UserAssertations(user);
         }
 
+        [Fact]
+        public async Task ShouldGetProviderToken()
+        {
+            var token = await _fixture.UsersApiClient.GetProviderToken("LID", "Google");
+
+            Assert.Equal("Google", token.Provider);
+            Assert.Equal("PUID", token.ProviderUserId);
+            Assert.Equal("token", token.AccessToken);
+            Assert.Equal(99999, token.Expiration);
+            Assert.Single(token.Scopes);
+            Assert.Equal("Scope1", token.Scopes.ElementAt(0));
+        }
+
+        [Fact]
+        public async Task ShouldSearchUser()
+        {
+            var search = new DescopeUserSearchRequest
+            {
+                LoginId = "LID",
+                TenantIds = [],
+                RoleNames = []
+            };
+
+            var users = await _fixture.UsersApiClient.Search(search);
+
+            Assert.Single(users);
+
+            var user = users.ElementAt(0);
+
+            UserAssertations(user);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserStatus()
+        {
+            var update = await _fixture.UsersApiClient.UpdateStatus("LID", "active");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserEmail()
+        {
+            var update = await _fixture.UsersApiClient.UpdateEmail("LID", "testuser@test.com", true);
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserLoginId()
+        {
+            var update = await _fixture.UsersApiClient.UpdateLoginId("OLID", "LID");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserPhone()
+        {
+            var update = await _fixture.UsersApiClient.UpdatePhone("LID", "+1-555-555-5555", false);
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserName()
+        {
+            var update = await _fixture.UsersApiClient.UpdateName("LID", "Test", "Mid", "User", "Test User");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserPicture()
+        {
+            var update = await _fixture.UsersApiClient.UpdatePicture("LID", "picture");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUserCustomAttribute()
+        {
+            var update = await _fixture.UsersApiClient.UpdateCustomAttribute("LID", "Inner", "Inner");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldSetUserPassword()
+        {
+            var password = await Record.ExceptionAsync(async () => await _fixture.UsersApiClient.SetPassword("LID", "secret-password"));
+
+            Assert.Null(password);
+        }
+
+        [Fact]
+        public async Task ShouldExpireUserPassword()
+        {
+            var password = await Record.ExceptionAsync(async () => await _fixture.UsersApiClient.ExpirePassword("LID"));
+
+            Assert.Null(password);
+        }
+
+        [Fact]
+        public async Task ShouldLogoutUserByUserId()
+        {
+            var logout = await Record.ExceptionAsync(async () => await _fixture.UsersApiClient.LogoutByUserId("UID"));
+
+            Assert.Null(logout);
+        }
+
+        [Fact]
+        public async Task ShouldLogoutUserByLoginId()
+        {
+            var logout = await Record.ExceptionAsync(async () => await _fixture.UsersApiClient.LogoutByLoginId("LID"));
+
+            Assert.Null(logout);
+        }
+
+        [Fact]
+        public async Task ShouldDeleteUser()
+        {
+            var delete = await Record.ExceptionAsync(async () => await _fixture.UsersApiClient.Delete("LID"));
+
+            Assert.Null(delete);
+        }
+
         #region Private Methods
 
         private static void UserAssertations(DescopeUser user)

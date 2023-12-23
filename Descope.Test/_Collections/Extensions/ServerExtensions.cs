@@ -91,7 +91,20 @@ namespace Descope.Test
         public static WireMockServer ConfigureUsers(this WireMockServer server)
         {
             server
-                .GetUser();
+                .GetUser()
+                .GetProviderToken()
+                .SearchUser()
+                .UpdateUserStatus()
+                .UpdateUserEmail()
+                .UpdateUserLoginId()
+                .UpdateUserPhone()
+                .UpdateUserName()
+                .UpdateUserPicture()
+                .UpdateUserCustomAttribute()
+                .SetUserPassword()
+                .ExpireUserPassword()
+                .LogoutUser()
+                .DeleteUser();
 
             return server;
         }
