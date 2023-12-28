@@ -151,6 +151,73 @@ namespace Descope.Test
             return server;
         }
 
+        public static WireMockServer CreateUser(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/create")
+                        .UsingPost()
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            User = _userObjectMock
+                        })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer BatchCreateUsers(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/create/batch")
+                        .UsingPost()
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            CreatedUsers = _usersObjectMock,
+                            FailedUsers = Array.Empty<object>()
+                        })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer UpdateUser(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/update")
+                        .UsingPost()
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            User = _userObjectMock
+                        })
+                );
+
+            return server;
+        }
+
         public static WireMockServer UpdateUserStatus(this WireMockServer server)
         {
             server
@@ -331,6 +398,116 @@ namespace Descope.Test
                         {
                             LoginId = "LID",
                             Picture = "picture",
+                        }, true))
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            User = _userObjectMock
+                        })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer AddUserTenant(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/update/tenant/add")
+                        .UsingPost()
+                        .WithBody(new JsonMatcher(new
+                        {
+                            LoginId = "LID",
+                            TenantId = "TID",
+                        }, true))
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            User = _userObjectMock
+                        })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer RemoveUserTenant(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/update/tenant/remove")
+                        .UsingPost()
+                        .WithBody(new JsonMatcher(new
+                        {
+                            LoginId = "LID",
+                            TenantId = "TID",
+                        }, true))
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            User = _userObjectMock
+                        })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer AddUserRole(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/update/role/add")
+                        .UsingPost()
+                        .WithBody(new JsonMatcher(new
+                        {
+                            LoginId = "LID",
+                            TenantId = "TID",
+                            RoleNames = _tenantRoleNames
+                        }, true))
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new
+                        {
+                            User = _userObjectMock
+                        })
+                );
+
+            return server;
+        }
+
+        public static WireMockServer RemoveUserRole(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/v1/mgmt/user/update/role/remove")
+                        .UsingPost()
+                        .WithBody(new JsonMatcher(new
+                        {
+                            LoginId = "LID",
+                            TenantId = "TID",
+                            RoleNames = _tenantRoleNames
                         }, true))
                 )
                 .RespondWith(

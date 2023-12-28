@@ -8,6 +8,8 @@ namespace Descope.Test.Management.Users
     {
         private readonly UsersApiClientFixture _fixture = fixture;
 
+        private static readonly string[] _roleNames = ["TRName"];
+
         [Fact]
         public async Task ShouldGetByUserId()
         {
@@ -55,6 +57,78 @@ namespace Descope.Test.Management.Users
 
             var user = users.ElementAt(0);
 
+            Assert.NotNull(user);
+            UserAssertations(user);
+        }
+
+        [Fact]
+        public async Task ShouldCreateUser()
+        {
+            var create = new DescopeUserCreateRequest
+            {
+                LoginId = "LID",
+                Name = "Test User",
+                GivenName = "Test",
+                MiddleName = "Mid",
+                FamilyName = "User",
+                Email = "testuser@test.com",
+                VerifiedEmail = true,
+                Test = false
+            };
+
+            var user = await _fixture.UsersApiClient.Create(create);
+            UserAssertations(user);
+        }
+
+        [Fact]
+        public async Task ShouldBatchCreateUsers()
+        {
+            var batch = new DescopeUserBatchCreateRequest
+            {
+                Users = new DescopeUsersCreateRequest[] {
+                    new() {
+                        LoginId = "LID",
+                        Name = "Test User",
+                        GivenName = "Test",
+                        MiddleName = "Mid",
+                        FamilyName = "User",
+                        Email = "testuser@test.com",
+                        VerifiedEmail = true,
+                        Test = false
+                    }
+                },
+                Invite = false,
+                SendMail = false,
+                SendSms = false
+            };
+
+            var users = await _fixture.UsersApiClient.BatchCreate(batch);
+
+            Assert.Single(users.CreatedUsers);
+            Assert.Empty(users.FailedUsers);
+
+            var user = users.CreatedUsers.ElementAt(0);
+
+            Assert.NotNull(user);
+            UserAssertations(user);
+        }
+
+        [Fact]
+        public async Task ShouldUpdateUser()
+        {
+            var update = new DescopeUser
+            {
+                LoginIds = new string[] { "LID" },
+                Name = "Test User",
+                GivenName = "Test",
+                MiddleName = "Mid",
+                FamilyName = "User",
+                Email = "testuser@test.com",
+                VerifiedEmail = true,
+                Test = false
+            };
+
+            var user = await _fixture.UsersApiClient.Update("LID", update);
             UserAssertations(user);
         }
 
@@ -116,6 +190,42 @@ namespace Descope.Test.Management.Users
         public async Task ShouldUpdateUserCustomAttribute()
         {
             var update = await _fixture.UsersApiClient.UpdateCustomAttribute("LID", "Inner", "Inner");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldAddUserTenant()
+        {
+            var update = await _fixture.UsersApiClient.AddTenant("LID", "TID");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldRemoveUserTenant()
+        {
+            var update = await _fixture.UsersApiClient.RemoveTenant("LID", "TID");
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldAddUserRole()
+        {
+            var update = await _fixture.UsersApiClient.AddRoles("LID", "TID", _roleNames);
+
+            Assert.NotNull(update);
+            UserAssertations(update);
+        }
+
+        [Fact]
+        public async Task ShouldRemoveUserRole()
+        {
+            var update = await _fixture.UsersApiClient.RemoveRoles("LID", "TID", _roleNames);
 
             Assert.NotNull(update);
             UserAssertations(update);
