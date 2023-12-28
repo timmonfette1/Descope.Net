@@ -87,5 +87,33 @@ namespace Descope.Test
 
             return server;
         }
+
+        public static WireMockServer ConfigureUsers(this WireMockServer server)
+        {
+            server
+                .GetUser()
+                .GetProviderToken()
+                .SearchUser()
+                .CreateUser()
+                .BatchCreateUsers()
+                .UpdateUser()
+                .UpdateUserStatus()
+                .UpdateUserEmail()
+                .UpdateUserLoginId()
+                .UpdateUserPhone()
+                .UpdateUserName()
+                .UpdateUserPicture()
+                .UpdateUserCustomAttribute()
+                .AddUserTenant()
+                .RemoveUserTenant()
+                .AddUserRole()
+                .RemoveUserRole()
+                .SetUserPassword()
+                .ExpireUserPassword()
+                .LogoutUser()
+                .DeleteUser();
+
+            return server;
+        }
     }
 }

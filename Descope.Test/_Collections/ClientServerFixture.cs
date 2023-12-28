@@ -23,7 +23,8 @@ namespace Descope.Test
                 .ConifgurePermissions()
                 .ConifgureRoles()
                 .ConifgureTenants()
-                .ConfigureThemes();
+                .ConfigureThemes()
+                .ConfigureUsers();
 
             _serverUrl = _server.Url;
             var config = new IDescopeConfigurationMock(_serverUrl);
