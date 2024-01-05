@@ -51,6 +51,14 @@ namespace Descope.Test.HttpClient.Management
         }
 
         [Fact]
+        public async Task ShouldDelete()
+        {
+            var exception = await Record.ExceptionAsync(async () => await _fixture.DescopeManagementClient.DeleteAsync("/dummy/delete"));
+
+            Assert.Null(exception);
+        }
+
+        [Fact]
         public async Task ShouldPostAsync()
         {
             var response = await _fixture.DescopeManagementClient.PostAsync<object, Dummy>("/dummy/post", new { Name = "TEST" });

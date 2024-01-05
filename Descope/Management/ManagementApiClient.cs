@@ -17,6 +17,7 @@ namespace Descope.Management
         IRolesApiClient rolesApiClient,
         ITenantsApiClient tenants,
         IThemesApiClient themes,
+        ITestUsersApiClient testUsers,
         IUsersApiClient users) : IManagementApiClient
     {
         private readonly IAccessKeysApiClient _accessKeysApiClient = accessKeysApiClient;
@@ -26,6 +27,7 @@ namespace Descope.Management
         private readonly IRolesApiClient _rolesApiClient = rolesApiClient;
         private readonly ITenantsApiClient _tenantsApiClient = tenants;
         private readonly IThemesApiClient _themesApiClient = themes;
+        private readonly ITestUsersApiClient _testUsersApiClient = testUsers;
         private readonly IUsersApiClient _usersApiClient = users;
 
         public IAccessKeysApiClient AccessKeys => _accessKeysApiClient;
@@ -35,6 +37,7 @@ namespace Descope.Management
         public IRolesApiClient Roles => _rolesApiClient;
         public ITenantsApiClient Tenants => _tenantsApiClient;
         public IThemesApiClient Themes => _themesApiClient;
+        public ITestUsersApiClient TestUsers => _testUsersApiClient;
         public IUsersApiClient Users => _usersApiClient;
     }
 }

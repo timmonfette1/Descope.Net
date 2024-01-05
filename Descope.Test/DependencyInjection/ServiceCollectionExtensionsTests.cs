@@ -53,6 +53,9 @@ namespace Descope.Test.DependencyInjection
             var theme = Record.Exception(serviceProvider.GetRequiredService<IThemesApiClient>);
             Assert.Null(theme);
 
+            var testUser = Record.Exception(serviceProvider.GetRequiredService<ITestUsersApiClient>);
+            Assert.Null(testUser);
+
             var user = Record.Exception(serviceProvider.GetRequiredService<IUsersApiClient>);
             Assert.Null(user);
 

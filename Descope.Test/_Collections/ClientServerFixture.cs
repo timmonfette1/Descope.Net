@@ -24,6 +24,7 @@ namespace Descope.Test
                 .ConifgureRoles()
                 .ConifgureTenants()
                 .ConfigureThemes()
+                .ConfigureTestUsers()
                 .ConfigureUsers();
 
             _serverUrl = _server.Url;

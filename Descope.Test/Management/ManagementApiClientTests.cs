@@ -23,8 +23,9 @@ namespace Descope.Test.Management
             var roleMock = Substitute.For<IRolesApiClient>();
             var tenantMock = Substitute.For<ITenantsApiClient>();
             var themeMock = Substitute.For<IThemesApiClient>();
+            var testUserMock = Substitute.For<ITestUsersApiClient>();
             var userMock = Substitute.For<IUsersApiClient>();
-            var client = new ManagementApiClient(accessKeyMock, auditMock, flowMock, permissionMock, roleMock, tenantMock, themeMock, userMock);
+            var client = new ManagementApiClient(accessKeyMock, auditMock, flowMock, permissionMock, roleMock, tenantMock, themeMock, testUserMock, userMock);
 
             Assert.IsAssignableFrom<IAccessKeysApiClient>(client.AccessKeys);
             Assert.IsAssignableFrom<IAuditApiClient>(client.Audit);
@@ -33,6 +34,7 @@ namespace Descope.Test.Management
             Assert.IsAssignableFrom<IRolesApiClient>(client.Roles);
             Assert.IsAssignableFrom<ITenantsApiClient>(client.Tenants);
             Assert.IsAssignableFrom<IThemesApiClient>(client.Themes);
+            Assert.IsAssignableFrom<ITestUsersApiClient>(client.TestUsers);
             Assert.IsAssignableFrom<IUsersApiClient>(client.Users);
         }
     }

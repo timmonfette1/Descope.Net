@@ -613,7 +613,6 @@ namespace Descope.Test
 
         public static WireMockServer DeleteUser(this WireMockServer server)
         {
-
             server
                 .Given(
                     Request

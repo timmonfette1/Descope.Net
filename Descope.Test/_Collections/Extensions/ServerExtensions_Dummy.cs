@@ -84,6 +84,25 @@ namespace Descope.Test
             return server;
         }
 
+        public static WireMockServer ConfigureDummyDeletes(this WireMockServer server)
+        {
+            server
+                .Given(
+                    Request
+                        .Create()
+                        .WithPath("/dummy/delete")
+                        .UsingDelete()
+                )
+                .RespondWith(
+                    Response
+                        .Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new { })
+                );
+
+            return server;
+        }
+
         public static WireMockServer ConfigureDummyPosts(this WireMockServer server)
         {
             server

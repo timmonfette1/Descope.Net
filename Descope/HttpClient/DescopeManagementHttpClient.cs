@@ -43,6 +43,13 @@ namespace Descope.HttpClient
             return _client.Serializers.DeserializeResponse<TResponse>(response);
         }
 
+        public async Task DeleteAsync(string resource)
+        {
+            var request = new RestRequest(resource, Method.Delete);
+            var response = await _client.DeleteAsync(request);
+            _client.Serializers.ParseResponse(response);
+        }
+
         public async Task PostAsync<TBody>(string resource, TBody body) where TBody : class, new()
         {
             var request = CreatePostRequest(resource, body);

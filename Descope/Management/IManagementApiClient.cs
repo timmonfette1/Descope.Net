@@ -18,6 +18,7 @@ namespace Descope.Management
         IRolesApiClient Roles { get; }
         ITenantsApiClient Tenants { get; }
         IThemesApiClient Themes { get; }
+        ITestUsersApiClient TestUsers { get; }
         IUsersApiClient Users { get; }
     }
 }
