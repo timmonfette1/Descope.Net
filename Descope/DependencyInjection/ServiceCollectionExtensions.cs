@@ -28,6 +28,7 @@ namespace Descope.DependencyInjection
                 .AddTransient<IRolesApiClient, RolesApiClient>()
                 .AddTransient<ITenantsApiClient, TenantsApiClient>()
                 .AddTransient<IThemesApiClient, ThemesApiClient>()
+                .AddTransient<ITestUsersApiClient, TestUsersApiClient>()
                 .AddTransient<IUsersApiClient, UsersApiClient>()
                 .AddTransient<IManagementApiClient, ManagementApiClient>();
 

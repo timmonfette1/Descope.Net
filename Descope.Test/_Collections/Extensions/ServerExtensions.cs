@@ -8,6 +8,7 @@ namespace Descope.Test
         {
             server
                 .ConfigureDummyGets()
+                .ConfigureDummyDeletes()
                 .ConfigureDummyPosts();
 
             return server;
@@ -84,6 +85,15 @@ namespace Descope.Test
             server
                 .ExportTheme()
                 .ImportTheme();
+
+            return server;
+        }
+
+        public static WireMockServer ConfigureTestUsers(this WireMockServer server)
+        {
+            server
+                .GenerateTestUserLogins()
+                .DeleteAllTestUsers();
 
             return server;
         }
