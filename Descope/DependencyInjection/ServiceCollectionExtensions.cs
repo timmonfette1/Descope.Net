@@ -1,4 +1,5 @@
-﻿using Descope.Auth.AccessKey;
+﻿using Descope.Auth;
+using Descope.Auth.AccessKey;
 using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Management;

@@ -1,4 +1,5 @@
-﻿using Descope.Management;
+﻿using Descope.Auth;
+using Descope.Management;
 using NSubstitute;
 
 namespace Descope.Test
