@@ -1,6 +1,6 @@
 ﻿using Descope.Auth.AccessKey;
 
-namespace Descope
+namespace Descope.Auth
 {
     public interface IAuthApiClient
     {

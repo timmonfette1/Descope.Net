@@ -1,4 +1,5 @@
-﻿using Descope.Management;
+﻿using Descope.Auth;
+using Descope.Management;
 
 namespace Descope
 {
