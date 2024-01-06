@@ -5,7 +5,13 @@ namespace Descope.Test.Configuration
     public class EndpointsTests
     {
         [Fact]
-        public void ShouldGetEndpoints()
+        public void ShouldGetAuthEndpoints()
+        {
+            Assert.Equal("v1/auth/accesskey/exchange", Endpoints.Auth.ExchangeAccessKey);
+        }
+
+        [Fact]
+        public void ShouldGetManagementEndpoints()
         {
             Assert.Equal("v1/mgmt/accesskey", Endpoints.Management.LoadAccessKey);
             Assert.Equal("v1/mgmt/accesskey/search", Endpoints.Management.SearchAccessKeys);

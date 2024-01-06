@@ -4,7 +4,7 @@ namespace Descope.Test.Management.Users
 {
     public class UsersApiClientFixture(ClientServerFixture fixture)
     {
-        private readonly UsersApiClient _usersApiClient = new(fixture.HttpClient);
+        private readonly UsersApiClient _usersApiClient = new(fixture.ManagementHttpClient);
 
         internal UsersApiClient UsersApiClient => _usersApiClient;
     }

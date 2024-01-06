@@ -4,7 +4,7 @@ namespace Descope.Test.Management.Themes
 {
     public class ThemesApiClientFixture(ClientServerFixture fixture)
     {
-        private readonly ThemesApiClient _themesApiClient = new(fixture.HttpClient);
+        private readonly ThemesApiClient _themesApiClient = new(fixture.ManagementHttpClient);
 
         internal ThemesApiClient ThemesApiClient => _themesApiClient;
     }

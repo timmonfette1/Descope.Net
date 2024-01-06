@@ -23,6 +23,9 @@ namespace Descope.Test.Mocks
             _descopeConfigurationMock
                 .ManagementApiAuthenticator
                 .Returns(new OAuth2AuthorizationRequestHeaderAuthenticator("mockProjectId:mockManagementKey"));
+            _descopeConfigurationMock
+                .ConfigureCustomAuthenticator(Arg.Any<string>())
+                .Returns(new OAuth2AuthorizationRequestHeaderAuthenticator("mockProjectId:custom"));
         }
 
         internal IDescopeConfiguration DescopeConfiguration => _descopeConfigurationMock;

@@ -16,7 +16,7 @@ namespace Descope.Test.Management
         [Fact]
         public void ShouldGetSubClients()
         {
-            var accessKeyMock = Substitute.For<IAccessKeysApiClient>();
+            var accessKeysMock = Substitute.For<IAccessKeysApiClient>();
             var auditMock = Substitute.For<IAuditApiClient>();
             var flowMock = Substitute.For<IFlowsApiClient>();
             var permissionMock = Substitute.For<IPermissionsApiClient>();
@@ -25,7 +25,7 @@ namespace Descope.Test.Management
             var themeMock = Substitute.For<IThemesApiClient>();
             var testUserMock = Substitute.For<ITestUsersApiClient>();
             var userMock = Substitute.For<IUsersApiClient>();
-            var client = new ManagementApiClient(accessKeyMock, auditMock, flowMock, permissionMock, roleMock, tenantMock, themeMock, testUserMock, userMock);
+            var client = new ManagementApiClient(accessKeysMock, auditMock, flowMock, permissionMock, roleMock, tenantMock, themeMock, testUserMock, userMock);
 
             Assert.IsAssignableFrom<IAccessKeysApiClient>(client.AccessKeys);
             Assert.IsAssignableFrom<IAuditApiClient>(client.Audit);

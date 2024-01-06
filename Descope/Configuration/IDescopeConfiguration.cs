@@ -7,5 +7,7 @@ namespace Descope.Configuration
         string BaseUrl { get; }
         OAuth2AuthorizationRequestHeaderAuthenticator AuthApiAuthenticator { get; }
         OAuth2AuthorizationRequestHeaderAuthenticator ManagementApiAuthenticator { get; }
+
+        OAuth2AuthorizationRequestHeaderAuthenticator ConfigureCustomAuthenticator(string custom);
     }
 }
