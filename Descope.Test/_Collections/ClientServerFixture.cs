@@ -7,7 +7,8 @@ namespace Descope.Test
     public class ClientServerFixture : IDisposable
     {
         private readonly WireMockServer _server;
-        private readonly IDescopeManagementHttpClient _httpClient;
+        private readonly IDescopeAuthHttpClient _authHttpClient;
+        private readonly IDescopeManagementHttpClient _managementHttpClient;
 
         private readonly string _serverUrl;
 
@@ -17,6 +18,7 @@ namespace Descope.Test
 
             _server
                 .ConfigureDummy()
+                .ConfigureAccessKey()
                 .ConfigureAccessKeys()
                 .ConfigureAudit()
                 .ConfigureFlows()
@@ -29,10 +31,12 @@ namespace Descope.Test
 
             _serverUrl = _server.Url;
             var config = new IDescopeConfigurationMock(_serverUrl);
-            _httpClient = new DescopeManagementHttpClient(config.DescopeConfiguration);
+            _authHttpClient = new DescopeAuthHttpClient(config.DescopeConfiguration);
+            _managementHttpClient = new DescopeManagementHttpClient(config.DescopeConfiguration);
         }
 
-        internal IDescopeManagementHttpClient HttpClient => _httpClient;
+        internal IDescopeAuthHttpClient AuthHttpClient => _authHttpClient;
+        internal IDescopeManagementHttpClient ManagementHttpClient => _managementHttpClient;
 
         internal string ServerUrl => _serverUrl;
 
@@ -40,7 +44,8 @@ namespace Descope.Test
         {
             _server?.Stop();
             _server?.Dispose();
-            _httpClient?.Dispose();
+            _authHttpClient?.Dispose();
+            _managementHttpClient?.Dispose();
             GC.SuppressFinalize(this);
         }
     }

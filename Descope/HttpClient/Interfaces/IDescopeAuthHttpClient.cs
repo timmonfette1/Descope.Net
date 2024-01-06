@@ -1,10 +1,7 @@
-﻿using RestSharp;
-
-namespace Descope.HttpClient
+﻿namespace Descope.HttpClient
 {
     internal interface IDescopeAuthHttpClient : IDisposable
     {
-        RestClient Client { get; }
-
+        Task<TResponse> PostWithCustomTokenAsync<TBody, TResponse>(string resource, string customTokenValue, TBody body) where TBody : class, new() where TResponse : class, new();
     }
 }

@@ -34,5 +34,13 @@ namespace Descope.Test.Configuration
 
             Assert.IsType<OAuth2AuthorizationRequestHeaderAuthenticator>(authenticator);
         }
+
+        [Fact]
+        public void ShouldGetCustomAuthenticator()
+        {
+            var authenticator = _fixture.Config.ConfigureCustomAuthenticator("custom");
+
+            Assert.IsType<OAuth2AuthorizationRequestHeaderAuthenticator>(authenticator);
+        }
     }
 }

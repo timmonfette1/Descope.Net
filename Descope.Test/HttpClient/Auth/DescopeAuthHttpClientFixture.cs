@@ -7,9 +7,9 @@ namespace Descope.Test.HttpClient.Auth
     {
         private readonly DescopeAuthHttpClient _client;
 
-        public DescopeAuthHttpClientFixture()
+        public DescopeAuthHttpClientFixture(ClientServerFixture fixture)
         {
-            var config = new IDescopeConfigurationMock();
+            var config = new IDescopeConfigurationMock(fixture.ServerUrl);
             _client = new DescopeAuthHttpClient(config.DescopeConfiguration);
         }
 

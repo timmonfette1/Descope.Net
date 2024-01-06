@@ -1,18 +1,22 @@
-﻿using RestSharp;
-
-namespace Descope.Test.HttpClient.Auth
+﻿namespace Descope.Test.HttpClient.Auth
 {
+    [Collection("ClientServer")]
     public class DescopeAuthHttpClientTests(DescopeAuthHttpClientFixture fixture) : IClassFixture<DescopeAuthHttpClientFixture>
     {
+        class Dummy
+        {
+            public string Message { get; set; }
+        }
+
         private readonly DescopeAuthHttpClientFixture _fixture = fixture;
 
         [Fact]
-        public void ShouldCreateRestClient()
+        public async Task ShouldPostWithCustomToken()
         {
-            var client = _fixture.DescopeAuthClient.Client;
+            var response = await _fixture.DescopeAuthClient.PostWithCustomTokenAsync<object, Dummy>("/dummy/post", "custom", new { Name = "TEST" });
 
-            Assert.Equal("http://localhost:9999/", client.Options.BaseUrl.AbsoluteUri);
-            Assert.Single(client.Serializers.Serializers.Values.Where(x => x.DataFormat == DataFormat.Json));
+            Assert.NotNull(response);
+            Assert.Equal("Hello TEST!", response.Message);
         }
     }
 }

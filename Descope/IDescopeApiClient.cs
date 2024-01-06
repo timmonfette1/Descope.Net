@@ -4,6 +4,7 @@ namespace Descope
 {
     public interface IDescopeApiClient
     {
+        IAuthApiClient Auth { get; }
         IManagementApiClient Management { get; }
     }
 }

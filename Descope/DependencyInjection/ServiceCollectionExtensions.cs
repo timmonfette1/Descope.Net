@@ -1,4 +1,5 @@
-﻿using Descope.Configuration;
+﻿using Descope.Auth.AccessKey;
+using Descope.Configuration;
 using Descope.HttpClient;
 using Descope.Management;
 using Descope.Management.AccessKeys;
@@ -21,6 +22,7 @@ namespace Descope.DependencyInjection
                 .AddSingleton<IDescopeConfiguration, DescopeConfiguration>(x => new DescopeConfiguration(projectId, managementKey))
                 .AddSingleton<IDescopeAuthHttpClient, DescopeAuthHttpClient>()
                 .AddSingleton<IDescopeManagementHttpClient, DescopeManagementHttpClient>()
+                .AddTransient<IAccessKeyApiClient, AccessKeyApiClient>()
                 .AddTransient<IAccessKeysApiClient, AccessKeysApiClient>()
                 .AddTransient<IAuditApiClient, AuditApiClient>()
                 .AddTransient<IFlowsApiClient, FlowsApiClient>()
@@ -30,6 +32,7 @@ namespace Descope.DependencyInjection
                 .AddTransient<IThemesApiClient, ThemesApiClient>()
                 .AddTransient<ITestUsersApiClient, TestUsersApiClient>()
                 .AddTransient<IUsersApiClient, UsersApiClient>()
+                .AddTransient<IAuthApiClient, AuthApiClient>()
                 .AddTransient<IManagementApiClient, ManagementApiClient>();
 
             services.AddTransient<IDescopeApiClient, DescopeApiClient>();

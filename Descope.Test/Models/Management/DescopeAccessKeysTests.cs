@@ -2,7 +2,7 @@
 
 namespace Descope.Test.Models.Management
 {
-    public class DescopeAccessKeyTests
+    public class DescopeAccessKeysTests
     {
         [Fact]
         public void ShouldCreateObject_AccessKeyResponse()

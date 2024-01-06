@@ -4,6 +4,11 @@
     {
         private const string VERSION = "v1";
 
+        internal static class Auth
+        {
+            internal static string ExchangeAccessKey => Url(AuthEndpoints.ExchangeAccessKey);
+        }
+
         internal static class Management
         {
             internal static string LoadAccessKey => Url(ManagementEndpoints.LoadAccessKey);
@@ -66,6 +71,15 @@
         private static string Url(string route) => $"{VERSION}/{route}";
 
         #endregion Private Methods
+
+        #region Auth Endpoint Config
+
+        private static class AuthEndpoints
+        {
+            internal const string ExchangeAccessKey = "auth/accesskey/exchange";
+        }
+
+        #endregion Auth Endpoint Config
 
         #region Management Endpoint Config
 

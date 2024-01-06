@@ -1,4 +1,5 @@
-﻿using Descope.Configuration;
+﻿using Descope.Auth.AccessKey;
+using Descope.Configuration;
 using Descope.DependencyInjection;
 using Descope.HttpClient;
 using Descope.Management;
@@ -32,8 +33,11 @@ namespace Descope.Test.DependencyInjection
             var mgmtClient = Record.Exception(serviceProvider.GetRequiredService<IDescopeManagementHttpClient>);
             Assert.Null(mgmtClient);
 
-            var accessKey = Record.Exception(serviceProvider.GetRequiredService<IAccessKeysApiClient>);
+            var accessKey = Record.Exception(serviceProvider.GetRequiredService<IAccessKeyApiClient>);
             Assert.Null(accessKey);
+
+            var accessKeys = Record.Exception(serviceProvider.GetRequiredService<IAccessKeysApiClient>);
+            Assert.Null(accessKeys);
 
             var audit = Record.Exception(serviceProvider.GetRequiredService<IAuditApiClient>);
             Assert.Null(audit);
@@ -58,6 +62,9 @@ namespace Descope.Test.DependencyInjection
 
             var user = Record.Exception(serviceProvider.GetRequiredService<IUsersApiClient>);
             Assert.Null(user);
+
+            var auth = Record.Exception(serviceProvider.GetRequiredService<IAuthApiClient>);
+            Assert.Null(auth);
 
             var mgmt = Record.Exception(serviceProvider.GetRequiredService<IManagementApiClient>);
             Assert.Null(mgmt);

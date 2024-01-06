@@ -14,6 +14,13 @@ namespace Descope.Test
             return server;
         }
 
+        public static WireMockServer ConfigureAccessKey(this WireMockServer server)
+        {
+            server.ExchangeAccessKey();
+
+            return server;
+        }
+
         public static WireMockServer ConfigureAccessKeys(this WireMockServer server)
         {
             server

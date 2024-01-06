@@ -5,7 +5,7 @@ using RestSharp.Serializers.Json;
 
 namespace Descope.HttpClient
 {
-    internal class DescopeManagementHttpClient : IDescopeManagementHttpClient
+    internal class DescopeManagementHttpClient : BaseHttpClient, IDescopeManagementHttpClient
     {
         private readonly RestClient _client;
 
@@ -69,17 +69,5 @@ namespace Descope.HttpClient
             _client.Dispose();
             GC.SuppressFinalize(this);
         }
-
-        #region Private Methods
-
-        private static RestRequest CreatePostRequest<TBody>(string resource, TBody body) where TBody : class, new()
-        {
-            var request = new RestRequest(resource, Method.Post);
-            request.AddJsonBody(body);
-
-            return request;
-        }
-
-        #endregion Private Methods
     }
 }
