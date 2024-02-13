@@ -2,6 +2,6 @@
 
 [![build and test](https://github.com/timmonfette1/Descope.Net/actions/workflows/dotnet-ci.yml/badge.svg)](https://github.com/timmonfette1/Descope.Net/actions/workflows/dotnet-ci.yml)
 
-This SDK is currently in active development.
+This SDK is currently archived.
 
-There are no promises on functionality, stability, nor any promises on all API endpoints being included. This will be continually updated, and it is liable to have breaking changes with any commit.
+While progress was made, Descope is missing critical features I'd need for my applications and is frequently being updated, so for now, I'm archiving this.  I might come back and finish it at a later date, but not right now as I have other priorities I'd like to focus on.
